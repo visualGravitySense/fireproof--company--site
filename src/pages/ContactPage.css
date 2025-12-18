@@ -12,7 +12,7 @@
 
 /* Fogg: MOTIVATION & PROMPTS - Hero блок */
 .contact-hero {
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
   color: #fff;
   padding: 6rem 2rem;
   text-align: center;
@@ -208,7 +208,7 @@
 .info-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  border-color: #d32f2f;
+  border-color: #ff6b35;
 }
 
 .info-card-icon {
@@ -240,7 +240,7 @@
 
 .info-card-arrow {
   font-size: 1.5rem;
-  color: #d32f2f;
+  color: #ff6b35;
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }
@@ -255,9 +255,9 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(211, 47, 47, 0.1) 0%, rgba(211, 47, 47, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
   border-radius: 12px;
-  border-left: 4px solid #d32f2f;
+  border-left: 4px solid #ff6b35;
   margin-top: 2rem;
 }
 
@@ -312,7 +312,7 @@
 
 .form-status-message.error {
   background: #ffebee;
-  color: #d32f2f;
+  color: #ff6b35;
   border: 1px solid #ffcdd2;
 }
 
@@ -342,7 +342,7 @@
 
 .field-error {
   font-size: 0.85rem;
-  color: #d32f2f;
+  color: #ff6b35;
   font-weight: 400;
 }
 
@@ -372,8 +372,8 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #d32f2f;
-  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
   transform: translateY(-2px);
 }
 
@@ -384,7 +384,7 @@
 
 .form-group input.error,
 .form-group textarea.error {
-  border-color: #d32f2f;
+  border-color: #ff6b35;
 }
 
 /* Fogg: PROMPTS - Визуальная обратная связь */

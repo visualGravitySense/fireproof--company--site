@@ -62,8 +62,8 @@ function Footer() {
         {/* Company Section с улучшениями по модели Фогга */}
         <div className={`footer-section footer-company ${isVisible ? 'visible' : ''}`}>
           <div className="footer-logo">
-            <span className="logo-icon">🔥</span>
-            <h3>Fire Proof Company</h3>
+            <img src="/fp-logo-2.svg" alt="Fire Proof" className="footer-logo-img" />
+            <h3></h3>
           </div>
           <div className="footer-stats">
             {stats.map((stat, index) => (

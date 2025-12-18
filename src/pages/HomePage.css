@@ -24,28 +24,34 @@
 
 /* Professional UI: Цветовая схема */
 :root {
-  /* Primary Colors */
-  --color-primary: #d32f2f;
-  --color-primary-dark: #b71c1c;
-  --color-primary-light: #e57373;
+  /* Primary Colors - Темно-синий/графитовый */
+  --color-primary: #1a1a2e;
+  --color-primary-dark: #2d3436;
+  --color-primary-light: #636e72;
   
-  /* Secondary Colors */
-  --color-secondary: #1976d2;
-  --color-secondary-dark: #1565c0;
-  --color-secondary-light: #64b5f6;
+  /* Accent Colors - Оранжевый из логотипа */
+  --color-accent: #ff6b35;
+  --color-accent-dark: #f77f00;
+  --color-accent-light: #ff8c5a;
   
-  /* Accent Colors */
-  --color-accent: #388e3c;
-  --color-accent-dark: #2e7d32;
-  --color-accent-light: #81c784;
+  /* Secondary Colors - для дополнительных элементов */
+  --color-secondary: #2d3436;
+  --color-secondary-dark: #1a1a2e;
+  --color-secondary-light: #636e72;
+  
+  /* CTA Colors - Красный только для CTA кнопок и критичных элементов */
+  --color-cta: #d32f2f;
+  --color-cta-dark: #b71c1c;
+  --color-cta-light: #e57373;
   
   /* Neutral Colors */
-  --color-text-primary: #212121;
-  --color-text-secondary: #666666;
-  --color-text-light: #999999;
+  --color-text-primary: #2d3436;
+  --color-text-secondary: #636e72;
+  --color-text-light: #b2bec3;
   --color-background: #ffffff;
   --color-background-light: #f8f9fa;
-  --color-border: #e0e0e0;
+  --color-background-dark: #1a1a2e;
+  --color-border: #dfe6e9;
   --color-border-light: #f0f0f0;
   
   /* Typography Scale */
@@ -119,7 +125,7 @@
   top: 0;
   left: 0;
   height: 4px;
-  background: linear-gradient(90deg, #d32f2f, #1976d2, #388e3c);
+  background: linear-gradient(90deg, #ff6b35, #1a1a2e, #2d3436);
   z-index: 9999;
   transition: width 0.1s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -161,7 +167,7 @@
 }
 
 .status-error {
-  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
   color: #fff;
 }
 
@@ -347,7 +353,7 @@
 
 .feedback-close:hover {
   background: #f5f5f5;
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 .feedback-form {
@@ -358,9 +364,9 @@
 .form-instruction {
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: rgba(211, 47, 47, 0.05);
+  background: rgba(255, 107, 53, 0.05);
   border-radius: 8px;
-  border-left: 3px solid #d32f2f;
+  border-left: 3px solid #ff6b35;
 }
 
 .form-instruction p {
@@ -637,7 +643,7 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, var(--color-cta, #d32f2f) 0%, var(--color-cta-dark, #b71c1c) 100%);
   border: none;
   box-shadow: 0 4px 20px rgba(211, 47, 47, 0.4);
   cursor: pointer;
@@ -856,7 +862,7 @@
 
 .comparison-close:hover {
   background: #f5f5f5;
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 .comparison-table {
@@ -874,7 +880,7 @@
 .comparison-row.header {
   background: #f8f9fa;
   font-weight: 600;
-  border-bottom: 2px solid #d32f2f;
+  border-bottom: 2px solid #ff6b35;
 }
 
 .comparison-cell {
@@ -936,10 +942,10 @@
 /* Spectrum of Thinking: HEURISTICS - Form Heuristics */
 .form-heuristics {
   padding: 1rem;
-  background: rgba(211, 47, 47, 0.1);
+  background: rgba(255, 107, 53, 0.1);
   border-radius: 8px;
   margin-bottom: 1rem;
-  border-left: 3px solid #d32f2f;
+  border-left: 3px solid #ff6b35;
 }
 
 .form-heuristics p {
@@ -969,10 +975,19 @@
 
 /* Professional UI: Hero Section с улучшенной цветовой схемой */
 .hero {
-  background: linear-gradient(135deg, var(--color-primary, #d32f2f) 0%, var(--color-primary-dark, #b71c1c) 100%);
+  background: 
+    linear-gradient(135deg, rgba(26, 26, 46, 0.85) 0%, rgba(45, 52, 54, 0.9) 100%),
+    url('/fp-hero-1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: #fff;
-  /* Professional UI: Оптимизированные отступы */
-  padding: var(--spacing-5xl, 8rem) var(--spacing-xl, 2rem);
+  /* Professional UI: Компактные отступы */
+  padding: 6rem 2rem 4rem;
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1024,10 +1039,12 @@
 }
 
 .hero-content {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  width: 100%;
+  padding: 0 2rem;
 }
 
 /* Trust Badge для мотивации (Motivation) */
@@ -1035,15 +1052,16 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   animation: slideDown 0.6s ease 0.2s both;
   /* Визуальная подсказка о надежности */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .trust-icon {
@@ -1063,20 +1081,23 @@
   }
 }
 
-/* Professional UI: Оптимизированная типографика для заголовка */
+/* Professional UI: Оптимизированная типографика для заголовка - крупная типографика */
 .hero-title {
-  font-size: var(--font-size-5xl, 3.5rem);
-  margin-bottom: var(--spacing-lg, 1.5rem);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  margin-bottom: 1.5rem;
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 800;
   /* Professional UI: Плавная микро-анимация */
   animation: fadeInUp var(--transition-slow, 500ms) ease 0.3s both;
   /* Professional UI: Оптимизированный letter-spacing для читаемости */
-  letter-spacing: -0.02em;
-  /* Professional UI: Текстовая тень для глубины */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.03em;
+  /* Professional UI: Текстовая тень для глубины и читаемости на фоне */
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
   /* Professional UI: Улучшенная типографика */
   font-family: var(--font-family-primary, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @keyframes fadeInUp {
@@ -1092,28 +1113,30 @@
 
 /* Professional UI: Оптимизированная типографика для подзаголовка */
 .hero-subtitle {
-  font-size: var(--font-size-xl, 1.25rem);
-  margin-bottom: var(--spacing-2xl, 2.5rem);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  margin-bottom: 2rem;
   opacity: 0.95;
   /* Professional UI: Оптимизированный line-height для читаемости */
-  line-height: 1.7;
+  line-height: 1.6;
   /* Professional UI: Плавная микро-анимация */
   animation: fadeInUp var(--transition-slow, 500ms) ease 0.5s both;
-  max-width: 700px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   /* Professional UI: Улучшенная типографика */
   font-weight: 400;
   letter-spacing: 0.01em;
   font-family: var(--font-family-primary, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  /* Текстовая тень для читаемости на фоне */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* CREATE Action Funnel: EVALUATION - Социальное доказательство */
 .hero-social-proof {
   display: flex;
   justify-content: center;
-  gap: 3rem;
-  margin-bottom: 2rem;
+  gap: 2.5rem;
+  margin-bottom: 1.5rem;
   flex-wrap: wrap;
   animation: fadeInUp 0.8s ease 0.7s both;
 }
@@ -1123,7 +1146,7 @@
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
   animation: fadeInUp 0.8s ease 0.8s both;
 }
@@ -1192,6 +1215,7 @@
   justify-content: center;
   flex-wrap: wrap;
   animation: fadeInUp 0.8s ease 0.9s both;
+  margin-bottom: 2rem;
 }
 
 .btn {
@@ -1329,7 +1353,7 @@
 
 .form-close:hover {
   background: #f5f5f5;
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 .form-fields {
@@ -1362,9 +1386,9 @@
 
 .form-input:focus {
   outline: none;
-  border-color: var(--color-primary, #d32f2f);
+  border-color: var(--color-accent, #ff6b35);
   /* Professional UI: Тонкая тень для фокуса */
-  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
   /* Professional UI: Микро-анимация при фокусе */
   transform: translateY(-2px);
 }
@@ -1406,11 +1430,11 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem;
-  background: rgba(211, 47, 47, 0.05);
+  background: rgba(255, 107, 53, 0.05);
   border-radius: 8px;
   font-size: 0.85rem;
   color: #666;
-  border-left: 3px solid #d32f2f;
+  border-left: 3px solid #ff6b35;
 }
 
 .value-icon {
@@ -1426,12 +1450,12 @@
 
 /* Визуальная подсказка для прокрутки (Prompts) */
 .hero-scroll-hint {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  opacity: 0.7;
+  opacity: 0.8;
   animation: fadeInUp 0.8s ease 1.1s both, bounce 2s ease-in-out infinite 2s;
 }
 
@@ -1476,7 +1500,7 @@
 
 .btn-primary {
   background: #fff;
-  color: var(--color-primary, #d32f2f);
+  color: var(--color-primary, #1a1a2e);
   /* Professional UI: Тень для глубины */
   box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
 }
@@ -1525,10 +1549,11 @@
    ============================================ */
 
 .stats {
-  background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
   padding: 5rem 2rem;
   position: relative;
   overflow: hidden;
+  color: #fff;
 }
 
 /* CREATE Action Funnel: CUE - Заголовок секции статистики */
@@ -1540,13 +1565,13 @@
 .stats-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #333;
+  color: #fff;
   margin-bottom: 1rem;
 }
 
 .stats-subtitle {
   font-size: 1.1rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -1558,7 +1583,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #d32f2f, #1976d2, #388e3c);
+  background: linear-gradient(90deg, #ff6b35, #1a1a2e, #2d3436);
   opacity: 0.3;
 }
 
@@ -1575,13 +1600,14 @@
 
 .stat-item {
   padding: 3rem 2rem;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  border: 2px solid transparent;
   /* Улучшение способности: плавные переходы */
   opacity: 0;
   transform: translateY(30px) scale(0.95);
@@ -1611,7 +1637,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #d32f2f, #1976d2, #388e3c);
+  background: linear-gradient(90deg, #ff6b35, #1a1a2e, #2d3436);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
@@ -1619,8 +1645,9 @@
 
 .stat-item:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  border-color: rgba(211, 47, 47, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 107, 53, 0.2);
+  border-color: rgba(255, 107, 53, 0.4);
+  background: rgba(255, 255, 255, 0.08);
   /* Подсказка: интерактивность */
 }
 
@@ -1641,7 +1668,8 @@
   position: relative;
   z-index: 2;
   transition: transform 0.3s ease;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.4));
+  animation: iconPulse 2s ease-in-out infinite;
 }
 
 .stat-item:hover .stat-icon {
@@ -1657,16 +1685,28 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  opacity: 0.15;
+  opacity: 0.2;
   filter: blur(20px);
   transition: all 0.3s ease;
   z-index: 1;
+  background-color: #ff6b35 !important;
 }
 
 .stat-item:hover .stat-icon-glow {
-  opacity: 0.25;
-  width: 100px;
-  height: 100px;
+  opacity: 0.35;
+  width: 110px;
+  height: 110px;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.4));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 16px rgba(255, 107, 53, 0.6));
+  }
 }
 
 /* Обертка для числа */
@@ -1677,13 +1717,27 @@
 }
 
 .stat-number {
-  font-size: 3.5rem;
-  font-weight: 700;
+  font-size: 4rem;
+  font-weight: 800;
   line-height: 1.2;
   display: block;
   transition: all 0.3s ease;
   font-variant-numeric: tabular-nums;
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+  animation: numberCount 0.3s ease;
   /* Улучшение способности: читаемость */
+}
+
+@keyframes numberCount {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .stat-item:hover .stat-number {
@@ -1699,7 +1753,9 @@
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 0.4s ease 0.2s;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  background: linear-gradient(90deg, #ff6b35, #f77f00) !important;
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.4);
   /* Визуальная подсказка (Prompts) */
 }
 
@@ -1709,22 +1765,27 @@
 
 .stat-label {
   font-size: 1.15rem;
-  color: #333;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 600;
   margin-bottom: 0.5rem;
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .stat-item:hover .stat-label {
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 .stat-description {
   font-size: 0.9rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.7);
   margin-top: 0.5rem;
   opacity: 0.8;
   font-style: italic;
+  display: none; /* Убираем описание - минимум текста, только иконки и числа */
 }
 
 /* Прогресс-бар для визуальной подсказки (Prompts) */
@@ -1743,7 +1804,8 @@
   height: 100%;
   transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 0 0 16px 16px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(90deg, #ff6b35, #f77f00) !important;
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
 }
 
 /* Trust элемент для мотивации (Motivation) */
@@ -1751,15 +1813,16 @@
   max-width: 1200px;
   margin: 3rem auto 0;
   padding: 1.5rem;
-  background: rgba(211, 47, 47, 0.05);
+  background: rgba(255, 107, 53, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
   font-size: 0.95rem;
-  color: #666;
-  border: 1px solid rgba(211, 47, 47, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 107, 53, 0.3);
   animation: fadeInUp 0.6s ease 0.8s both;
 }
 
@@ -1811,7 +1874,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #d32f2f, transparent);
+  background: linear-gradient(90deg, transparent, #ff6b35, transparent);
 }
 
 .container {
@@ -1864,7 +1927,7 @@
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border-left: 4px solid #d32f2f;
+  border-left: 4px solid #ff6b35;
   opacity: 0;
   transform: translateX(-30px);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1878,13 +1941,13 @@
 .problem-badge {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: rgba(211, 47, 47, 0.1);
-  color: #d32f2f;
+  background: rgba(255, 107, 53, 0.1);
+  color: #ff6b35;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(211, 47, 47, 0.2);
+  border: 1px solid rgba(255, 107, 53, 0.2);
 }
 
 .problem-list {
@@ -1899,7 +1962,7 @@
   gap: 1rem;
   padding: 1rem;
   margin-bottom: 1rem;
-  background: rgba(211, 47, 47, 0.03);
+  background: rgba(255, 107, 53, 0.03);
   border-radius: 12px;
   border-left: 3px solid transparent;
   transition: all 0.3s ease;
@@ -1925,15 +1988,15 @@
 }
 
 .problem-item:hover {
-  background: rgba(211, 47, 47, 0.08);
-  border-left-color: #d32f2f;
+  background: rgba(255, 107, 53, 0.08);
+  border-left-color: #ff6b35;
   transform: translateX(5px);
   /* Подсказка: интерактивность */
 }
 
 .problem-item[data-severity="high"] {
-  border-left-color: #d32f2f;
-  background: rgba(211, 47, 47, 0.05);
+  border-left-color: #ff6b35;
+  background: rgba(255, 107, 53, 0.05);
 }
 
 .problem-icon {
@@ -1961,7 +2024,7 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: #d32f2f;
+  background: var(--color-cta, #d32f2f);
   color: #fff;
   border-radius: 50%;
   font-size: 0.75rem;
@@ -2002,10 +2065,10 @@
   left: 0;
   top: 0;
   bottom: 0;
-  background: linear-gradient(90deg, #d32f2f, #ff5722);
+  background: linear-gradient(90deg, #ff6b35, #f77f00);
   border-radius: 20px;
   transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 20px rgba(211, 47, 47, 0.3);
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
 }
 
 .risk-label {
@@ -2121,7 +2184,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 1.1rem 2.5rem;
-  background: #d32f2f;
+  background: var(--color-cta, #d32f2f);
   color: #fff;
   border-radius: 12px;
   font-weight: 600;
@@ -2155,6 +2218,7 @@
 .solution-cta:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+  background: var(--color-cta-dark, #b71c1c);
   /* Подсказка: призыв к действию */
 }
 
@@ -2262,13 +2326,13 @@
 
 .service-card {
   background: #fff;
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08), 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  border: 2px solid transparent;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   /* Улучшение способности: плавные переходы */
   opacity: 0;
   transform: translateY(30px) scale(0.95);
@@ -2292,50 +2356,55 @@
 }
 
 .service-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  border-color: rgba(211, 47, 47, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 12px 32px rgba(255, 107, 53, 0.15);
+  border-color: rgba(255, 107, 53, 0.3);
   /* Подсказка: интерактивность */
 }
 
 /* Badge для мотивации (Motivation) */
 .service-badge {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  padding: 0.4rem 0.9rem;
+  top: 1.25rem;
+  right: 1.25rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 20px;
   color: #fff;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   z-index: 2;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background-color: #2d3436 !important;
 }
 
-/* Иконка для мотивации (Motivation) */
+/* Иконка для мотивации (Motivation) - оранжевый цвет */
 .service-icon-wrapper {
   position: relative;
   display: inline-flex;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .service-icon {
-  font-size: 3.5rem;
+  font-size: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
-  border-radius: 16px;
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
   position: relative;
   z-index: 2;
   transition: all 0.3s ease;
+  background-color: rgba(255, 107, 53, 0.1) !important;
+  color: #ff6b35 !important;
+  filter: grayscale(0);
 }
 
 .service-card:hover .service-icon {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.08) translateY(-2px);
+  background-color: rgba(255, 107, 53, 0.15) !important;
   /* Микро-анимация для привлечения внимания (подсказка) */
 }
 
@@ -2344,69 +2413,75 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  opacity: 0.1;
-  filter: blur(20px);
+  opacity: 0.15;
+  filter: blur(15px);
   transition: all 0.3s ease;
   z-index: 1;
+  background-color: #ff6b35 !important;
 }
 
 .service-card:hover .service-icon-glow {
-  opacity: 0.2;
-  width: 120px;
-  height: 120px;
+  opacity: 0.25;
+  width: 110px;
+  height: 110px;
 }
 
 .service-card h3 {
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: #2d3436;
   font-weight: 700;
   line-height: 1.3;
   transition: color 0.3s ease;
 }
 
 .service-card:hover h3 {
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 .service-card p {
-  color: #666;
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
-  font-size: 1.05rem;
+  color: #636e72;
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  display: none; /* Минимум текста - скрываем описание */
 }
 
-/* Features для мотивации (Motivation) */
+/* Features для мотивации (Motivation) - минимум текста */
 .service-features {
   list-style: none;
   padding: 0;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.5rem 0;
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .service-features li {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 0.9rem;
-  color: #555;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #636e72;
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 107, 53, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 107, 53, 0.1);
 }
 
 .feature-check {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
-  background: #4caf50;
+  width: 16px;
+  height: 16px;
+  background: #ff6b35;
   color: #fff;
   border-radius: 50%;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: bold;
   flex-shrink: 0;
 }
@@ -2416,7 +2491,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: #d32f2f;
+  color: #ff6b35;
   font-weight: 600;
   font-size: 1.05rem;
   text-decoration: none;
@@ -2426,7 +2501,7 @@
 }
 
 .service-link:hover {
-  color: #b71c1c;
+  color: #f77f00;
   gap: 0.75rem;
   /* Подсказка: призыв к действию */
 }
@@ -2473,6 +2548,7 @@
   transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 0;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.03) 0%, rgba(255, 107, 53, 0.01) 100%);
 }
 
 .service-card:hover .service-hover-effect {
@@ -2483,7 +2559,7 @@
 .services-trust {
   text-align: center;
   padding: 2rem;
-  background: rgba(211, 47, 47, 0.05);
+  background: rgba(255, 107, 53, 0.05);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -2491,7 +2567,7 @@
   gap: 0.75rem;
   font-size: 0.95rem;
   color: #666;
-  border: 1px solid rgba(211, 47, 47, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.1);
   max-width: 800px;
   margin: 0 auto;
 }
@@ -2670,7 +2746,7 @@
 }
 
 .partner-card:hover .partner-name {
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 .partner-description {
@@ -3037,7 +3113,7 @@
 
 .cta-quick-form .form-header h3 {
   font-size: 1.3rem;
-  color: #d32f2f;
+  color: #ff6b35;
   margin: 0;
 }
 
@@ -3060,7 +3136,7 @@
 
 .cta-quick-form .form-close:hover {
   background: #f5f5f5;
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 .cta-quick-form .form-fields {
@@ -3080,8 +3156,8 @@
 
 .cta-quick-form .form-input:focus {
   outline: none;
-  border-color: #d32f2f;
-  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
 .cta-quick-form .form-submit {
@@ -3092,21 +3168,35 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 4rem 1.5rem;
+    padding: 5rem 1.5rem 3rem;
+    min-height: auto;
+    background-attachment: scroll;
   }
 
   .hero-title {
-    font-size: 2.2rem;
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    margin-bottom: 1rem;
   }
 
   .hero-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
+    font-size: clamp(1rem, 3vw, 1.15rem);
+    margin-bottom: 1.5rem;
   }
 
   .hero-social-proof {
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-trust-badge {
+    margin-bottom: 1rem;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+  }
+  
+  .hero-evaluation {
+    margin-bottom: 1.5rem;
+    gap: 1rem;
   }
 
   .proof-item {
@@ -3126,6 +3216,18 @@
     flex-direction: column;
     width: 100%;
     gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-trust-badge {
+    margin-bottom: 2rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .hero-evaluation {
+    margin-bottom: 3rem;
+    gap: 1.5rem;
   }
 
   .btn {
@@ -3569,6 +3671,55 @@
     padding: 0.6rem 1rem;
   }
 
+  /* Stats Section - Mobile */
+  .stats {
+    padding: 3rem 1.5rem;
+  }
+
+  .stats-title {
+    font-size: 2rem;
+    color: #fff;
+  }
+
+  .stats-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .stat-item {
+    padding: 2rem 1.5rem;
+  }
+
+  .stat-icon {
+    font-size: 2.5rem;
+  }
+
+  .stat-icon-glow {
+    width: 60px;
+    height: 60px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+  }
+
+  .stats-trust-note {
+    padding: 1rem;
+    font-size: 0.85rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
   .form-value-reminder {
     font-size: 0.8rem;
     flex-wrap: wrap;
@@ -3590,10 +3741,12 @@
 
   .stats-title {
     font-size: 2rem;
+    color: #fff;
   }
 
   .stats-subtitle {
     font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .problem-solution-header {
@@ -3753,7 +3906,7 @@
 
   .comparison-cell:first-child {
     font-weight: 600;
-    color: #d32f2f;
+    color: #ff6b35;
     margin-bottom: 0.25rem;
   }
 

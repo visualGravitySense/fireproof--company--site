@@ -15,7 +15,7 @@
   top: 0;
   left: 0;
   height: 4px;
-  background: linear-gradient(90deg, #d32f2f, #1976d2, #388e3c);
+  background: linear-gradient(90deg, #ff6b35, #1a1a2e, #2d3436);
   z-index: 9999;
   transition: width 0.1s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -80,7 +80,7 @@
 }
 
 .exit-close:hover {
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 @keyframes fadeIn {
@@ -144,15 +144,15 @@
 }
 
 .category-filter:hover {
-  border-color: #d32f2f;
-  color: #d32f2f;
+  border-color: #ff6b35;
+  color: #ff6b35;
   transform: translateY(-2px);
 }
 
 .category-filter.active {
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, var(--color-cta, #d32f2f) 0%, var(--color-cta-dark, #b71c1c) 100%);
   color: #fff;
-  border-color: #d32f2f;
+  border-color: #ff6b35;
   box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
 }
 
@@ -174,8 +174,8 @@
 
 .search-input:focus {
   outline: none;
-  border-color: #d32f2f;
-  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
 .search-icon {
@@ -196,8 +196,8 @@
   background: linear-gradient(135deg, rgba(211, 47, 47, 0.1) 0%, rgba(211, 47, 47, 0.05) 100%);
   border-radius: 12px;
   margin-bottom: 2rem;
-  border: 1px solid rgba(211, 47, 47, 0.2);
-  color: #d32f2f;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  color: #ff6b35;
   font-weight: 600;
   animation: fadeInUp 0.6s ease;
 }
@@ -255,12 +255,12 @@
   /* CREATE: REACTION - Визуальная обратная связь */
   transform: translateY(-5px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border-color: #d32f2f;
+  border-color: #ff6b35;
 }
 
 .blog-card.popular {
-  border: 2px solid rgba(211, 47, 47, 0.3);
-  background: linear-gradient(135deg, #fff 0%, rgba(211, 47, 47, 0.02) 100%);
+  border: 2px solid rgba(255, 107, 53, 0.3);
+  background: linear-gradient(135deg, #fff 0%, rgba(255, 107, 53, 0.02) 100%);
 }
 
 /* CREATE: CUE - Компактный популярный бейдж */
@@ -272,7 +272,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.4rem 0.75rem;
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, var(--color-cta, #d32f2f) 0%, var(--color-cta-dark, #b71c1c) 100%);
   color: #fff;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -303,10 +303,10 @@
   padding: 0.4rem 0.75rem;
   background: linear-gradient(135deg, rgba(211, 47, 47, 0.1) 0%, rgba(211, 47, 47, 0.05) 100%);
   border-radius: 20px;
-  color: #d32f2f;
+  color: #ff6b35;
   font-weight: 600;
   font-size: 0.75rem;
-  border: 1px solid rgba(211, 47, 47, 0.2);
+  border: 1px solid rgba(255, 107, 53, 0.2);
 }
 
 .category-icon {
@@ -336,7 +336,7 @@
 }
 
 .blog-card:hover .blog-title {
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 /* Fogg: MOTIVATION - Компактное описание */
@@ -365,7 +365,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, var(--color-cta, #d32f2f) 0%, var(--color-cta-dark, #b71c1c) 100%);
   color: #fff;
   font-weight: 600;
   text-decoration: none;

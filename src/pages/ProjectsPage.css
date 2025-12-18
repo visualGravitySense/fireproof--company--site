@@ -41,7 +41,7 @@
 .project-count {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 .stats-section {
@@ -70,7 +70,7 @@
 .stat-number {
   font-size: 3rem;
   font-weight: bold;
-  color: #d32f2f;
+  color: #ff6b35;
   margin-bottom: 0.5rem;
 }
 

@@ -12,7 +12,7 @@
 
 /* Fogg: MOTIVATION & PROMPTS - Hero блок */
 .service-hero {
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
   color: #fff;
   padding: 6rem 2rem 4rem;
   position: relative;
@@ -189,7 +189,7 @@
 
 .hero-cta-btn.primary {
   background: #fff;
-  color: #d32f2f;
+  color: #ff6b35;
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
@@ -277,7 +277,7 @@
 
 /* Fogg: ABILITY - Процесс работы */
 .process-section {
-  border-left: 4px solid #d32f2f;
+  border-left: 4px solid #ff6b35;
 }
 
 .process-steps {
@@ -299,7 +299,7 @@
   justify-content: center;
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
   color: #fff;
   border-radius: 50%;
   font-size: 1.5rem;
@@ -327,14 +327,14 @@
 
 .step-line {
   height: 2px;
-  background: linear-gradient(90deg, #d32f2f 0%, transparent 100%);
+  background: linear-gradient(90deg, #ff6b35 0%, transparent 100%);
   margin-top: 0.5rem;
 }
 
 /* Fogg: MOTIVATION - Материалы */
 .materials-section {
-  background: linear-gradient(135deg, rgba(211, 47, 47, 0.05) 0%, rgba(211, 47, 47, 0.02) 100%);
-  border-left: 4px solid #d32f2f;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%);
+  border-left: 4px solid #ff6b35;
 }
 
 .materials-grid {
@@ -359,7 +359,7 @@
 .material-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  border-color: #d32f2f;
+  border-color: #ff6b35;
 }
 
 .material-icon {
@@ -378,8 +378,8 @@
 .material-badge {
   font-size: 0.75rem;
   padding: 0.4rem 0.75rem;
-  background: rgba(211, 47, 47, 0.1);
-  color: #d32f2f;
+  background: rgba(255, 107, 53, 0.1);
+  color: #ff6b35;
   border-radius: 20px;
   font-weight: 600;
 }
@@ -458,7 +458,7 @@
 
 /* Fogg: PROMPTS - Улучшенная CTA секция */
 .cta-box {
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
   color: #fff;
   padding: 4rem 3rem;
   border-radius: 12px;
@@ -541,7 +541,7 @@
 
 .cta-btn.primary {
   background: #fff;
-  color: #d32f2f;
+  color: #ff6b35;
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 

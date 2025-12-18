@@ -58,6 +58,18 @@
   margin-bottom: 1.5rem;
 }
 
+.footer-logo-img {
+  height: 70px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  transition: transform 0.2s ease;
+}
+
+.footer-logo:hover .footer-logo-img {
+  transform: scale(1.05);
+}
+
 .logo-icon {
   font-size: 2rem;
   animation: pulse 2s ease-in-out infinite;
@@ -108,7 +120,7 @@
   padding: 0.75rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  border-left: 3px solid #d32f2f;
+  border-left: 3px solid #ff6b35;
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateX(-10px);
@@ -232,7 +244,7 @@
   opacity: 0;
   transform: translateX(-5px);
   transition: all 0.3s ease;
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 .footer-link:hover .link-arrow {
@@ -272,7 +284,7 @@
 }
 
 .contact-link:hover {
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 /* Social Links с улучшенными подсказками (Prompts) */
@@ -397,7 +409,7 @@
 .footer-link:focus-visible,
 .contact-link:focus-visible,
 .social-link:focus-visible {
-  outline: 2px solid #d32f2f;
+  outline: 2px solid #ff6b35;
   outline-offset: 2px;
   border-radius: 4px;
 }

@@ -12,7 +12,7 @@
 
 /* Fogg: MOTIVATION & PROMPTS - Hero блок с улучшениями */
 .services-hero {
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
   color: #fff;
   padding: 6rem 2rem;
   text-align: center;
@@ -212,7 +212,7 @@
 
 .services-cta-btn.btn-primary {
   background: #fff;
-  color: #d32f2f;
+  color: #ff6b35;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -290,7 +290,7 @@
   /* Fogg: PROMPTS - Визуальная обратная связь */
   transform: translateY(-5px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border-color: #d32f2f;
+  border-color: #ff6b35;
 }
 
 /* Fogg: MOTIVATION - Trust Badge */
@@ -302,7 +302,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
   color: #fff;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -456,12 +456,12 @@
 
 .service-btn.btn-secondary {
   background: transparent;
-  color: #d32f2f;
-  border: 2px solid #d32f2f;
+  color: #ff6b35;
+  border: 2px solid #ff6b35;
 }
 
 .service-btn.btn-secondary:hover {
-  background: rgba(211, 47, 47, 0.1);
+  background: rgba(255, 107, 53, 0.1);
   transform: translateY(-2px);
 }
 
@@ -512,12 +512,12 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: rgba(211, 47, 47, 0.1);
+  background: rgba(255, 107, 53, 0.1);
   border-radius: 50px;
   font-size: 0.9rem;
   margin-bottom: 2rem;
-  border: 1px solid rgba(211, 47, 47, 0.2);
-  color: #d32f2f;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  color: #ff6b35;
   font-weight: 600;
   animation: slideDown 0.6s ease 0.2s both;
 }
@@ -630,7 +630,7 @@
 .cta-option-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  border-color: #d32f2f;
+  border-color: #ff6b35;
 }
 
 .option-icon {
@@ -663,7 +663,7 @@
 
 .option-arrow {
   font-size: 1.5rem;
-  color: #d32f2f;
+  color: #ff6b35;
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }
@@ -697,7 +697,7 @@
 }
 
 .cta-main-btn.btn-primary {
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
   color: #fff;
 }
 
@@ -717,12 +717,12 @@
   text-decoration: none;
   transition: all 0.3s ease;
   background: #fff;
-  color: #d32f2f;
-  border: 2px solid #d32f2f;
+  color: #ff6b35;
+  border: 2px solid #ff6b35;
 }
 
 .cta-secondary-btn:hover {
-  background: rgba(211, 47, 47, 0.05);
+  background: rgba(255, 107, 53, 0.05);
   transform: translateY(-3px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }

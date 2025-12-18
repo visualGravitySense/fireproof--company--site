@@ -33,21 +33,27 @@
 
 /* Логотип с улучшенной мотивацией */
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #d32f2f;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   transition: transform 0.2s ease, opacity 0.2s ease;
   /* Микро-анимация для привлечения внимания (подсказка) */
 }
 
-.logo:hover {
+.logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.logo:hover .logo-img {
   transform: scale(1.05);
   opacity: 0.9;
 }
 
 .logo:focus {
-  outline: 2px solid #d32f2f;
+  outline: 2px solid #ff6b35;
   outline-offset: 4px;
   border-radius: 4px;
 }
@@ -79,12 +85,12 @@
 }
 
 .search-toggle:hover {
-  background: rgba(211, 47, 47, 0.1);
+  background: rgba(255, 107, 53, 0.1);
   transform: scale(1.1);
 }
 
 .search-toggle:focus {
-  outline: 2px solid #d32f2f;
+  outline: 2px solid #ff6b35;
   outline-offset: 2px;
 }
 
@@ -125,12 +131,12 @@
 
 .search-input:focus {
   outline: none;
-  border-color: #d32f2f;
+  border-color: #ff6b35;
 }
 
 .search-submit {
   padding: 0.5rem 1rem;
-  background: #d32f2f;
+  background: var(--color-cta, #d32f2f);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -140,7 +146,7 @@
 }
 
 .search-submit:hover {
-  background: #b71c1c;
+  background: var(--color-cta-dark, #b71c1c);
   transform: translateY(-1px);
 }
 
@@ -168,19 +174,19 @@
 }
 
 .nav-link:hover {
-  color: #d32f2f;
-  background: rgba(211, 47, 47, 0.05);
+  color: #ff6b35;
+  background: rgba(255, 107, 53, 0.05);
   transform: translateY(-2px);
   /* Подсказка: визуальная обратная связь */
 }
 
 .nav-link:focus {
-  outline: 2px solid #d32f2f;
+  outline: 2px solid #ff6b35;
   outline-offset: 2px;
 }
 
 .nav-link.active {
-  color: #d32f2f;
+  color: #ff6b35;
   font-weight: 600;
 }
 
@@ -191,7 +197,7 @@
   left: 0.75rem;
   right: 0.75rem;
   height: 3px;
-  background: #d32f2f;
+  background: #ff6b35;
   border-radius: 2px 2px 0 0;
   /* Улучшенный индикатор активной страницы (подсказка) */
 }
@@ -213,7 +219,7 @@
 
 /* CTA кнопка для мотивации (Motivation) */
 .cta-button {
-  background: #d32f2f;
+  background: var(--color-cta, #d32f2f);
   color: #fff;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -226,7 +232,7 @@
 }
 
 .cta-button:hover {
-  background: #b71c1c;
+  background: var(--color-cta-dark, #b71c1c);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
   /* Подсказка: призыв к действию */
@@ -237,7 +243,7 @@
 }
 
 .cta-button:focus {
-  outline: 2px solid #d32f2f;
+  outline: 2px solid var(--color-cta, #d32f2f);
   outline-offset: 2px;
 }
 
@@ -260,7 +266,7 @@
 }
 
 .menu-toggle:focus {
-  outline: 2px solid #d32f2f;
+  outline: 2px solid #ff6b35;
   outline-offset: 2px;
 }
 
@@ -391,7 +397,7 @@
 .cta-button:focus-visible,
 .logo:focus-visible,
 .search-toggle:focus-visible {
-  outline: 3px solid #d32f2f;
+  outline: 3px solid #ff6b35;
   outline-offset: 3px;
 }
 

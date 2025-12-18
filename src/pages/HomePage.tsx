@@ -19,8 +19,8 @@ function StatsSection() {
       number: 20,
       suffix: '+',
       label: 'лет опыта',
-      description: 'Профессиональная экспертиза',
-      color: '#d32f2f'
+      description: '',
+      color: '#ff6b35'
     },
     {
       id: 'projects',
@@ -28,17 +28,17 @@ function StatsSection() {
       number: 100,
       suffix: '+',
       label: 'проектов',
-      description: 'Успешно реализовано',
-      color: '#1976d2'
+      description: '',
+      color: '#ff6b35'
     },
     {
       id: 'area',
       icon: '📐',
       number: 230000,
       suffix: '',
-      label: 'м² обработанной площади',
-      description: 'Защищено от пожаров',
-      color: '#388e3c'
+      label: 'м²',
+      description: '',
+      color: '#ff6b35'
     }
   ]
 
@@ -68,18 +68,21 @@ function StatsSection() {
   }, [isVisible])
 
   const animateCounters = () => {
-    const duration = 2000
-    const steps = 60
-    const stepDuration = duration / steps
-
     stats.forEach((stat) => {
-      let currentStep = 0
+      const duration = 2000
+      const steps = 80
+      const stepDuration = duration / steps
       const increment = stat.number / steps
+      let currentStep = 0
 
       const timer = setInterval(() => {
         currentStep++
+        
+        // Используем easing функцию для более плавной анимации
+        const progress = currentStep / steps
+        const easeOutCubic = 1 - Math.pow(1 - progress, 3)
         const currentValue = Math.min(
-          Math.floor(increment * currentStep),
+          Math.floor(stat.number * easeOutCubic),
           stat.number
         )
 
@@ -120,17 +123,17 @@ function StatsSection() {
             className={`stat-item ${isVisible ? 'visible' : ''}`}
             style={{ animationDelay: `${index * 0.15}s` }}
           >
-            {/* Иконка для мотивации (Motivation) */}
+            {/* Иконка для мотивации (Motivation) - оранжевая */}
             <div className="stat-icon-wrapper">
-              <span className="stat-icon" style={{ color: stat.color }}>
+              <span className="stat-icon">
                 {stat.icon}
               </span>
-              <div className="stat-icon-glow" style={{ backgroundColor: stat.color }} />
+              <div className="stat-icon-glow" />
             </div>
 
             {/* Анимированное число для подсказки (Prompts) */}
             <div className="stat-number-wrapper">
-              <span className="stat-number" style={{ color: stat.color }}>
+              <span className="stat-number">
                 {formatNumber(
                   stat.id === 'years' ? counters.years :
                   stat.id === 'projects' ? counters.projects :
@@ -138,12 +141,12 @@ function StatsSection() {
                 )}
                 {stat.suffix}
               </span>
-              <div className="stat-number-underline" style={{ backgroundColor: stat.color }} />
+              <div className="stat-number-underline" />
             </div>
 
-            {/* Метка и описание */}
+            {/* Метка - минимальный текст */}
             <div className="stat-label">{stat.label}</div>
-            <div className="stat-description">{stat.description}</div>
+            {stat.description && <div className="stat-description">{stat.description}</div>}
 
             {/* Прогресс-бар для визуальной подсказки (Prompts) */}
             <div className="stat-progress">
@@ -312,30 +315,30 @@ function ServicesPreviewSection() {
       id: 'concrete',
       icon: '🏗️',
       title: 'Огнезащита железобетонных конструкций',
-      description: 'Используем материалы Firetherm и Promat для защиты бетонных конструкций',
+      description: '',
       link: '/services/concrete',
-      features: ['Сертификация', 'Премиум материалы', 'Долговечность'],
-      color: '#1976d2',
+      features: ['Сертификация', 'Премиум материалы'],
+      color: '#ff6b35',
       badge: 'Популярно'
     },
     {
       id: 'timber',
       icon: '🌳',
       title: 'Огнезащита деревянных конструкций',
-      description: 'Сертифицированные методы обработки древесины',
+      description: '',
       link: '/services/timber',
-      features: ['Экологично', 'Безопасно', 'Эффективно'],
-      color: '#388e3c',
+      features: ['Экологично', 'Безопасно'],
+      color: '#ff6b35',
       badge: 'Рекомендуем'
     },
     {
       id: 'industrial',
       icon: '🏭',
       title: 'Промышленные решения',
-      description: 'Комплексные системы для промышленных объектов',
+      description: '',
       link: '/services/industrial',
-      features: ['Комплексно', 'Масштабируемо', 'Надежно'],
-      color: '#d32f2f',
+      features: ['Комплексно', 'Надежно'],
+      color: '#ff6b35',
       badge: 'Профессионально'
     }
   ]
@@ -382,30 +385,21 @@ function ServicesPreviewSection() {
             >
               {/* Badge для мотивации (Motivation) */}
               {service.badge && (
-                <div className="service-badge" style={{ backgroundColor: service.color }}>
+                <div className="service-badge">
                   {service.badge}
                 </div>
               )}
 
-              {/* Иконка для мотивации (Motivation) */}
+              {/* Иконка для мотивации (Motivation) - оранжевая */}
               <div className="service-icon-wrapper">
-                <span 
-                  className="service-icon" 
-                  style={{ 
-                    backgroundColor: `${service.color}15`,
-                    color: service.color
-                  }}
-                >
+                <span className="service-icon">
                   {service.icon}
                 </span>
-                <div 
-                  className="service-icon-glow" 
-                  style={{ backgroundColor: service.color }}
-                />
+                <div className="service-icon-glow" />
               </div>
 
               <h3>{service.title}</h3>
-              <p>{service.description}</p>
+              {service.description && <p>{service.description}</p>}
 
               {/* Features для мотивации (Motivation) */}
               <ul className="service-features">
@@ -421,17 +415,11 @@ function ServicesPreviewSection() {
               <Link to={service.link} className="service-link">
                 <span className="link-text">Подробнее</span>
                 <span className="link-arrow">→</span>
-                <div 
-                  className="link-underline" 
-                  style={{ backgroundColor: service.color }}
-                />
+                <div className="link-underline" style={{ backgroundColor: '#ff6b35' }} />
               </Link>
 
               {/* Hover эффект для подсказки (Prompts) */}
-              <div 
-                className="service-hover-effect" 
-                style={{ backgroundColor: `${service.color}08` }}
-              />
+              <div className="service-hover-effect" />
             </div>
           ))}
         </div>

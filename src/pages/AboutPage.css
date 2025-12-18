@@ -20,7 +20,7 @@
 
 /* Fogg: MOTIVATION & PROMPTS - Hero блок с улучшениями */
 .about-hero {
-  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
   color: #fff;
   padding: 6rem 2rem;
   text-align: center;
@@ -213,7 +213,7 @@
 
 .about-cta-btn.btn-primary {
   background: #fff;
-  color: #d32f2f;
+  color: #ff6b35;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -317,7 +317,7 @@
 /* Fogg: MOTIVATION - Секция миссии */
 .about-mission {
   background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
-  border-left: 4px solid #d32f2f;
+  border-left: 4px solid #ff6b35;
 }
 
 .mission-text {
@@ -332,7 +332,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: rgba(211, 47, 47, 0.1);
+  background: rgba(255, 107, 53, 0.1);
   border-radius: 8px;
   margin-top: 1rem;
 }
@@ -343,7 +343,7 @@
 
 .highlight-text {
   font-weight: 600;
-  color: #d32f2f;
+  color: #ff6b35;
 }
 
 /* Fogg: ABILITY - Сетка ценностей */
@@ -366,7 +366,7 @@
 }
 
 .value-item:hover {
-  border-color: #d32f2f;
+  border-color: #ff6b35;
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -514,7 +514,7 @@
 
 .link-card-arrow {
   font-size: 1.5rem;
-  color: #d32f2f;
+  color: #ff6b35;
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }

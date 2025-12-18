@@ -1,0 +1,689 @@
+/* ============================================
+   FOGG BEHAVIOR MODEL - SERVICE DETAIL PAGE
+   ============================================
+   Motivation: Trust badges, social proof
+   Ability: Clear structure, navigation
+   Prompts: CTAs, visual cues, interactive elements
+   ============================================ */
+
+.service-detail-page {
+  min-height: 100vh;
+}
+
+/* Fogg: MOTIVATION & PROMPTS - Hero блок */
+.service-hero {
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  color: #fff;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.service-hero.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-hero .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Fogg: PROMPTS - Навигация назад */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.back-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-5px);
+}
+
+.back-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.back-link:hover .back-icon {
+  transform: translateX(-3px);
+}
+
+/* Fogg: MOTIVATION - Trust Badge */
+.service-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideDown 0.6s ease 0.2s both;
+}
+
+.trust-icon {
+  font-size: 1.2rem;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-hero-title {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  font-weight: 700;
+  animation: fadeInUp 0.8s ease 0.3s both;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.service-hero-subtitle {
+  font-size: 1.35rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.95;
+  line-height: 1.6;
+  animation: fadeInUp 0.8s ease 0.5s both;
+  max-width: 700px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fogg: MOTIVATION - Социальные доказательства */
+.service-social-proof {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.7s both;
+}
+
+.service-social-proof .proof-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.service-social-proof .proof-icon {
+  font-size: 2.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.service-social-proof .proof-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.service-social-proof .proof-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Fogg: PROMPTS - Быстрые действия в hero */
+.service-hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.9s both;
+}
+
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-cta-btn.primary {
+  background: #fff;
+  color: #d32f2f;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.hero-cta-btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+}
+
+.hero-cta-btn.secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.hero-cta-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px);
+}
+
+.hero-cta-btn .btn-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.hero-cta-btn:hover .btn-icon {
+  transform: scale(1.2);
+}
+
+.hero-cta-btn .btn-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.hero-cta-btn:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+/* Fogg: ABILITY - Контент */
+.service-detail-content {
+  padding: 4rem 2rem;
+}
+
+.service-detail-content .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Fogg: ABILITY - Секции с улучшениями */
+.detail-section {
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.detail-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.section-icon {
+  font-size: 2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.detail-section h2 {
+  font-size: 2rem;
+  margin: 0;
+  color: #333;
+  font-weight: 700;
+}
+
+/* Fogg: ABILITY - Процесс работы */
+.process-section {
+  border-left: 4px solid #d32f2f;
+}
+
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.process-step:hover .step-number {
+  transform: scale(1.1);
+}
+
+.step-content {
+  flex: 1;
+  padding-top: 0.5rem;
+}
+
+.step-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.step-line {
+  height: 2px;
+  background: linear-gradient(90deg, #d32f2f 0%, transparent 100%);
+  margin-top: 0.5rem;
+}
+
+/* Fogg: MOTIVATION - Материалы */
+.materials-section {
+  background: linear-gradient(135deg, rgba(211, 47, 47, 0.05) 0%, rgba(211, 47, 47, 0.02) 100%);
+  border-left: 4px solid #d32f2f;
+}
+
+.materials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.material-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.material-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-color: #d32f2f;
+}
+
+.material-icon {
+  font-size: 2rem;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.material-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.material-badge {
+  font-size: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(211, 47, 47, 0.1);
+  color: #d32f2f;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* Fogg: MOTIVATION - Стандарты */
+.standards-section {
+  border-left: 4px solid #4caf50;
+}
+
+.standards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.standard-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.standard-item:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.standard-icon {
+  font-size: 1.5rem;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.standard-text {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Fogg: MOTIVATION - Гарантии */
+.warranty-section {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+  border-left: 4px solid #4caf50;
+}
+
+.warranty-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.warranty-icon {
+  font-size: 3rem;
+  color: #4caf50;
+  font-weight: bold;
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.warranty-text h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.warranty-text p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Fogg: PROMPTS - Улучшенная CTA секция */
+.cta-box {
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+  color: #fff;
+  padding: 4rem 3rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 3rem;
+  box-shadow: 0 8px 32px rgba(211, 47, 47, 0.3);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.cta-box.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cta-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.cta-description {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.cta-benefits {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.benefit-icon {
+  font-size: 1.3rem;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-btn.primary {
+  background: #fff;
+  color: #d32f2f;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.cta-btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+}
+
+.cta-btn.secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.cta-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px);
+}
+
+.cta-btn .btn-icon {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+.cta-btn:hover .btn-icon {
+  transform: scale(1.2);
+}
+
+.cta-btn .btn-arrow {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+.cta-btn:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+  .service-hero {
+    padding: 4rem 1.5rem 3rem;
+  }
+
+  .service-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .service-hero-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .service-social-proof {
+    gap: 2rem;
+  }
+
+  .service-social-proof .proof-icon {
+    font-size: 2rem;
+  }
+
+  .service-social-proof .proof-value {
+    font-size: 1.5rem;
+  }
+
+  .service-hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .service-detail-content {
+    padding: 2rem 1rem;
+  }
+
+  .detail-section {
+    padding: 1.5rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .detail-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .process-steps {
+    gap: 1.5rem;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .materials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .warranty-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .warranty-icon {
+    font-size: 2.5rem;
+  }
+
+  .cta-box {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .cta-title {
+    font-size: 2rem;
+  }
+
+  .cta-description {
+    font-size: 1.1rem;
+  }
+
+  .cta-benefits {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cta-actions {
+    flex-direction: column;
+  }
+
+  .cta-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem 2rem;
+  }
+}
+

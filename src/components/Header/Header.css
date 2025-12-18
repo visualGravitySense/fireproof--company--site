@@ -1,0 +1,397 @@
+/* ============================================
+   FOGG BEHAVIOR MODEL IMPROVEMENTS
+   ============================================
+   Motivation: CTA button, visual hierarchy
+   Ability: Search, smooth animations, accessibility
+   Prompts: Icons, hover effects, micro-animations
+   ============================================ */
+
+.header {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  /* Улучшение способности: плавные переходы */
+}
+
+.header.scrolled {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  /* Визуальная обратная связь при прокрутке (подсказка) */
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Логотип с улучшенной мотивацией */
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #d32f2f;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  /* Микро-анимация для привлечения внимания (подсказка) */
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.logo:focus {
+  outline: 2px solid #d32f2f;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.logo-text {
+  display: block;
+}
+
+/* Поиск для улучшения способности (Ability) */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.search-toggle:hover {
+  background: rgba(211, 47, 47, 0.1);
+  transform: scale(1.1);
+}
+
+.search-toggle:focus {
+  outline: 2px solid #d32f2f;
+  outline-offset: 2px;
+}
+
+.search-form {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.3s ease;
+  z-index: 1001;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  min-width: 200px;
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #d32f2f;
+}
+
+.search-submit {
+  padding: 0.5rem 1rem;
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-submit:hover {
+  background: #b71c1c;
+  transform: translateY(-1px);
+}
+
+/* Навигация с улучшенными подсказками */
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  color: #333;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  /* Улучшение способности: большая область клика */
+}
+
+.nav-link:hover {
+  color: #d32f2f;
+  background: rgba(211, 47, 47, 0.05);
+  transform: translateY(-2px);
+  /* Подсказка: визуальная обратная связь */
+}
+
+.nav-link:focus {
+  outline: 2px solid #d32f2f;
+  outline-offset: 2px;
+}
+
+.nav-link.active {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 3px;
+  background: #d32f2f;
+  border-radius: 2px 2px 0 0;
+  /* Улучшенный индикатор активной страницы (подсказка) */
+}
+
+.nav-icon {
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+  /* Иконки как визуальные подсказки */
+}
+
+.nav-link:hover .nav-icon {
+  transform: scale(1.2);
+  /* Микро-анимация для привлечения внимания */
+}
+
+.nav-text {
+  display: inline-block;
+}
+
+/* CTA кнопка для мотивации (Motivation) */
+.cta-button {
+  background: #d32f2f;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
+  /* Визуальная привлекательность для мотивации */
+}
+
+.cta-button:hover {
+  background: #b71c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+  /* Подсказка: призыв к действию */
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+.cta-button:focus {
+  outline: 2px solid #d32f2f;
+  outline-offset: 2px;
+}
+
+/* Мобильное меню */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  z-index: 1002;
+}
+
+.menu-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.menu-toggle:focus {
+  outline: 2px solid #d32f2f;
+  outline-offset: 2px;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+@media (max-width: 1024px) {
+  .nav {
+    gap: 1rem;
+  }
+  
+  .nav-text {
+    display: none;
+  }
+  
+  .nav-icon {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .search-container {
+    order: 3;
+    margin-left: auto;
+  }
+
+  .menu-toggle {
+    display: flex;
+    order: 2;
+  }
+
+  .cta-button {
+    order: 1;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 5rem 2rem 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Улучшенная анимация для способности */
+    z-index: 1001;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .nav.open {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+  }
+
+  .nav-text {
+    display: inline-block;
+  }
+
+  .nav-icon {
+    font-size: 1.3rem;
+  }
+
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  .search-form {
+    position: fixed;
+    top: 70px;
+    left: 1rem;
+    right: 1rem;
+    margin-top: 0;
+  }
+
+  .search-input {
+    min-width: auto;
+    flex: 1;
+  }
+}
+
+/* Улучшение доступности (Ability) */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Фокус для клавиатурной навигации */
+.nav-link:focus-visible,
+.cta-button:focus-visible,
+.logo:focus-visible,
+.search-toggle:focus-visible {
+  outline: 3px solid #d32f2f;
+  outline-offset: 3px;
+}
+

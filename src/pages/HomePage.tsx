@@ -1,9 +1,35 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import './HomePage.css'
+import { useLanguage } from '../contexts/LanguageContext'
+import { sendQuickForm } from '../utils/emailService'
+// Иконки из централизованного файла
+import {
+  HiCheck,
+  HiStar,
+  HiFire,
+  HiShieldCheck,
+  HiCube,
+  HiPhone,
+  HiClipboardDocument,
+  HiArrowRight,
+  HiCurrencyDollar,
+  HiCheckCircle,
+  HiClock,
+  HiExclamationTriangle,
+  HiLockClosed,
+  HiBuildingOffice,
+  HiCog6Tooth,
+  HiWrenchScrewdriver,
+  HiGift,
+  HiLightBulb,
+  HiChartBar,
+  HiSquares2X2
+} from '../utils/icons'
 
 // Компонент статистики с улучшениями по модели Фогга
 function StatsSection() {
+  const { t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
   const [counters, setCounters] = useState<{ years: number; projects: number; area: number }>({ 
     years: 0, 
@@ -15,28 +41,28 @@ function StatsSection() {
   const stats = [
     {
       id: 'years',
-      icon: '🎯',
+      icon: HiStar,
       number: 20,
       suffix: '+',
-      label: 'лет опыта',
+      label: t('home.stats.years'),
       description: '',
       color: '#ff6b35'
     },
     {
       id: 'projects',
-      icon: '🏗️',
+      icon: HiBuildingOffice,
       number: 100,
       suffix: '+',
-      label: 'проектов',
+      label: t('home.stats.projects'),
       description: '',
       color: '#ff6b35'
     },
     {
       id: 'area',
-      icon: '📐',
+      icon: HiSquares2X2,
       number: 230000,
       suffix: '',
-      label: 'м²',
+      label: t('home.stats.area'),
       description: '',
       color: '#ff6b35'
     }
@@ -113,8 +139,8 @@ function StatsSection() {
     <section className="stats" ref={sectionRef}>
       {/* CREATE Action Funnel: CUE - Заголовок секции */}
       <div className="stats-header">
-        <h2 className="stats-title">Наша экспертиза в цифрах</h2>
-        <p className="stats-subtitle">Доверьтесь профессионалам с проверенным опытом</p>
+        <h2 className="stats-title">{t('home.stats.title')}</h2>
+        <p className="stats-subtitle">{t('home.stats.subtitle')}</p>
       </div>
       <div className="stats-container">
         {stats.map((stat, index) => (
@@ -126,7 +152,7 @@ function StatsSection() {
             {/* Иконка для мотивации (Motivation) - оранжевая */}
             <div className="stat-icon-wrapper">
               <span className="stat-icon">
-                {stat.icon}
+                {stat.icon && <stat.icon />}
               </span>
               <div className="stat-icon-glow" />
             </div>
@@ -165,8 +191,8 @@ function StatsSection() {
 
       {/* Дополнительный trust элемент для мотивации (Motivation) */}
       <div className="stats-trust-note">
-        <span className="trust-badge-icon">✓</span>
-        <span>Проверенная статистика на основе реальных проектов</span>
+        <span className="trust-badge-icon"><HiCheck /></span>
+        <span>{t('home.stats.trustNote')}</span>
       </div>
     </section>
   )
@@ -174,6 +200,7 @@ function StatsSection() {
 
 // Компонент Social Proof с улучшениями по модели Фогга
 function SocialProofSection() {
+  const { t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -181,29 +208,32 @@ function SocialProofSection() {
     {
       id: 'firetherm',
       name: 'Firetherm',
-      icon: '🔥',
-      description: 'Лидер в огнезащите',
+      icon: HiFire,
+      description: t('home.partners.firetherm.description'),
       since: '2010',
       color: '#d32f2f',
-      badge: 'Premium'
+      badge: t('home.partners.firetherm.badge'),
+      logo: '/firetherm_logo.jpg'
     },
     {
       id: 'normaali',
       name: 'Normaali',
-      icon: '🛡️',
-      description: 'Инновационные материалы',
+      icon: HiShieldCheck,
+      description: t('home.partners.normaali.description'),
       since: '2015',
       color: '#1976d2',
-      badge: 'Innovation'
+      badge: t('home.partners.normaali.badge'),
+      logo: '/normaali-logo.png'
     },
     {
       id: 'promat',
       name: 'Promat',
-      icon: '⭐',
-      description: 'Международный стандарт',
+      icon: HiStar,
+      description: t('home.partners.promat.description'),
       since: '2008',
       color: '#388e3c',
-      badge: 'Certified'
+      badge: t('home.partners.promat.badge'),
+      logo: '/promat-logo.webp'
     }
   ]
 
@@ -234,9 +264,9 @@ function SocialProofSection() {
     <section className="social-proof" ref={sectionRef}>
       <div className="container">
         <div className="social-proof-header">
-          <h2>Нам доверяют</h2>
+          <h2>{t('home.partners.title')}</h2>
           <p className="social-proof-subtitle">
-            Работаем с ведущими производителями противопожарных материалов
+            {t('home.partners.subtitle')}
           </p>
         </div>
         
@@ -252,17 +282,25 @@ function SocialProofSection() {
                 {partner.badge}
               </div>
 
-              {/* Иконка для мотивации (Motivation) */}
+              {/* Иконка/Логотип для мотивации (Motivation) */}
               <div className="partner-icon-wrapper">
-                <span 
-                  className="partner-icon" 
-                  style={{ 
-                    backgroundColor: `${partner.color}15`,
-                    color: partner.color
-                  }}
-                >
-                  {partner.icon}
-                </span>
+                {partner.logo ? (
+                  <img 
+                    src={partner.logo} 
+                    alt={partner.name}
+                    className="partner-logo"
+                  />
+                ) : (
+                  <span 
+                    className="partner-icon" 
+                    style={{ 
+                      backgroundColor: `${partner.color}15`,
+                      color: partner.color
+                    }}
+                  >
+                    {partner.icon && <partner.icon />}
+                  </span>
+                )}
                 <div 
                   className="partner-icon-glow" 
                   style={{ backgroundColor: partner.color }}
@@ -277,8 +315,8 @@ function SocialProofSection() {
 
               {/* Trust индикатор для мотивации (Motivation) */}
               <div className="partner-trust">
-                <span className="trust-icon">✓</span>
-                <span className="trust-text">Партнер с {partner.since}</span>
+                <span className="trust-icon"><HiCheck /></span>
+                <span className="trust-text">{t('home.partners.partnerSince')} {partner.since}</span>
               </div>
 
               {/* Hover эффект для подсказки (Prompts) */}
@@ -297,8 +335,8 @@ function SocialProofSection() {
 
         {/* Дополнительный trust элемент для мотивации (Motivation) */}
         <div className="social-proof-trust">
-          <span className="trust-badge-icon">✓</span>
-          <span>Все партнеры сертифицированы и соответствуют международным стандартам качества</span>
+          <span className="trust-badge-icon"><HiCheck /></span>
+          <span>{t('home.partners.trustNote')}</span>
         </div>
       </div>
     </section>
@@ -307,39 +345,52 @@ function SocialProofSection() {
 
 // Компонент Services Preview с улучшениями по модели Фогга
 function ServicesPreviewSection() {
+  const { t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
   const services = [
     {
       id: 'concrete',
-      icon: '🏗️',
-      title: 'Огнезащита железобетонных конструкций',
+      icon: HiBuildingOffice,
+      title: t('home.services.concrete.title'),
       description: '',
       link: '/services/concrete',
-      features: ['Сертификация', 'Премиум материалы'],
+      features: [
+        t('home.services.concrete.features.0'),
+        t('home.services.concrete.features.1')
+      ],
       color: '#ff6b35',
-      badge: 'Популярно'
+      badge: t('home.services.concrete.badge'),
+      image: '/concrete_building.jpg'
     },
     {
       id: 'timber',
-      icon: '🌳',
-      title: 'Огнезащита деревянных конструкций',
+      icon: HiCube,
+      title: t('home.services.timber.title'),
       description: '',
       link: '/services/timber',
-      features: ['Экологично', 'Безопасно'],
+      features: [
+        t('home.services.timber.features.0'),
+        t('home.services.timber.features.1')
+      ],
       color: '#ff6b35',
-      badge: 'Рекомендуем'
+      badge: t('home.services.timber.badge'),
+      image: '/wooden_log.jpg'
     },
     {
       id: 'industrial',
-      icon: '🏭',
-      title: 'Промышленные решения',
+      icon: HiBuildingOffice,
+      title: t('home.services.industrial.title'),
       description: '',
       link: '/services/industrial',
-      features: ['Комплексно', 'Надежно'],
+      features: [
+        t('home.services.industrial.features.0'),
+        t('home.services.industrial.features.1')
+      ],
       color: '#ff6b35',
-      badge: 'Профессионально'
+      badge: t('home.services.industrial.badge'),
+      image: '/industrial_building.jpg'
     }
   ]
 
@@ -370,9 +421,9 @@ function ServicesPreviewSection() {
     <section className="services-preview" ref={sectionRef}>
       <div className="container">
         <div className="services-header">
-          <h2>Наши услуги</h2>
+          <h2>{t('home.services.title')}</h2>
           <p className="services-subtitle">
-            Комплексные решения для защиты вашего имущества от пожаров
+            {t('home.services.subtitle')}
           </p>
         </div>
         
@@ -380,9 +431,19 @@ function ServicesPreviewSection() {
           {services.map((service, index) => (
             <div
               key={service.id}
-              className={`service-card ${isVisible ? 'visible' : ''}`}
-              style={{ animationDelay: `${index * 0.15}s` }}
+              className={`service-card ${isVisible ? 'visible' : ''} ${service.image ? 'has-image' : ''}`}
+              style={{ 
+                animationDelay: `${index * 0.15}s`,
+                ...(service.image && {
+                  '--service-image': `url(${service.image})`
+                } as React.CSSProperties)
+              }}
             >
+              {/* Изображение как фон в верхней части */}
+              {service.image && (
+                <div className="service-image-background" />
+              )}
+
               {/* Badge для мотивации (Motivation) */}
               {service.badge && (
                 <div className="service-badge">
@@ -391,12 +452,14 @@ function ServicesPreviewSection() {
               )}
 
               {/* Иконка для мотивации (Motivation) - оранжевая */}
-              <div className="service-icon-wrapper">
-                <span className="service-icon">
-                  {service.icon}
-                </span>
-                <div className="service-icon-glow" />
-              </div>
+              {!service.image && (
+                <div className="service-icon-wrapper">
+                  <span className="service-icon">
+                    {service.icon && <service.icon />}
+                  </span>
+                  <div className="service-icon-glow" />
+                </div>
+              )}
 
               <h3>{service.title}</h3>
               {service.description && <p>{service.description}</p>}
@@ -405,7 +468,7 @@ function ServicesPreviewSection() {
               <ul className="service-features">
                 {service.features.map((feature, idx) => (
                   <li key={idx}>
-                    <span className="feature-check">✓</span>
+                    <span className="feature-check"><HiCheck /></span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -413,7 +476,7 @@ function ServicesPreviewSection() {
 
               {/* Улучшенная CTA с подсказками (Prompts) */}
               <Link to={service.link} className="service-link">
-                <span className="link-text">Подробнее</span>
+                <span className="link-text">{t('home.services.more')}</span>
                 <span className="link-arrow">→</span>
                 <div className="link-underline" style={{ backgroundColor: '#ff6b35' }} />
               </Link>
@@ -427,7 +490,7 @@ function ServicesPreviewSection() {
         {/* Trust элемент для мотивации (Motivation) */}
         <div className="services-trust">
           <span className="trust-icon">✓</span>
-          <span>Все услуги сертифицированы и соответствуют международным стандартам</span>
+          <span>{t('home.services.trust')}</span>
         </div>
       </div>
     </section>
@@ -436,44 +499,45 @@ function ServicesPreviewSection() {
 
 // Компонент Problem-Solution с улучшениями по модели Фогга
 function ProblemSolutionSection() {
+  const { t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
   const problems = [
     {
-      icon: '💰',
-      text: 'Ущерб от пожаров в США: $11.4 млрд в 2023 году',
+      icon: HiCurrencyDollar,
+      text: t('home.problemSolution.problem.items.damage'),
       severity: 'high'
     },
     {
-      icon: '📋',
-      text: 'Увеличение строгости строительных норм',
+      icon: HiClipboardDocument,
+      text: t('home.problemSolution.problem.items.regulations'),
       severity: 'medium'
     },
     {
-      icon: '🔥',
-      text: 'Рост количества лесных и городских пожаров',
+      icon: HiFire,
+      text: t('home.problemSolution.problem.items.wildfires'),
       severity: 'high'
     },
     {
-      icon: '🛡️',
-      text: 'Страховые компании требуют огнезащиту',
+      icon: HiShieldCheck,
+      text: t('home.problemSolution.problem.items.insurance'),
       severity: 'medium'
     }
   ]
 
   const solutions = [
     {
-      icon: '✅',
-      text: 'Сертифицированные материалы премиум-класса'
+      icon: HiCheckCircle,
+      text: t('home.problemSolution.solution.items.materials')
     },
     {
-      icon: '🏆',
-      text: '20 лет опыта в противопожарной защите'
+      icon: HiStar,
+      text: t('home.problemSolution.solution.items.experience')
     },
     {
-      icon: '🔧',
-      text: 'Комплексные решения от проектирования до надзора'
+      icon: HiWrenchScrewdriver,
+      text: t('home.problemSolution.solution.items.complex')
     }
   ]
 
@@ -504,17 +568,17 @@ function ProblemSolutionSection() {
     <section className="problem-solution" ref={sectionRef}>
       {/* CREATE Action Funnel: CUE - Заголовок секции */}
       <div className="problem-solution-header">
-        <h2 className="section-main-title">Проблема и решение</h2>
-        <p className="section-main-subtitle">Понимаем риски и предлагаем надежную защиту</p>
+        <h2 className="section-main-title">{t('home.problemSolution.title')}</h2>
+        <p className="section-main-subtitle">{t('home.problemSolution.subtitle')}</p>
       </div>
       <div className="container">
         {/* Problem Section - для мотивации (Motivation) */}
         <div className={`problem-section ${isVisible ? 'visible' : ''}`}>
           <div className="section-header">
-            <span className="section-icon">⚠️</span>
-            <h2>Риски пожаров реальны</h2>
+            <span className="section-icon"><HiExclamationTriangle /></span>
+            <h2>{t('home.problemSolution.problem.title')}</h2>
           </div>
-          <div className="problem-badge">Критическая проблема</div>
+          <div className="problem-badge">{t('home.problemSolution.problem.badge')}</div>
           <ul className="problem-list">
             {problems.map((problem, index) => (
               <li
@@ -523,7 +587,7 @@ function ProblemSolutionSection() {
                 style={{ animationDelay: `${index * 0.1}s` }}
                 data-severity={problem.severity}
               >
-                <span className="problem-icon">{problem.icon}</span>
+                <span className="problem-icon">{problem.icon && <problem.icon />}</span>
                 <span className="problem-text">{problem.text}</span>
                 {problem.severity === 'high' && (
                   <span className="problem-alert">!</span>
@@ -534,7 +598,7 @@ function ProblemSolutionSection() {
           <div className="problem-visual">
             <div className="risk-meter">
               <div className="risk-bar" style={{ width: isVisible ? '85%' : '0%' }} />
-              <span className="risk-label">Высокий риск</span>
+              <span className="risk-label">{t('home.problemSolution.problem.highRisk')}</span>
             </div>
           </div>
         </div>
@@ -542,12 +606,12 @@ function ProblemSolutionSection() {
         {/* Solution Section - для способности (Ability) */}
         <div className={`solution-section ${isVisible ? 'visible' : ''}`}>
           <div className="section-header">
-            <span className="section-icon">✨</span>
-            <h2>Наше решение</h2>
+            <span className="section-icon"><HiStar /></span>
+            <h2>{t('home.problemSolution.solution.title')}</h2>
           </div>
-          <div className="solution-badge">Проверенное решение</div>
+          <div className="solution-badge">{t('home.problemSolution.solution.badge')}</div>
           <p className="solution-description">
-            Комплексная противопожарная защита с использованием сертифицированных материалов премиум-класса
+            {t('home.problemSolution.solution.description')}
           </p>
           
           {/* Список преимуществ для мотивации (Motivation) */}
@@ -558,7 +622,7 @@ function ProblemSolutionSection() {
                 className={`solution-benefit ${isVisible ? 'visible' : ''}`}
                 style={{ animationDelay: `${index * 0.1 + 0.3}s` }}
               >
-                <span className="benefit-icon">{solution.icon}</span>
+                <span className="benefit-icon">{solution.icon && <solution.icon />}</span>
                 <span className="benefit-text">{solution.text}</span>
               </li>
             ))}
@@ -566,8 +630,8 @@ function ProblemSolutionSection() {
 
           {/* Улучшенная CTA кнопка с подсказками (Prompts) */}
           <Link to="/services" className="solution-cta">
-            <span className="cta-icon">🚀</span>
-            <span className="cta-text">Узнать больше</span>
+            <span className="cta-icon"><HiArrowRight /></span>
+            <span className="cta-text">{t('home.problemSolution.solution.more')}</span>
             <span className="cta-arrow">→</span>
             <div className="cta-glow" />
           </Link>
@@ -575,12 +639,12 @@ function ProblemSolutionSection() {
           {/* Trust элементы для мотивации (Motivation) */}
           <div className="solution-trust">
             <div className="trust-item">
-              <span className="trust-check">✓</span>
-              <span>Гарантия качества</span>
+              <span className="trust-check"><HiCheck /></span>
+              <span>{t('home.problemSolution.solution.trust.quality')}</span>
             </div>
             <div className="trust-item">
-              <span className="trust-check">✓</span>
-              <span>Сертификация</span>
+              <span className="trust-check"><HiCheck /></span>
+              <span>{t('home.problemSolution.solution.trust.certification')}</span>
             </div>
           </div>
         </div>
@@ -589,11 +653,147 @@ function ProblemSolutionSection() {
   )
 }
 
+// Компонент Projects Preview Section
+function ProjectsPreviewSection() {
+  const { t } = useLanguage()
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  const projects = [
+    {
+      id: 1,
+      title: 'Hilton Tallinn Park',
+      location: 'Tallinn, Estonia',
+      category: 'commercial',
+      image: '/hilton_tallinn_park.jpg'
+    },
+    {
+      id: 2,
+      title: 'Viimsi Keskus',
+      location: 'Tallinn, Estonia',
+      category: 'commercial',
+      image: '/viimsi_keskus.jpg'
+    },
+    {
+      id: 3,
+      title: 'Rotermani Kvartal',
+      location: 'Tallinn, Estonia',
+      category: 'commercial',
+      image: '/rotermanni_kvartal.jpg'
+    },
+    {
+      id: 4,
+      title: 'Elamu Mustamael',
+      location: 'Tallinn, Estonia',
+      category: 'residential',
+      image: '/elamu_mustamael.jpg'
+    },
+    {
+      id: 5,
+      title: 'Eesti Energia elektrijaam',
+      location: 'Ida-Virumaa, Estonia',
+      category: 'industrial',
+      image: '/eesti_energia.jpg'
+    },
+    {
+      id: 6,
+      title: 'Magistrali Keskus',
+      location: 'Tallinn, Estonia',
+      category: 'commercial',
+      image: '/magistrali_keskus.jpg'
+    }
+  ]
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isVisible) {
+            setIsVisible(true)
+          }
+        })
+      },
+      { threshold: 0.2 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [isVisible])
+
+  const getCategoryLabel = (category: string) => {
+    switch (category) {
+      case 'commercial': return t('home.projects.categories.commercial')
+      case 'residential': return t('home.projects.categories.residential')
+      case 'industrial': return t('home.projects.categories.industrial')
+      default: return ''
+    }
+  }
+
+  return (
+    <section className="projects-preview" ref={sectionRef}>
+      <div className="container">
+        <div className="projects-header">
+          <h2>{t('home.projects.title')}</h2>
+          <p className="projects-subtitle">
+            {t('home.projects.subtitle')}
+          </p>
+        </div>
+
+        <div className="projects-grid">
+          {projects.slice(0, 6).map((project, index) => (
+            <Link
+              key={project.id}
+              to={`/projects/${project.category}`}
+              className={`project-preview-card ${isVisible ? 'visible' : ''}`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="project-preview-image">
+                {project.image ? (
+                  <img src={project.image} alt={project.title} onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.style.display = 'none'
+                    const placeholder = target.nextElementSibling as HTMLElement
+                    if (placeholder) placeholder.style.display = 'flex'
+                  }} />
+                ) : null}
+                <div className="placeholder-image" style={{ display: project.image ? 'none' : 'flex' }}>
+                  <div className="placeholder-icon"><HiBuildingOffice /></div>
+                </div>
+                <div className="project-category-badge">{getCategoryLabel(project.category)}</div>
+              </div>
+              <div className="project-preview-info">
+                <p className="project-preview-location">{project.location}</p>
+                <h3>{project.title}</h3>
+                <div className="project-preview-underline"></div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="projects-cta">
+          <Link to="/projects" className="projects-view-all">
+            <span>{t('home.projects.viewAll')}</span>
+            <span className="arrow">→</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 // Компонент CTA Section с улучшениями по модели Фогга
 function CTASection() {
+  const { t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
   const [showForm, setShowForm] = useState(false)
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '' })
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', objectType: '' })
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -619,18 +819,33 @@ function CTASection() {
     }
   }, [isVisible])
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    alert('Спасибо! Мы свяжемся с вами в ближайшее время.')
-    setFormData({ name: '', phone: '', email: '' })
-    setShowForm(false)
+    
+    try {
+      const result = await sendQuickForm({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || ''
+      })
+      
+      if (result.success) {
+        alert(t('contact.form.success'))
+        setFormData({ name: '', phone: '', email: '', objectType: '' })
+        setShowForm(false)
+      } else {
+        alert(result.message || t('contact.form.error'))
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      alert(t('contact.form.error'))
+    }
   }
 
   const benefits = [
-    { icon: '✓', text: 'Бесплатная консультация' },
-    { icon: '✓', text: 'Ответ в течение 24 часов' },
-    { icon: '✓', text: 'Индивидуальный подход' }
+    { icon: '✓', text: t('home.cta.benefits.freeConsultation') },
+    { icon: '✓', text: t('home.cta.benefits.fastResponse') },
+    { icon: '✓', text: t('home.cta.benefits.expertAdvice') }
   ]
 
   return (
@@ -655,11 +870,11 @@ function CTASection() {
         </div>
 
         <h2 className={`cta-title ${isVisible ? 'visible' : ''}`}>
-          Готовы защитить свой проект?
+          {t('home.cta.title')}
         </h2>
         
         <p className={`cta-description ${isVisible ? 'visible' : ''}`}>
-          Получите бесплатную консультацию от наших экспертов
+          {t('home.cta.subtitle')}
         </p>
 
         {/* Benefits для мотивации (Motivation) */}
@@ -685,8 +900,8 @@ function CTASection() {
               setShowForm(!showForm)
             }}
           >
-            <span className="cta-icon">📞</span>
-            <span className="cta-text">Связаться с нами</span>
+            <span className="cta-icon"><HiPhone /></span>
+            <span className="cta-text">{t('home.cta.button')}</span>
             <span className="cta-arrow">→</span>
           </Link>
           
@@ -694,8 +909,8 @@ function CTASection() {
             to="/services" 
             className={`cta-button-secondary ${isVisible ? 'visible' : ''}`}
           >
-            <span className="cta-icon">📋</span>
-            <span>Узнать больше</span>
+            <span className="cta-icon"><HiClipboardDocument /></span>
+            <span>{t('common.more')}</span>
           </Link>
         </div>
 
@@ -703,12 +918,12 @@ function CTASection() {
         {showForm && (
           <form className="cta-quick-form" onSubmit={handleFormSubmit}>
             <div className="form-header">
-              <h3>Получите консультацию прямо сейчас</h3>
+              <h3>{t('home.hero.form.title')}</h3>
               <button 
                 type="button" 
                 className="form-close"
                 onClick={() => setShowForm(false)}
-                aria-label="Закрыть форму"
+                aria-label={t('home.hero.form.close')}
               >
                 ×
               </button>
@@ -716,7 +931,7 @@ function CTASection() {
             <div className="form-fields">
               <input
                 type="text"
-                placeholder="Ваше имя"
+                placeholder={t('home.hero.form.namePlaceholder')}
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
@@ -724,7 +939,7 @@ function CTASection() {
               />
               <input
                 type="tel"
-                placeholder="Телефон"
+                placeholder={t('home.hero.form.phonePlaceholder')}
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 required
@@ -732,14 +947,14 @@ function CTASection() {
               />
               <input
                 type="email"
-                placeholder="Email"
+                placeholder={t('home.hero.form.emailPlaceholder')}
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
                 className="form-input"
               />
               <button type="submit" className="cta-button-primary form-submit">
-                <span>Отправить заявку</span>
+                <span>{t('home.hero.form.submit')}</span>
                 <span className="cta-arrow">→</span>
               </button>
             </div>
@@ -751,9 +966,10 @@ function CTASection() {
 }
 
 function HomePage() {
+  const { t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
   const [showForm, setShowForm] = useState(false)
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '' })
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', objectType: '' })
   const [showNotification, setShowNotification] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [exitIntentDetected, setExitIntentDetected] = useState(false)
@@ -821,29 +1037,36 @@ function HomePage() {
     // Tell User: Показываем статус загрузки
     setSystemStatus('loading')
     
-    // Симуляция отправки формы
     try {
-      // Здесь будет реальная отправка на сервер
-      await new Promise(resolve => setTimeout(resolve, 1500)) // Симуляция задержки
-      console.log('Form submitted:', formData)
+      // Отправка формы через EmailJS
+      const result = await sendQuickForm({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || '',
+        objectType: formData.objectType || ''
+      })
       
-      // Tell User: Показываем успешный статус
-      setSystemStatus('success')
-      
-      // Показываем уведомление об успехе (EXECUTION)
-      setShowNotification(true)
-      setFormData({ name: '', phone: '', email: '' })
-      setShowForm(false)
-      
-      // Скрываем уведомление через 5 секунд
-      setTimeout(() => {
-        setShowNotification(false)
-        setSystemStatus('idle')
-      }, 5000)
+      if (result.success) {
+        // Tell User: Показываем успешный статус
+        setSystemStatus('success')
+        
+        // Показываем уведомление об успехе (EXECUTION)
+        setShowNotification(true)
+        setFormData({ name: '', phone: '', email: '', objectType: '' })
+        setShowForm(false)
+        
+        // Скрываем уведомление через 5 секунд
+        setTimeout(() => {
+          setShowNotification(false)
+          setSystemStatus('idle')
+        }, 5000)
+      } else {
+        throw new Error(result.message)
+      }
     } catch (error) {
       console.error('Form submission error:', error)
       setSystemStatus('error')
-      alert('Произошла ошибка. Пожалуйста, попробуйте еще раз.')
+      alert(t('contact.form.error'))
       setTimeout(() => {
         setSystemStatus('idle')
       }, 3000)
@@ -855,19 +1078,19 @@ function HomePage() {
       {/* Clear the Page: Минимизированные уведомления - только при необходимости */}
       {systemStatus === 'loading' && (
         <div className="system-status status-loading minimal">
-          <span className="status-icon">⏳</span>
+          <span className="status-icon"><HiClock /></span>
           <span>Отправка...</span>
         </div>
       )}
       {systemStatus === 'success' && (
         <div className="system-status status-success minimal">
-          <span className="status-icon">✓</span>
+          <span className="status-icon"><HiCheck /></span>
           <span>Отправлено!</span>
         </div>
       )}
       {systemStatus === 'error' && (
         <div className="system-status status-error minimal">
-          <span className="status-icon">⚠️</span>
+          <span className="status-icon"><HiExclamationTriangle /></span>
           <span>Ошибка</span>
         </div>
       )}
@@ -989,7 +1212,7 @@ function HomePage() {
       {showNotification && (
         <div className="success-notification">
           <div className="notification-content">
-            <span className="notification-icon">✓</span>
+            <span className="notification-icon"><HiCheck /></span>
             <div>
               <h4>Заявка отправлена!</h4>
               <p>Мы свяжемся с вами в ближайшее время</p>
@@ -1018,7 +1241,7 @@ function HomePage() {
           <span className="fab-icon">💬</span>
           <span className="fab-pulse" />
         </button>
-        <div className="fab-tooltip">Бесплатная консультация</div>
+        <div className="fab-tooltip">{t('home.quickActions.freeConsultationTooltip')}</div>
       </div>
 
       {/* Spectrum of Thinking: INTUITIVE RESPONSES - Быстрые действия для знакомых пользователей */}
@@ -1030,18 +1253,18 @@ function HomePage() {
               setShowComparison(!showComparison)
               setUserIntent('evaluating')
             }}
-            aria-label="Сравнить услуги"
+            aria-label={t('home.comparison.title')}
           >
             <span className="quick-action-icon">⚖️</span>
-            <span>Сравнить</span>
+            <span>{t('home.quickActions.compare')}</span>
           </button>
           <button 
             className="quick-action"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            aria-label="Наверх"
+            aria-label={t('home.quickActions.toTop')}
           >
             <span className="quick-action-icon">↑</span>
-            <span>Наверх</span>
+            <span>{t('home.quickActions.toTop')}</span>
           </button>
         </div>
       )}
@@ -1051,39 +1274,39 @@ function HomePage() {
         <div className="comparison-modal">
           <div className="comparison-content">
             <div className="comparison-header">
-              <h3>Сравнение услуг</h3>
+              <h3>{t('home.comparison.title')}</h3>
               <button 
                 className="comparison-close"
                 onClick={() => setShowComparison(false)}
-                aria-label="Закрыть сравнение"
+                aria-label={t('home.comparison.close')}
               >
                 ×
               </button>
             </div>
             <div className="comparison-table">
               <div className="comparison-row header">
-                <div className="comparison-cell">Критерий</div>
-                <div className="comparison-cell">Бетон</div>
-                <div className="comparison-cell">Дерево</div>
-                <div className="comparison-cell">Промышленные</div>
+                <div className="comparison-cell">{t('home.comparison.criteria')}</div>
+                <div className="comparison-cell">{t('home.comparison.concrete')}</div>
+                <div className="comparison-cell">{t('home.comparison.timber')}</div>
+                <div className="comparison-cell">{t('home.comparison.industrial')}</div>
               </div>
               <div className="comparison-row">
-                <div className="comparison-cell">Срок службы</div>
-                <div className="comparison-cell">25+ лет</div>
-                <div className="comparison-cell">15+ лет</div>
-                <div className="comparison-cell">30+ лет</div>
+                <div className="comparison-cell">{t('home.comparison.serviceLife')}</div>
+                <div className="comparison-cell">{t('home.comparison.years25plus')}</div>
+                <div className="comparison-cell">{t('home.comparison.years15plus')}</div>
+                <div className="comparison-cell">{t('home.comparison.years30plus')}</div>
               </div>
               <div className="comparison-row">
-                <div className="comparison-cell">Стоимость</div>
-                <div className="comparison-cell">Средняя</div>
-                <div className="comparison-cell">Низкая</div>
-                <div className="comparison-cell">Высокая</div>
+                <div className="comparison-cell">{t('home.comparison.cost')}</div>
+                <div className="comparison-cell">{t('home.comparison.costMedium')}</div>
+                <div className="comparison-cell">{t('home.comparison.costLow')}</div>
+                <div className="comparison-cell">{t('home.comparison.costHigh')}</div>
               </div>
               <div className="comparison-row">
-                <div className="comparison-cell">Применение</div>
-                <div className="comparison-cell">ЖБК</div>
-                <div className="comparison-cell">Деревянные конструкции</div>
-                <div className="comparison-cell">Промышленные объекты</div>
+                <div className="comparison-cell">{t('home.comparison.application')}</div>
+                <div className="comparison-cell">{t('home.comparison.applicationConcrete')}</div>
+                <div className="comparison-cell">{t('home.comparison.applicationTimber')}</div>
+                <div className="comparison-cell">{t('home.comparison.applicationIndustrial')}</div>
               </div>
             </div>
           </div>
@@ -1096,46 +1319,46 @@ function HomePage() {
           {/* Trust Badge для мотивации (Motivation) */}
           <div className="hero-trust-badge">
             <span className="trust-icon">✓</span>
-            <span>Сертифицированные материалы • 20 лет опыта</span>
+            <span>{t('home.hero.trustBadge')}</span>
           </div>
 
           <h1 className="hero-title">
-            Защищаем то, что важно: жизни, имущество, бизнес
+            {t('home.hero.title')}
           </h1>
           
           <p className="hero-subtitle">
-            20 лет опыта в противопожарной защите. Комплексные решения от проектирования до надзора.
+            {t('home.hero.subtitle')}
           </p>
 
           {/* CREATE Action Funnel: EVALUATION - Социальные доказательства и ценность */}
           <div className="hero-social-proof">
             <div className="proof-item">
               <span className="proof-number">100+</span>
-              <span className="proof-label">Успешных проектов</span>
+              <span className="proof-label">{t('home.hero.socialProof.projects')}</span>
             </div>
             <div className="proof-item">
               <span className="proof-number">230,000</span>
-              <span className="proof-label">м² защищено</span>
+              <span className="proof-label">{t('home.hero.socialProof.area')}</span>
             </div>
             <div className="proof-item">
               <span className="proof-number">20</span>
-              <span className="proof-label">лет опыта</span>
+              <span className="proof-label">{t('home.hero.socialProof.years')}</span>
             </div>
           </div>
 
           {/* CREATE Action Funnel: EVALUATION - Дополнительные индикаторы ценности */}
           <div className="hero-evaluation">
             <div className="evaluation-item">
-              <span className="eval-icon">⭐</span>
-              <span>Рейтинг 4.9/5</span>
+              <span className="eval-icon"><HiStar /></span>
+              <span>{t('home.hero.evaluation.rating')}</span>
             </div>
             <div className="evaluation-item">
-              <span className="eval-icon">🏆</span>
-              <span>Лидер рынка</span>
+              <span className="eval-icon"><HiStar /></span>
+              <span>{t('home.hero.evaluation.leader')}</span>
             </div>
             <div className="evaluation-item">
-              <span className="eval-icon">🔒</span>
-              <span>Гарантия качества</span>
+              <span className="eval-icon"><HiLockClosed /></span>
+              <span>{t('home.hero.evaluation.guarantee')}</span>
             </div>
           </div>
 
@@ -1159,7 +1382,7 @@ function HomePage() {
               className="btn btn-secondary"
               onClick={() => setUserIntent('evaluating')}
             >
-              <span className="btn-icon">⚙️</span>
+              <span className="btn-icon"><HiCog6Tooth /></span>
               <span>Наши услуги</span>
               <span className="btn-arrow">→</span>
             </Link>
@@ -1168,24 +1391,24 @@ function HomePage() {
           {/* Spectrum of Thinking: HEURISTICS - Упрощенные правила принятия решений */}
           <div className="decision-helpers">
             <div className="helper-card">
-              <span className="helper-icon">💡</span>
+              <span className="helper-icon"><HiLightBulb /></span>
               <div>
-                <h4>Быстрое решение</h4>
-                <p>Выберите услугу за 2 минуты</p>
+                <h4>{t('home.hero.helpers.quickDecision.title')}</h4>
+                <p>{t('home.hero.helpers.quickDecision.text')}</p>
               </div>
             </div>
             <div className="helper-card">
-              <span className="helper-icon">📊</span>
+              <span className="helper-icon"><HiChartBar /></span>
               <div>
-                <h4>Сравнение</h4>
-                <p>Сравните варианты рядом</p>
+                <h4>{t('home.hero.helpers.comparison.title')}</h4>
+                <p>{t('home.hero.helpers.comparison.text')}</p>
               </div>
             </div>
             <div className="helper-card">
-              <span className="helper-icon">🎯</span>
+              <span className="helper-icon"><HiStar /></span>
               <div>
-                <h4>Рекомендации</h4>
-                <p>Получите персональный совет</p>
+                <h4>{t('home.hero.helpers.recommendations.title')}</h4>
+                <p>{t('home.hero.helpers.recommendations.text')}</p>
               </div>
             </div>
           </div>
@@ -1194,7 +1417,7 @@ function HomePage() {
           {showForm && (
             <form className="hero-quick-form" onSubmit={handleFormSubmit}>
               <div className="form-header">
-                <h3>Получите консультацию прямо сейчас</h3>
+                <h3>{t('home.hero.form.title')}</h3>
                 <button 
                   type="button" 
                   className="form-close"
@@ -1202,7 +1425,7 @@ function HomePage() {
                     setShowForm(false)
                     setUserIntent('browsing')
                   }}
-                  aria-label="Закрыть форму"
+                  aria-label={t('home.hero.form.close')}
                 >
                   ×
                 </button>
@@ -1210,13 +1433,13 @@ function HomePage() {
 
               {/* Tell User: Микротекст с инструкциями */}
               <div className="form-microcopy">
-                <p>Заполните форму ниже, и наш специалист свяжется с вами в течение 24 часов</p>
+                <p>{t('home.hero.form.description')}</p>
               </div>
               
               {/* Spectrum of Thinking: HEURISTICS - Подсказки для упрощения решения */}
               {userIntent === 'evaluating' && (
                 <div className="form-heuristics">
-                  <p>💡 <strong>Совет:</strong> Укажите тип объекта, и мы подберем оптимальное решение</p>
+                  <p>💡 <strong>{t('home.hero.form.hint')}</strong></p>
                 </div>
               )}
 
@@ -1224,67 +1447,67 @@ function HomePage() {
                 <div className="form-field-wrapper">
                   {/* Tell User: Визуальная подсказка с иконкой */}
                   <div className="field-label-with-hint">
-                    <label htmlFor="form-name">Ваше имя</label>
-                    <span className="field-hint" title="Укажите ваше имя для обращения">ℹ️</span>
+                    <label htmlFor="form-name">{t('home.hero.form.name')}</label>
+                    <span className="field-hint" title={t('home.hero.form.name')}>ℹ️</span>
                   </div>
                   <input
                     id="form-name"
                     type="text"
-                    placeholder="Например: Иван Иванов"
+                    placeholder={t('home.hero.form.namePlaceholder')}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
                     className="form-input"
-                    aria-label="Ваше имя"
+                    aria-label={t('home.hero.form.name')}
                     aria-describedby="name-hint"
                   />
                   {formData.name && (
-                    <span className="field-check">✓</span>
+                    <span className="field-check"><HiCheck /></span>
                   )}
                   {/* Tell User: Подсказка под полем */}
-                  <span id="name-hint" className="field-hint-text">Мы обратимся к вам по имени</span>
+                  <span id="name-hint" className="field-hint-text">{t('home.hero.form.nameHint')}</span>
                 </div>
                 <div className="form-field-wrapper">
                   <div className="field-label-with-hint">
-                    <label htmlFor="form-phone">Телефон</label>
-                    <span className="field-hint" title="Укажите номер для связи">ℹ️</span>
+                    <label htmlFor="form-phone">{t('home.hero.form.phone')}</label>
+                    <span className="field-hint" title={t('home.hero.form.phone')}>ℹ️</span>
                   </div>
                   <input
                     id="form-phone"
                     type="tel"
-                    placeholder="+372 5XXX XXXX"
+                    placeholder={t('home.hero.form.phonePlaceholder')}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     required
                     className="form-input"
-                    aria-label="Телефон"
+                    aria-label={t('home.hero.form.phone')}
                     aria-describedby="phone-hint"
                   />
                   {formData.phone && (
-                    <span className="field-check">✓</span>
+                    <span className="field-check"><HiCheck /></span>
                   )}
-                  <span id="phone-hint" className="field-hint-text">Мы позвоним в удобное для вас время</span>
+                  <span id="phone-hint" className="field-hint-text">{t('home.hero.form.phoneHint')}</span>
                 </div>
                 <div className="form-field-wrapper">
                   <div className="field-label-with-hint">
-                    <label htmlFor="form-email">Email</label>
-                    <span className="field-hint" title="Для отправки деталей консультации">ℹ️</span>
+                    <label htmlFor="form-email">{t('home.hero.form.email')}</label>
+                    <span className="field-hint" title={t('home.hero.form.email')}>ℹ️</span>
                   </div>
                   <input
                     id="form-email"
                     type="email"
-                    placeholder="example@email.com"
+                    placeholder={t('home.hero.form.emailPlaceholder')}
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
                     className="form-input"
-                    aria-label="Email"
+                    aria-label={t('home.hero.form.email')}
                     aria-describedby="email-hint"
                   />
                   {formData.email && (
-                    <span className="field-check">✓</span>
+                    <span className="field-check"><HiCheck /></span>
                   )}
-                  <span id="email-hint" className="field-hint-text">Отправим детали консультации на email</span>
+                  <span id="email-hint" className="field-hint-text">{t('home.hero.form.emailHint')}</span>
                 </div>
                 
                 {/* Spectrum of Thinking: FOCUSED CALCULATION - Дополнительные поля для критических решений */}
@@ -1297,12 +1520,12 @@ function HomePage() {
                           setUserIntent('deciding')
                         }
                       }}
-                      aria-label="Тип объекта"
+                      aria-label={t('home.hero.form.objectType')}
                     >
-                      <option value="">Выберите тип объекта (опционально)</option>
-                      <option value="residential">Жилой</option>
-                      <option value="commercial">Коммерческий</option>
-                      <option value="industrial">Промышленный</option>
+                      <option value="">{t('home.hero.form.objectType')}</option>
+                      <option value="residential">{t('home.hero.form.objectTypeResidential')}</option>
+                      <option value="commercial">{t('home.hero.form.objectTypeCommercial')}</option>
+                      <option value="industrial">{t('home.hero.form.objectTypeIndustrial')}</option>
                     </select>
                   </div>
                 )}
@@ -1310,10 +1533,10 @@ function HomePage() {
                 {/* CREATE Action Funnel: EVALUATION - Напоминание о ценности */}
                 <div className="form-value-reminder">
                   <span className="value-icon">🎁</span>
-                  <span>Бесплатная консультация • Ответ в течение 24 часов</span>
+                  <span>{t('home.hero.form.valueReminder')}</span>
                 </div>
                 <button type="submit" className="btn btn-primary form-submit">
-                  <span>Отправить заявку</span>
+                  <span>{t('home.hero.form.submit')}</span>
                   <span className="btn-arrow">→</span>
                 </button>
               </div>
@@ -1322,7 +1545,7 @@ function HomePage() {
 
           {/* Визуальные подсказки (Prompts) */}
           <div className="hero-scroll-hint">
-            <span className="scroll-text">Узнайте больше</span>
+            <span className="scroll-text">{t('home.hero.scrollHint')}</span>
             <span className="scroll-arrow">↓</span>
           </div>
         </div>
@@ -1339,6 +1562,9 @@ function HomePage() {
 
       {/* Social Proof с улучшениями по модели Фогга */}
       <SocialProofSection />
+
+      {/* Projects Preview с примерами проектов */}
+      <ProjectsPreviewSection />
 
       {/* CTA Section с улучшениями по модели Фогга */}
       <CTASection />

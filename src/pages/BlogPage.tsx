@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './BlogPage.css'
+import { HiBookOpen } from '../utils/icons'
+import { useLanguage } from '../contexts/LanguageContext'
 
 function BlogPage() {
+  const { t } = useLanguage()
   // CREATE Action Funnel: State для улучшения UX
   const [isVisible, setIsVisible] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -44,11 +47,21 @@ function BlogPage() {
   // Fogg: Helper функция для иконок категорий
   const getCategoryIcon = (category: string) => {
     const icons: Record<string, string> = {
-      'Руководства': '📚',
-      'Новости': '📰',
-      'Статьи': '📝'
+      [t('blog.categories.guides')]: '📚',
+      [t('blog.categories.news')]: '📰',
+      [t('blog.categories.articles')]: '📝'
     }
     return icons[category] || '📄'
+  }
+  
+  // Функция для получения переведенного названия категории
+  const getCategoryTranslation = (categoryKey: string) => {
+    const categoryMap: Record<string, string> = {
+      'Руководства': t('blog.categories.guides'),
+      'Новости': t('blog.categories.news'),
+      'Статьи': t('blog.categories.articles')
+    }
+    return categoryMap[categoryKey] || categoryKey
   }
 
   const blogPosts = [
@@ -59,6 +72,7 @@ function BlogPage() {
       excerpt: 'Руководство по выбору правильного огнезащитного покрытия в зависимости от типа конструкции',
       date: '2025-01-15',
       category: 'Руководства',
+      categoryKey: 'guides',
       views: 1250,
       rating: 4.8,
       popular: true
@@ -70,6 +84,7 @@ function BlogPage() {
       excerpt: 'Обзор новых нормативов и требований к противопожарной защите',
       date: '2025-01-10',
       category: 'Новости',
+      categoryKey: 'news',
       views: 980,
       rating: 4.6,
       popular: true
@@ -81,6 +96,7 @@ function BlogPage() {
       excerpt: 'Развеиваем популярные мифы о противопожарной защите',
       date: '2025-01-05',
       category: 'Статьи',
+      categoryKey: 'articles',
       views: 750,
       rating: 4.7,
       popular: false
@@ -92,6 +108,7 @@ function BlogPage() {
       excerpt: 'Сравнение активных и пассивных систем противопожарной защиты',
       date: '2024-12-28',
       category: 'Статьи',
+      categoryKey: 'articles',
       views: 620,
       rating: 4.5,
       popular: false
@@ -99,9 +116,17 @@ function BlogPage() {
   ]
 
   // CREATE: ABILITY - Фильтрация постов
-  const categories = ['Все', 'Руководства', 'Новости', 'Статьи']
+  const categories = [
+    { key: 'all', label: t('blog.categories.all') },
+    { key: 'guides', label: t('blog.categories.guides') },
+    { key: 'news', label: t('blog.categories.news') },
+    { key: 'articles', label: t('blog.categories.articles') }
+  ]
   const filteredPosts = blogPosts.filter(post => {
-    const matchesCategory = !selectedCategory || selectedCategory === 'Все' || post.category === selectedCategory
+    const matchesCategory = !selectedCategory || selectedCategory === 'all' || 
+      (selectedCategory === 'guides' && post.categoryKey === 'guides') ||
+      (selectedCategory === 'news' && post.categoryKey === 'news') ||
+      (selectedCategory === 'articles' && post.categoryKey === 'articles')
     const matchesSearch = !searchQuery || 
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
@@ -117,26 +142,52 @@ function BlogPage() {
       {exitIntentDetected && (
         <div className="exit-intent-notification">
           <div className="exit-intent-content">
-            <span className="exit-icon">📚</span>
-            <div>
-              <strong>Не уходите!</strong>
-              <p>У нас есть полезные статьи для вас</p>
-            </div>
             <button 
               className="exit-close"
               onClick={() => setExitIntentDetected(false)}
-              aria-label="Закрыть"
+              aria-label={t('blog.exitIntent.close')}
             >
               ×
             </button>
+            <div className="exit-intent-header">
+              <span className="exit-icon"><HiBookOpen /></span>
+              <div>
+                <strong>{t('blog.exitIntent.title')}</strong>
+                <p>{t('blog.exitIntent.subtitle')}</p>
+              </div>
+            </div>
+            <div className="exit-intent-articles">
+              {blogPosts.slice(0, 2).map(post => (
+                <Link
+                  key={post.id}
+                  to={`/blog/${post.slug}`}
+                  className="exit-article-card"
+                  onClick={() => setExitIntentDetected(false)}
+                >
+                  <div className="article-card-content">
+                    <span className="article-category">{getCategoryTranslation(post.category)}</span>
+                    <h3>{post.title}</h3>
+                    <p className="article-excerpt">{post.excerpt}</p>
+                  </div>
+                  <span className="article-arrow">→</span>
+                </Link>
+              ))}
+            </div>
+            <Link
+              to="/blog"
+              className="exit-view-all"
+              onClick={() => setExitIntentDetected(false)}
+            >
+              {t('blog.exitIntent.viewAll')} →
+            </Link>
           </div>
         </div>
       )}
 
       <div className="page-header">
         <div className="container">
-          <h1>Блог и база знаний</h1>
-          <p>Экспертные статьи о противопожарной защите</p>
+          <h1>{t('blog.title')}</h1>
+          <p>{t('blog.subtitle')}</p>
         </div>
       </div>
 
@@ -147,18 +198,18 @@ function BlogPage() {
             <div className="category-filters">
               {categories.map(category => (
                 <button
-                  key={category}
-                  className={`category-filter ${selectedCategory === category || (!selectedCategory && category === 'Все') ? 'active' : ''}`}
-                  onClick={() => setSelectedCategory(category === 'Все' ? null : category)}
+                  key={category.key}
+                  className={`category-filter ${selectedCategory === category.key || (!selectedCategory && category.key === 'all') ? 'active' : ''}`}
+                  onClick={() => setSelectedCategory(category.key === 'all' ? null : category.key)}
                 >
-                  {category}
+                  {category.label}
                 </button>
               ))}
             </div>
             <div className="blog-search">
               <input
                 type="text"
-                placeholder="Поиск статей..."
+                placeholder={t('blog.search')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input"
@@ -171,14 +222,14 @@ function BlogPage() {
           {!selectedCategory && !searchQuery && (
             <div className="popular-posts-banner">
               <span className="popular-icon">🔥</span>
-              <span>Популярные статьи этой недели</span>
+              <span>{t('blog.popular')}</span>
             </div>
           )}
 
           {/* CREATE: EVALUATION - Результаты поиска */}
           {searchQuery && (
             <div className="search-results-info">
-              Найдено статей: <strong>{filteredPosts.length}</strong>
+              {t('blog.searchResults')} <strong>{filteredPosts.length}</strong>
             </div>
           )}
 
@@ -193,7 +244,7 @@ function BlogPage() {
                 {post.popular && (
                   <div className="popular-badge">
                     <span className="popular-badge-icon">🔥</span>
-                    <span>Популярно</span>
+                    <span>{t('blog.popularBadge')}</span>
                   </div>
                 )}
 
@@ -201,7 +252,7 @@ function BlogPage() {
                 <div className="blog-meta">
                   <span className="blog-category-badge">
                     <span className="category-icon">{getCategoryIcon(post.category)}</span>
-                    <span>{post.category}</span>
+                    <span>{getCategoryTranslation(post.category)}</span>
                   </span>
                   <span className="blog-date">
                     <span className="date-icon">📅</span>
@@ -220,17 +271,17 @@ function BlogPage() {
                   <div className="evaluation-item">
                     <span className="evaluation-icon">👁️</span>
                     <span className="evaluation-value">{post.views}</span>
-                    <span className="evaluation-label">просмотров</span>
+                    <span className="evaluation-label">{t('blog.evaluation.views')}</span>
                   </div>
                   <div className="evaluation-item">
                     <span className="evaluation-icon">⭐</span>
                     <span className="evaluation-value">{post.rating}</span>
-                    <span className="evaluation-label">рейтинг</span>
+                    <span className="evaluation-label">{t('blog.evaluation.rating')}</span>
                   </div>
                   <div className="evaluation-item">
                     <span className="evaluation-icon">⏱️</span>
                     <span className="evaluation-value">5</span>
-                    <span className="evaluation-label">мин чтения</span>
+                    <span className="evaluation-label">{t('blog.evaluation.readingTime')}</span>
                   </div>
                 </div>
 
@@ -245,7 +296,7 @@ function BlogPage() {
                     }}
                   >
                     <span className="btn-icon">📖</span>
-                    <span>Читать далее</span>
+                    <span>{t('blog.readMore')}</span>
                     <span className="btn-arrow">→</span>
                   </Link>
                 </div>

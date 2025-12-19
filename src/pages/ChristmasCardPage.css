@@ -1,0 +1,663 @@
+.christmas-card-page {
+  font-family: 'Montserrat', 'Arial', sans-serif;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #16213e 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  padding: 2rem 1rem;
+}
+
+/* Рождественские декоративные элементы */
+.christmas-card-page::before {
+  content: '✨';
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  font-size: 2rem;
+  animation: twinkle 2s ease-in-out infinite;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.christmas-card-page::after {
+  content: '⭐';
+  position: fixed;
+  top: 20%;
+  right: 8%;
+  font-size: 1.5rem;
+  animation: twinkle 2.5s ease-in-out infinite 0.5s;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: white;
+  font-size: 1em;
+  opacity: 0.8;
+  animation: fall linear infinite;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8),
+               0 0 10px rgba(255, 255, 255, 0.5);
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.card {
+  background: white;
+  width: 90%;
+  max-width: 800px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+              0 0 40px rgba(255, 107, 53, 0.2),
+              inset 0 0 20px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+  animation: cardAppear 0.5s ease-out;
+  border: 3px solid transparent;
+  background-image: linear-gradient(white, white),
+                    linear-gradient(135deg, #c41e3a, #ff6b35, #ffd700, #c41e3a);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.card::before {
+  content: '🎄';
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  font-size: 2rem;
+  z-index: 11;
+  animation: swing 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.card::after {
+  content: '🎄';
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  font-size: 2rem;
+  z-index: 11;
+  animation: swing 3s ease-in-out infinite 1.5s;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.card-header {
+  background: linear-gradient(135deg, rgba(196, 30, 58, 0.85) 0%, rgba(139, 0, 0, 0.85) 100%),
+              url('/christmas-card-1.jpg') center/cover no-repeat;
+  padding: 60px 40px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-blend-mode: overlay;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Рождественские огоньки на баннере */
+.card-header::after {
+  content: '✨';
+  position: absolute;
+  top: 20px;
+  left: 10%;
+  font-size: 1.5rem;
+  animation: sparkle 1.5s ease-in-out infinite;
+  z-index: 3;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
+.card-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: shimmer 20s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+  margin: 0 0 20px 0;
+  display: block;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  align-self: center;
+}
+
+.card-header h1 {
+  color: white;
+  font-size: 2.5em;
+  margin: 0 0 10px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3),
+               0 0 20px rgba(255, 215, 0, 0.5),
+               0 0 40px rgba(255, 107, 53, 0.3);
+  position: relative;
+  z-index: 2;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  align-self: center;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3),
+                 0 0 20px rgba(255, 215, 0, 0.5),
+                 0 0 40px rgba(255, 107, 53, 0.3); }
+  to { text-shadow: 2px 2px 4px rgba(0,0,0,0.3),
+             0 0 30px rgba(255, 215, 0, 0.8),
+             0 0 60px rgba(255, 107, 53, 0.5); }
+}
+
+.card-header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2em;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  font-family: 'Montserrat', sans-serif;
+  align-self: center;
+}
+
+.card-body {
+  padding: 50px 40px;
+  background: linear-gradient(180deg, #ffffff 0%, #fffafa 100%);
+  position: relative;
+}
+
+/* Декоративные рождественские элементы в теле карточки */
+.card-body::before {
+  content: '🎁';
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 1.5rem;
+  opacity: 0.3;
+  animation: float 4s ease-in-out infinite;
+}
+
+.card-body::after {
+  content: '❄️';
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  font-size: 1.2rem;
+  opacity: 0.3;
+  animation: float 3s ease-in-out infinite 1s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.message {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.message h2 {
+  color: #2c3e50;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.message p {
+  color: #555;
+  font-size: 1.1em;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  font-family: 'Inter', sans-serif;
+}
+
+.fire-safety-message {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
+  padding: 30px;
+  border-radius: 15px;
+  border-left: 5px solid #c41e3a;
+  margin: 30px 0;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(196, 30, 58, 0.1),
+              inset 0 0 20px rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+.fire-safety-message::before {
+  content: '🎄';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 3rem;
+  opacity: 0.1;
+  transform: rotate(-15deg);
+}
+
+.fire-safety-message::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 215, 0, 0.03) 10px,
+    rgba(255, 215, 0, 0.03) 20px
+  );
+  pointer-events: none;
+}
+
+.fire-safety-message h3 {
+  color: #c41e3a;
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.fire-safety-message p {
+  color: #666;
+  font-size: 1em;
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+}
+
+.icon {
+  font-size: 1.5em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #c41e3a;
+}
+
+.icon svg {
+  width: 1.5em;
+  height: 1.5em;
+  fill: currentColor;
+}
+
+.signature {
+  text-align: right;
+  margin-top: 40px;
+  color: #2c3e50;
+  font-style: italic;
+  font-family: 'Inter', sans-serif;
+}
+
+.signature strong {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  color: #c41e3a;
+  font-size: 1.2em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.footer {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 40px 40px 30px;
+  text-align: center;
+  border-top: 4px solid #c41e3a;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::after {
+  content: '🎅';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  opacity: 0.2;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #c41e3a, #ff6b35, #c41e3a);
+  background-size: 200% 100%;
+  animation: shimmer-line 3s linear infinite;
+}
+
+@keyframes shimmer-line {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.contact-item {
+  color: #2c3e50;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  padding: 12px 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.contact-item:hover::before {
+  left: 100%;
+}
+
+.contact-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(196, 30, 58, 0.15);
+  border-color: rgba(196, 30, 58, 0.2);
+  background: #fff;
+}
+
+.contact-item svg {
+  width: 1.4em;
+  height: 1.4em;
+  color: #c41e3a;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  background: rgba(196, 30, 58, 0.1);
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.contact-item:hover svg {
+  color: #fff;
+  background: linear-gradient(135deg, #c41e3a, #ff6b35);
+  transform: scale(1.1);
+}
+
+.contact-item a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.contact-item:hover a {
+  color: #c41e3a;
+  font-weight: 600;
+}
+
+.footer-tagline {
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 20px;
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  padding: 15px;
+  background: rgba(196, 30, 58, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #c41e3a;
+}
+
+.back-to-home {
+  padding: 30px 40px;
+  text-align: center;
+  background: #fff;
+}
+
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #ff6b35, #ff8c5a, #ffd700);
+  background-size: 200% 200%;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1em;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3),
+              0 0 20px rgba(255, 215, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  animation: gradient-shift 3s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-button::before {
+  content: '✨';
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  animation: sparkle-move 2s ease-in-out infinite;
+  opacity: 0;
+}
+
+.home-button:hover::before {
+  animation: sparkle-move 2s ease-in-out infinite;
+  opacity: 1;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes sparkle-move {
+  0% { left: -20px; opacity: 0; }
+  50% { opacity: 1; }
+  100% { left: calc(100% + 20px); opacity: 0; }
+}
+
+.home-button:hover {
+  background: linear-gradient(135deg, #ff8c5a, #ff6b35);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.home-button:active {
+  transform: translateY(-1px);
+}
+
+.home-button svg {
+  width: 1.3em;
+  height: 1.3em;
+  fill: currentColor;
+}
+
+.home-button svg:last-child {
+  transition: transform 0.3s ease;
+}
+
+.home-button:hover svg:last-child {
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .christmas-card-page {
+    padding: 1rem 0.5rem;
+  }
+
+  .card-header {
+    padding: 40px 20px 30px;
+  }
+
+  .logo {
+    width: 140px;
+  }
+
+  .card-header h1 {
+    font-size: 1.8em;
+  }
+
+  .card-header p {
+    font-size: 1em;
+  }
+
+  .card-body {
+    padding: 30px 20px;
+  }
+
+  .message h2 {
+    font-size: 1.4em;
+  }
+
+  .message p {
+    font-size: 1em;
+  }
+
+  .fire-safety-message {
+    padding: 20px;
+  }
+
+  .fire-safety-message h3 {
+    font-size: 1.1em;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-item {
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 0.9em;
+  }
+
+  .contact-item svg {
+    width: 1.2em;
+    height: 1.2em;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-header h1 {
+    font-size: 1.5em;
+  }
+
+  .card-header p {
+    font-size: 0.9em;
+  }
+
+  .message h2 {
+    font-size: 1.2em;
+  }
+
+  .message p {
+    font-size: 0.95em;
+  }
+
+  .fire-safety-message {
+    padding: 15px;
+  }
+
+  .footer {
+    padding: 20px 15px;
+  }
+
+  .back-to-home {
+    padding: 20px 15px;
+  }
+
+  .home-button {
+    padding: 14px 24px;
+    font-size: 1em;
+    gap: 10px;
+  }
+
+  .home-button svg {
+    width: 1.2em;
+    height: 1.2em;
+  }
+}
+

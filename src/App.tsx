@@ -12,27 +12,33 @@ import BlogPostPage from './pages/BlogPostPage'
 import ResourcesPage from './pages/ResourcesPage'
 import MaterialsPage from './pages/MaterialsPage'
 import ContactPage from './pages/ContactPage'
+import ChristmasCardPage from './pages/ChristmasCardPage'
 
 function App() {
   return (
-    <Layout>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/about/:section" element={<AboutPage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/services/:service" element={<ServiceDetailPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/projects/:category" element={<ProjectCategoryPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/blog/:slug" element={<BlogPostPage />} />
-        <Route path="/resources" element={<ResourcesPage />} />
-        <Route path="/materials" element={<MaterialsPage />} />
-        <Route path="/materials/:material" element={<MaterialsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      <Route path="/christmas" element={<ChristmasCardPage />} />
+      <Route path="*" element={
+        <Layout>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/about/:section" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/services/:service" element={<ServiceDetailPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/:category" element={<ProjectCategoryPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/resources" element={<ResourcesPage />} />
+            <Route path="/materials" element={<MaterialsPage />} />
+            <Route path="/materials/:material" element={<MaterialsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
+        </Layout>
+      } />
+    </Routes>
   )
 }
 

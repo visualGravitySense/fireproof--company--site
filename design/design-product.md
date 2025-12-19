@@ -1,15 +1,24 @@
 UI Design Tasks:
-- [] 0. CONTENT: Style, Colors and Images for website
-- [] 00. Mouse Fire Effect: https://codepen.io/rban/pen/BaNgQqM
+- [x] 0. CONTENT: Style, Colors, Fonts and Images for website
 - [x] 1. Logo FIRE
-- [] 2. NEW FIRE ICONS
-- [] 3. My FIRE BUTTONS ANIMATION | NEW OPN-SRC
-- [] 4. Hover effect Fire animation in MENU | NEW OPN-SRC
-- [] 5. FIRE Vector Backgrounds https://i.pinimg.com/1200x/b0/0d/21/b00d21b5cc3e244837d228e0bc9a7a13.jpg
-- [] 6. FIRE Cards Animation https://codepen.io/pnbkn/pen/qBZmQrQ
+- [x] 2. NEW FIRE ICONS
 
 Next Task:
-- [] Lokalisation
+- [x] Contacts
+- [x] Mobile Optimisation
+- [x] Christmas Card | Implement to website
+- [x] Lokalisation
+- [x] Email JS form and Test
+- [] GitHub Action | Publish Website
+- [] Contact
+
+<!-- - [] 00. Mouse Fire Effect: https://codepen.io/rban/pen/BaNgQqM -->
+<!-- - [] 3. My FIRE BUTTONS ANIMATION | NEW OPN-SRC -->
+<!-- - [] 4. Hover effect Fire animation in MENU | NEW OPN-SRC -->
+<!-- - [] 5. FIRE Vector Backgrounds https://i.pinimg.com/1200x/b0/0d/21/b00d21b5cc3e244837d228e0bc9a7a13.jpg -->
+<!-- - [] 6. FIRE Cards Animation https://codepen.io/pnbkn/pen/qBZmQrQ -->
+
+
 
 BJ Fogg's Behavior Model
 B.J. Fogg, a renowned psychologist, and researcher at Stanford University, proposed the Fogg Behavior Model (FBM). This insightful model helps UX designers understand and infl uence user behavior by focusing on three core elements. These key factors are motivation, ability, and prompts.

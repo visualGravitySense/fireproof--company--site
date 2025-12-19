@@ -46,13 +46,20 @@
   transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .back-link:hover {
   color: #fff;
   background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15),
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transform: translateX(-5px);
 }
 
@@ -65,19 +72,31 @@
   transform: translateX(-3px);
 }
 
-/* Fogg: MOTIVATION - Trust Badge */
+/* Fogg: MOTIVATION - Trust Badge - Glassmorphism */
 .service-trust-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
   animation: slideDown 0.6s ease 0.2s both;
+  transition: all 0.3s ease;
+}
+
+.service-trust-badge:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 .trust-icon {
@@ -101,7 +120,9 @@
   font-size: 3.5rem;
   margin-bottom: 1rem;
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 900;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.02em;
   animation: fadeInUp 0.8s ease 0.3s both;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -111,6 +132,7 @@
   margin-bottom: 2.5rem;
   opacity: 0.95;
   line-height: 1.6;
+  font-family: 'Inter', 'Roboto', 'Open Sans', sans-serif;
   animation: fadeInUp 0.8s ease 0.5s both;
   max-width: 700px;
 }
@@ -272,7 +294,9 @@
   font-size: 2rem;
   margin: 0;
   color: #333;
-  font-weight: 700;
+  font-weight: 800;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.02em;
 }
 
 /* Fogg: ABILITY - Процесс работы */
@@ -445,6 +469,8 @@
 .warranty-text h3 {
   font-size: 1.5rem;
   font-weight: 700;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.01em;
   color: #333;
   margin-bottom: 0.75rem;
 }
@@ -458,16 +484,38 @@
 
 /* Fogg: PROMPTS - Улучшенная CTA секция */
 .cta-box {
-  background: linear-gradient(135deg, #1a1a2e 0%, #2d3436 100%);
+  background: url('/glass_background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: #fff;
   padding: 4rem 3rem;
   border-radius: 12px;
   text-align: center;
   margin-top: 3rem;
-  box-shadow: 0 8px 32px rgba(211, 47, 47, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  z-index: 0;
+}
+
+.cta-box .cta-content {
+  position: relative;
+  z-index: 1;
 }
 
 .cta-box.visible {
@@ -490,12 +538,13 @@
   font-size: 2.5rem;
   margin-bottom: 1rem;
   font-weight: 700;
+  color: #fff;
 }
 
 .cta-description {
   font-size: 1.25rem;
   margin-bottom: 2rem;
-  opacity: 0.95;
+  color: rgba(255, 255, 255, 0.95);
   line-height: 1.6;
 }
 

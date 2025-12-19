@@ -1,17 +1,34 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './Header.css'
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher'
+import { useLanguage } from '../../contexts/LanguageContext'
+// Иконки из централизованного файла
+import {
+  HiHome,
+  HiInformationCircle,
+  HiCog6Tooth,
+  HiDocumentText,
+  HiEnvelope,
+  HiMagnifyingGlass
+} from '../../utils/icons'
 
 // Иконки для навигации (улучшение подсказок)
-const navIcons: Record<string, string> = {
-  '/': '🏠',
-  '/about': 'ℹ️',
-  '/services': '⚙️',
-  // '/projects': '📁',
-  '/blog': '📝',
-  // '/resources': '📚',
-  // '/materials': '📄',
-  '/contact': '📧'
+const navIcons: Record<string, React.ComponentType> = {
+  '/': HiHome,
+  '/about': HiInformationCircle,
+  '/services': HiCog6Tooth,
+  // '/projects': HiFolder,
+  '/blog': HiDocumentText,
+  // '/resources': HiBookOpen,
+  // '/materials': HiDocument,
+  '/contact': HiEnvelope
+}
+
+// Вспомогательная функция для рендеринга иконок
+const renderIcon = (path: string) => {
+  const Icon = navIcons[path]
+  return Icon ? <Icon /> : null
 }
 
 function Header() {
@@ -21,6 +38,7 @@ function Header() {
   const [showSearch, setShowSearch] = useState(false)
   const location = useLocation()
   const searchInputRef = useRef<HTMLInputElement>(null)
+  const { t } = useLanguage()
 
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/')
 
@@ -46,7 +64,17 @@ function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isMenuOpen])
 
-  // Фокус на поиск при открытии (способность)
+  // Фокус на поиск при открытии меню на мобильных (способность)
+  useEffect(() => {
+    if (isMenuOpen && searchInputRef.current) {
+      // Небольшая задержка для плавной анимации
+      setTimeout(() => {
+        searchInputRef.current?.focus()
+      }, 300)
+    }
+  }, [isMenuOpen])
+
+  // Фокус на поиск при открытии (способность) - для десктопа
   useEffect(() => {
     if (showSearch && searchInputRef.current) {
       searchInputRef.current.focus()
@@ -82,6 +110,22 @@ function Header() {
         </button>
 
         <nav className={`nav ${isMenuOpen ? 'open' : ''}`} role="navigation" aria-label="Основная навигация">
+          {/* Поиск внутри мобильного меню */}
+          <form className="nav-search-form" onSubmit={handleSearch}>
+            <input
+              ref={searchInputRef}
+              type="text"
+              className="nav-search-input"
+              placeholder={t('nav.search') + '...'}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label={t('nav.search')}
+            />
+            <button type="submit" className="nav-search-submit" aria-label={t('nav.search')}>
+              <HiMagnifyingGlass />
+            </button>
+          </form>
+          
           {/* <Link 
             to="/" 
             className={`nav-link ${isActive('/') && location.pathname === '/' ? 'active' : ''}`}
@@ -95,16 +139,16 @@ function Header() {
             className={`nav-link ${isActive('/about') ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            <span className="nav-icon">{navIcons['/about']}</span>
-            <span className="nav-text">О компании</span>
+            <span className="nav-icon">{renderIcon('/about')}</span>
+            <span className="nav-text">{t('nav.about')}</span>
           </Link>
           <Link 
             to="/services" 
             className={`nav-link ${isActive('/services') ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            <span className="nav-icon">{navIcons['/services']}</span>
-            <span className="nav-text">Услуги</span>
+            <span className="nav-icon">{renderIcon('/services')}</span>
+            <span className="nav-text">{t('nav.services')}</span>
           </Link>
           {/* <Link 
             to="/projects" 
@@ -119,8 +163,8 @@ function Header() {
             className={`nav-link ${isActive('/blog') ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            <span className="nav-icon">{navIcons['/blog']}</span>
-            <span className="nav-text">Блог</span>
+            <span className="nav-icon">{renderIcon('/blog')}</span>
+            <span className="nav-text">{t('nav.blog')}</span>
           </Link>
           {/* <Link 
             to="/resources" 
@@ -143,8 +187,8 @@ function Header() {
             className={`nav-link ${isActive('/contact') ? 'active' : ''}`}
             onClick={() => setIsMenuOpen(false)}
           >
-            <span className="nav-icon">{navIcons['/contact']}</span>
-            <span className="nav-text">Контакты</span>
+            <span className="nav-icon">{renderIcon('/contact')}</span>
+            <span className="nav-text">{t('nav.contact')}</span>
           </Link>
 
         </nav>
@@ -154,10 +198,10 @@ function Header() {
           <button 
             className="search-toggle"
             onClick={() => setShowSearch(!showSearch)}
-            aria-label="Поиск"
+            aria-label={t('nav.search')}
             aria-expanded={showSearch}
           >
-            🔍
+            <HiMagnifyingGlass />
           </button>
           {showSearch && (
             <form className="search-form" onSubmit={handleSearch}>
@@ -165,28 +209,29 @@ function Header() {
                 ref={searchInputRef}
                 type="text"
                 className="search-input"
-                placeholder="Поиск..."
+                placeholder={t('nav.search') + '...'}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                aria-label="Поле поиска"
+                aria-label={t('nav.search')}
               />
-              <button type="submit" className="search-submit" aria-label="Выполнить поиск">
-                Найти
+              <button type="submit" className="search-submit" aria-label={t('nav.search')}>
+                {t('nav.search')}
               </button>
             </form>
           )}
         </div>
 
-        
+        {/* Переключатель языков */}
+        <LanguageSwitcher />
 
         {/* CTA кнопка для повышения мотивации (Motivation) */}
         <Link 
           to="/contact" 
           className="cta-button"
           onClick={() => setIsMenuOpen(false)}
-          aria-label="Связаться с нами"
+          aria-label={t('nav.contactButton')}
         >
-          Связаться
+          {t('nav.contactButton')}
         </Link>
       </div>
     </header>

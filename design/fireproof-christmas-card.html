@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireProof - С Рождеством!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            opacity: 0.8;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            padding: 60px 40px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: shimmer 20s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo-placeholder {
+            background: white;
+            width: 120px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #c41e3a;
+            font-size: 18px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-header h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-body {
+            padding: 50px 40px;
+            background: white;
+        }
+
+        .message {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .message h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .message p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .fire-safety-message {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #c41e3a;
+            margin: 30px 0;
+        }
+
+        .fire-safety-message h3 {
+            color: #c41e3a;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fire-safety-message p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            color: #2c3e50;
+            font-style: italic;
+        }
+
+        .signature strong {
+            display: block;
+            margin-top: 10px;
+            font-style: normal;
+            color: #c41e3a;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 25px 40px;
+            text-align: center;
+            border-top: 3px solid #c41e3a;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .contact-item {
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        .contact-item a {
+            color: #c41e3a;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .card-header {
+                padding: 40px 20px 30px;
+            }
+
+            .card-header h1 {
+                font-size: 1.8em;
+            }
+
+            .card-body {
+                padding: 30px 20px;
+            }
+
+            .message h2 {
+                font-size: 1.4em;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <div class="logo-placeholder">FIRE PROOF</div>
+            <h1>🎄 С Рождеством! 🎄</h1>
+            <p>и Наступающим Новым Годом!</p>
+        </div>
+
+        <div class="card-body">
+            <div class="message">
+                <h2>Уважаемые партнёры!</h2>
+                <p>
+                    В преддверии новогодних праздников команда FireProof от всей души поздравляет вас 
+                    с Рождеством и наступающим Новым Годом!
+                </p>
+                <p>
+                    Благодарим за доверие и плодотворное сотрудничество в уходящем году. 
+                    Вместе мы обеспечили надёжную защиту множества объектов, создавая 
+                    безопасное пространство для людей и бизнеса.
+                </p>
+            </div>
+
+            <div class="fire-safety-message">
+                <h3>
+                    <span class="icon">🔥</span>
+                    Безопасность превыше всего
+                </h3>
+                <p>
+                    В праздничные дни не забывайте о мерах пожарной безопасности: 
+                    используйте исправные гирлянды, не оставляйте без присмотра зажжённые свечи, 
+                    будьте внимательны при использовании фейерверков. Пусть праздники будут тёплыми и безопасными!
+                </p>
+            </div>
+
+            <div class="message">
+                <p>
+                    Желаем вам в новом году крепкого здоровья, благополучия, новых достижений 
+                    и успешной реализации всех планов!
+                </p>
+                <p>
+                    Пусть 2025 год принесёт радость, процветание и будет полон ярких событий!
+                </p>
+            </div>
+
+            <div class="signature">
+                С наилучшими пожеланиями,
+                <strong>Команда FireProof</strong>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="contact-info">
+                <div class="contact-item">
+                    📞 <a href="tel:0037253442034">+372 5344 2034</a>
+                </div>
+                <div class="contact-item">
+                    📧 <a href="mailto:info@fireproof.ee">info@fireproof.ee</a>
+                </div>
+                <div class="contact-item">
+                    🌐 <a href="https://fireproof.ee" target="_blank">fireproof.ee</a>
+                </div>
+            </div>
+            <p style="color: #888; font-size: 0.85em; margin-top: 10px;">
+                Профессиональные решения в области противопожарной защиты
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Создание снежинок
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
+            snowflake.style.fontSize = Math.random() * 1 + 0.5 + 'em';
+            snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 8000);
+        }
+
+        // Создание снежинок каждые 200мс
+        setInterval(createSnowflake, 200);
+    </script>
+</body>
+</html>

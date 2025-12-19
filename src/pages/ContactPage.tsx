@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import './ContactPage.css'
+import { useLanguage } from '../contexts/LanguageContext'
+import { sendContactForm, type ContactFormData } from '../utils/emailService'
 
 function ContactPage() {
+  const { t } = useLanguage()
   // Fogg Behavior Model: State для улучшения UX
   const [formData, setFormData] = useState({
     name: '',
@@ -69,19 +72,24 @@ function ContactPage() {
     setFormStatus('submitting')
     
     try {
-      // В реальном приложении здесь будет отправка формы
-      console.log('Form submitted:', formData)
+      // Отправка формы через EmailJS
+      const result = await sendContactForm(formData as ContactFormData)
       
-      // Fogg: EXECUTION - Успешная отправка
-      setFormStatus('success')
-      setFormData({ name: '', email: '', phone: '', message: '' })
-      setFieldTouched({})
-      setFieldErrors({})
-      
-      setTimeout(() => {
-        setFormStatus('idle')
-      }, 5000)
+      if (result.success) {
+        // Fogg: EXECUTION - Успешная отправка
+        setFormStatus('success')
+        setFormData({ name: '', email: '', phone: '', message: '' })
+        setFieldTouched({})
+        setFieldErrors({})
+        
+        setTimeout(() => {
+          setFormStatus('idle')
+        }, 5000)
+      } else {
+        throw new Error(result.message)
+      }
     } catch (error) {
+      console.error('Form submission error:', error)
       setFormStatus('error')
       setTimeout(() => {
         setFormStatus('idle')
@@ -97,25 +105,25 @@ function ContactPage() {
           {/* Fogg: MOTIVATION - Trust Badge */}
           <div className="contact-trust-badge">
             <span className="trust-icon">✓</span>
-            <span>Быстрый ответ • Бесплатная консультация • Опытные эксперты</span>
+            <span>{t('contact.trustBadge')}</span>
           </div>
 
-          <h1 className="contact-hero-title">Контакты</h1>
-          <p className="contact-hero-subtitle">Свяжитесь с нами для консультации</p>
+          <h1 className="contact-hero-title">{t('contact.title')}</h1>
+          <p className="contact-hero-subtitle">{t('contact.subtitle')}</p>
 
           {/* Fogg: MOTIVATION - Социальные доказательства */}
           <div className="contact-social-proof">
             <div className="proof-item">
               <span className="proof-icon">⚡</span>
-              <span className="proof-text">Ответ в течение 24 часов</span>
+              <span className="proof-text">{t('contact.socialProof.fast')}</span>
             </div>
             <div className="proof-item">
               <span className="proof-icon">💰</span>
-              <span className="proof-text">Бесплатная консультация</span>
+              <span className="proof-text">{t('contact.socialProof.free')}</span>
             </div>
             <div className="proof-item">
               <span className="proof-icon">👥</span>
-              <span className="proof-text">Опытные эксперты</span>
+              <span className="proof-text">{t('contact.socialProof.experts')}</span>
             </div>
           </div>
         </div>
@@ -128,7 +136,7 @@ function ContactPage() {
             <div className="contact-info">
               <h2 className="info-section-title">
                 <span className="title-icon">📞</span>
-                Контактная информация
+                {t('contact.info.title')}
               </h2>
 
               {/* Fogg: PROMPTS - Интерактивные контактные карточки */}
@@ -136,34 +144,37 @@ function ContactPage() {
                 <a href="mailto:info@fireproof.ee" className="info-card">
                   <div className="info-card-icon">✉️</div>
                   <div className="info-card-content">
-                    <h3>Email</h3>
-                    <p>info@fireproof.ee</p>
+                    <h3>{t('contact.info.email.title')}</h3>
+                    <p>{t('contact.info.email.value')}</p>
                   </div>
                   <div className="info-card-arrow">→</div>
                 </a>
 
-                <a href="tel:+372XXXXXXX" className="info-card">
+                <div className="info-card phone-card">
                   <div className="info-card-icon">📱</div>
                   <div className="info-card-content">
-                    <h3>Телефон</h3>
-                    <p>+372 XXX XXXX</p>
+                    <h3>{t('contact.info.phone.title')}</h3>
+                    <div className="phone-numbers">
+                      <a href="tel:+37253442034" className="phone-link">Leonid: +372 5344 2034</a>
+                      <a href="tel:+37253442035" className="phone-link">Nikolai: +372 5344 2035</a>
+                      <a href="tel:+37258054255" className="phone-link">Taimo: +372 5805 4255</a>
+                    </div>
                   </div>
-                  <div className="info-card-arrow">→</div>
-                </a>
+                </div>
 
                 <div className="info-card">
                   <div className="info-card-icon">📍</div>
                   <div className="info-card-content">
-                    <h3>Адрес</h3>
-                    <p>Эстония, Таллинн</p>
+                    <h3>{t('contact.info.address.title')}</h3>
+                    <p>{t('contact.info.address.value')}</p>
                   </div>
                 </div>
 
                 <div className="info-card">
                   <div className="info-card-icon">🕐</div>
                   <div className="info-card-content">
-                    <h3>Рабочие часы</h3>
-                    <p>Пн-Пт: 9:00 - 18:00</p>
+                    <h3>{t('contact.info.workingHours.title')}</h3>
+                    <p>{t('contact.info.workingHours.value')}</p>
                   </div>
                 </div>
               </div>
@@ -172,8 +183,8 @@ function ContactPage() {
               <div className="contact-highlight">
                 <span className="highlight-icon">💡</span>
                 <div>
-                  <strong>Нужна срочная консультация?</strong>
-                  <p>Позвоните нам прямо сейчас</p>
+                  <strong>{t('contact.highlight.title')}</strong>
+                  <p>{t('contact.highlight.text')}</p>
                 </div>
               </div>
             </div>
@@ -182,21 +193,21 @@ function ContactPage() {
             <div className="contact-form-wrapper">
               <h2 className="form-section-title">
                 <span className="title-icon">✉️</span>
-                Отправить сообщение
+                {t('contact.form.title')}
               </h2>
 
               {/* Fogg: PROMPTS - Статус формы */}
               {formStatus === 'success' && (
                 <div className="form-status-message success">
                   <span className="status-icon">✓</span>
-                  <span>Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.</span>
+                  <span>{t('contact.form.success')}</span>
                 </div>
               )}
 
               {formStatus === 'error' && (
                 <div className="form-status-message error">
                   <span className="status-icon">⚠️</span>
-                  <span>Пожалуйста, проверьте правильность заполнения полей.</span>
+                  <span>{t('contact.form.error')}</span>
                 </div>
               )}
 
@@ -204,9 +215,9 @@ function ContactPage() {
                 {/* Fogg: ABILITY - Улучшенные поля формы */}
                 <div className="form-group">
                   <label htmlFor="name">
-                    Имя *
+                    {t('contact.form.name')}
                     {fieldTouched.name && fieldErrors.name && (
-                      <span className="field-error">Минимум 2 символа</span>
+                      <span className="field-error">{t('contact.form.errors.name')}</span>
                     )}
                   </label>
                   <div className="input-wrapper">
@@ -228,9 +239,9 @@ function ContactPage() {
 
                 <div className="form-group">
                   <label htmlFor="email">
-                    Email *
+                    {t('contact.form.email')}
                     {fieldTouched.email && fieldErrors.email && (
-                      <span className="field-error">Некорректный email</span>
+                      <span className="field-error">{t('contact.form.errors.email')}</span>
                     )}
                   </label>
                   <div className="input-wrapper">
@@ -251,7 +262,7 @@ function ContactPage() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="phone">Телефон</label>
+                  <label htmlFor="phone">{t('contact.form.phone')}</label>
                   <div className="input-wrapper">
                     <input
                       type="tel"
@@ -266,9 +277,9 @@ function ContactPage() {
 
                 <div className="form-group">
                   <label htmlFor="message">
-                    Сообщение *
+                    {t('contact.form.message')}
                     {fieldTouched.message && fieldErrors.message && (
-                      <span className="field-error">Минимум 10 символов</span>
+                      <span className="field-error">{t('contact.form.errors.message')}</span>
                     )}
                   </label>
                   <div className="input-wrapper">
@@ -288,7 +299,7 @@ function ContactPage() {
                     )}
                   </div>
                   <div className="char-counter">
-                    {formData.message.length} / 500 символов
+                    {formData.message.length} {t('contact.form.charCounter')}
                   </div>
                 </div>
 
@@ -301,12 +312,12 @@ function ContactPage() {
                   {formStatus === 'submitting' ? (
                     <>
                       <span className="btn-icon">⏳</span>
-                      <span>Отправка...</span>
+                      <span>{t('contact.form.sending')}</span>
                     </>
                   ) : (
                     <>
                       <span className="btn-icon">📤</span>
-                      <span>Отправить сообщение</span>
+                      <span>{t('contact.form.send')}</span>
                       <span className="btn-arrow">→</span>
                     </>
                   )}

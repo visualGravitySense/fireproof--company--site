@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './ServicesPage.css'
+import { useLanguage } from '../contexts/LanguageContext'
 
 function ServicesPage() {
+  const { t } = useLanguage()
   // Fogg Behavior Model: State для улучшения UX
   const [isVisible, setIsVisible] = useState(false)
 
@@ -13,48 +15,68 @@ function ServicesPage() {
   const services = [
     {
       id: 'concrete',
-      title: 'Огнезащита железобетонных конструкций',
-      description: 'Защита бетонных конструкций с использованием материалов Firetherm и Promat',
-      features: ['Стандарты ISO, EN', 'Долговечное покрытие', 'Технические характеристики'],
+      title: t('services.items.concrete.title'),
+      description: t('services.items.concrete.description'),
+      features: [
+        t('services.items.concrete.features.0'),
+        t('services.items.concrete.features.1'),
+        t('services.items.concrete.features.2')
+      ],
       icon: '🏗️',
-      badge: 'Популярно',
-      trust: 'Сертифицировано'
+      badge: t('services.items.concrete.badge'),
+      trust: t('services.items.concrete.trust')
     },
     {
       id: 'timber',
-      title: 'Огнезащита деревянных конструкций',
-      description: 'Сертифицированные методы обработки различных типов древесины',
-      features: ['Экологичные материалы', 'Сертификация', 'Различные типы древесины'],
+      title: t('services.items.timber.title'),
+      description: t('services.items.timber.description'),
+      features: [
+        t('services.items.timber.features.0'),
+        t('services.items.timber.features.1'),
+        t('services.items.timber.features.2')
+      ],
       icon: '🪵',
-      badge: 'Экологично',
-      trust: 'Сертифицировано'
+      badge: t('services.items.timber.badge'),
+      trust: t('services.items.timber.trust')
     },
     {
       id: 'industrial',
-      title: 'Промышленные решения',
-      description: 'Комплексные системы для промышленных объектов',
-      features: ['Комплексные системы', 'Инспекция и надзор', 'Сопровождение объектов'],
+      title: t('services.items.industrial.title'),
+      description: t('services.items.industrial.description'),
+      features: [
+        t('services.items.industrial.features.0'),
+        t('services.items.industrial.features.1'),
+        t('services.items.industrial.features.2')
+      ],
       icon: '🏭',
-      badge: 'Комплексно',
-      trust: '20 лет опыта'
+      badge: t('services.items.industrial.badge'),
+      trust: t('services.items.industrial.trust')
     },
     {
       id: 'inspection',
-      title: 'Инспекция и надзор',
-      description: 'Профессиональная инспекция и надзор за проектами',
-      features: ['Регулярные проверки', 'Отчетность', 'Соответствие стандартам'],
+      title: t('services.items.inspection.title'),
+      description: t('services.items.inspection.description'),
+      features: [
+        t('services.items.inspection.features.0'),
+        t('services.items.inspection.features.1'),
+        t('services.items.inspection.features.2')
+      ],
       icon: '🔍',
-      badge: 'Профессионально',
-      trust: 'Гарантия качества'
+      badge: t('services.items.inspection.badge'),
+      trust: t('services.items.inspection.trust')
     },
     {
       id: 'consultation',
-      title: 'Консультации',
-      description: 'Экспертные консультации по противопожарной защите',
-      features: ['Бесплатная консультация', 'Проектирование', 'Рекомендации'],
+      title: t('services.items.consultation.title'),
+      description: t('services.items.consultation.description'),
+      features: [
+        t('services.items.consultation.features.0'),
+        t('services.items.consultation.features.1'),
+        t('services.items.consultation.features.2')
+      ],
       icon: '💬',
-      badge: 'Бесплатно',
-      trust: 'Эксперты'
+      badge: t('services.items.consultation.badge'),
+      trust: t('services.items.consultation.trust')
     }
   ]
 
@@ -66,29 +88,29 @@ function ServicesPage() {
           {/* Fogg: MOTIVATION - Trust Badge для повышения мотивации */}
           <div className="services-trust-badge">
             <span className="trust-icon">✓</span>
-            <span>5 видов услуг • Сертифицированные материалы • 20 лет опыта</span>
+            <span>{t('services.trustBadge')}</span>
           </div>
 
           {/* Fogg: MOTIVATION - Заголовок с эмоциональной привлекательностью */}
-          <h1 className="services-hero-title">Наши услуги</h1>
-          <p className="services-hero-subtitle">Комплексные решения в области противопожарной защиты</p>
+          <h1 className="services-hero-title">{t('services.title')}</h1>
+          <p className="services-hero-subtitle">{t('services.subtitle')}</p>
 
           {/* Fogg: MOTIVATION - Социальные доказательства */}
           <div className="services-social-proof">
             <div className="proof-item">
               <span className="proof-icon">🔧</span>
               <span className="proof-number">5</span>
-              <span className="proof-label">Видов услуг</span>
+              <span className="proof-label">{t('services.socialProof.types')}</span>
             </div>
             <div className="proof-item">
               <span className="proof-icon">📋</span>
               <span className="proof-number">100+</span>
-              <span className="proof-label">Реализованных проектов</span>
+              <span className="proof-label">{t('services.socialProof.projects')}</span>
             </div>
             <div className="proof-item">
               <span className="proof-icon">⭐</span>
               <span className="proof-number">20</span>
-              <span className="proof-label">лет опыта</span>
+              <span className="proof-label">{t('services.socialProof.years')}</span>
             </div>
           </div>
 
@@ -96,23 +118,23 @@ function ServicesPage() {
           <div className="services-quick-nav">
             <a href="#concrete" className="quick-nav-item">
               <span className="nav-icon">🏗️</span>
-              <span className="nav-text">Железобетон</span>
+              <span className="nav-text">{t('services.quickNav.concrete')}</span>
             </a>
             <a href="#timber" className="quick-nav-item">
               <span className="nav-icon">🪵</span>
-              <span className="nav-text">Дерево</span>
+              <span className="nav-text">{t('services.quickNav.timber')}</span>
             </a>
             <a href="#industrial" className="quick-nav-item">
               <span className="nav-icon">🏭</span>
-              <span className="nav-text">Промышленность</span>
+              <span className="nav-text">{t('services.quickNav.industrial')}</span>
             </a>
             <a href="#inspection" className="quick-nav-item">
               <span className="nav-icon">🔍</span>
-              <span className="nav-text">Инспекция</span>
+              <span className="nav-text">{t('services.quickNav.inspection')}</span>
             </a>
             <a href="#consultation" className="quick-nav-item">
               <span className="nav-icon">💬</span>
-              <span className="nav-text">Консультации</span>
+              <span className="nav-text">{t('services.quickNav.consultation')}</span>
             </a>
           </div>
 
@@ -120,12 +142,12 @@ function ServicesPage() {
           <div className="services-hero-cta">
             <Link to="/contact" className="btn btn-primary services-cta-btn">
               <span className="btn-icon">📞</span>
-              <span>Получить консультацию</span>
+              <span>{t('services.cta.consultation')}</span>
               <span className="btn-arrow">→</span>
             </Link>
             <Link to="/about" className="btn btn-secondary services-cta-btn">
               <span className="btn-icon">ℹ️</span>
-              <span>О компании</span>
+              <span>{t('services.cta.about')}</span>
               <span className="btn-arrow">→</span>
             </Link>
           </div>
@@ -169,7 +191,7 @@ function ServicesPage() {
 
                 {/* Fogg: ABILITY - Улучшенный список преимуществ */}
                 <div className="service-features-wrapper">
-                  <h3 className="features-title">Преимущества:</h3>
+                  <h3 className="features-title">{t('services.featuresTitle')}</h3>
                   <ul className="service-features">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="service-feature-item">
@@ -187,7 +209,7 @@ function ServicesPage() {
                     className="btn btn-primary service-btn"
                   >
                     <span className="btn-icon">📖</span>
-                    <span>Подробнее</span>
+                    <span>{t('services.more')}</span>
                     <span className="btn-arrow">→</span>
                   </Link>
                   <Link 
@@ -195,7 +217,7 @@ function ServicesPage() {
                     className="btn btn-secondary service-btn"
                   >
                     <span className="btn-icon">📞</span>
-                    <span>Консультация</span>
+                    <span>{t('services.consultationBtn')}</span>
                   </Link>
                 </div>
               </div>
@@ -210,26 +232,26 @@ function ServicesPage() {
           {/* Fogg: MOTIVATION - Trust Badge */}
           <div className="cta-trust-badge">
             <span className="cta-badge-icon">✓</span>
-            <span>Бесплатная консультация • Быстрый ответ • Опытные эксперты</span>
+            <span>{t('services.ctaSection.trustBadge')}</span>
           </div>
 
           {/* Fogg: MOTIVATION - Заголовок с эмоциональной привлекательностью */}
-          <h2 className="cta-title">Нужна консультация?</h2>
-          <p className="cta-subtitle">Свяжитесь с нами для бесплатной консультации</p>
+          <h2 className="cta-title">{t('services.ctaSection.title')}</h2>
+          <p className="cta-subtitle">{t('services.ctaSection.subtitle')}</p>
 
           {/* Fogg: MOTIVATION - Социальные доказательства */}
           <div className="cta-social-proof">
             <div className="cta-proof-item">
               <span className="cta-proof-icon">⚡</span>
-              <span className="cta-proof-text">Ответ в течение 24 часов</span>
+              <span className="cta-proof-text">{t('services.ctaSection.proof.fast')}</span>
             </div>
             <div className="cta-proof-item">
               <span className="cta-proof-icon">💰</span>
-              <span className="cta-proof-text">Бесплатно</span>
+              <span className="cta-proof-text">{t('services.ctaSection.proof.free')}</span>
             </div>
             <div className="cta-proof-item">
               <span className="cta-proof-icon">👥</span>
-              <span className="cta-proof-text">Опытные эксперты</span>
+              <span className="cta-proof-text">{t('services.ctaSection.proof.experts')}</span>
             </div>
           </div>
 
@@ -238,24 +260,24 @@ function ServicesPage() {
             <Link to="/contact" className="cta-option-card">
               <div className="option-icon">📞</div>
               <div className="option-content">
-                <h3>Телефон</h3>
-                <p>Позвоните нам</p>
+                <h3>{t('services.ctaSection.options.phone.title')}</h3>
+                <p>{t('services.ctaSection.options.phone.desc')}</p>
               </div>
               <div className="option-arrow">→</div>
             </Link>
             <Link to="/contact" className="cta-option-card">
               <div className="option-icon">✉️</div>
               <div className="option-content">
-                <h3>Email</h3>
-                <p>Напишите нам</p>
+                <h3>{t('services.ctaSection.options.email.title')}</h3>
+                <p>{t('services.ctaSection.options.email.desc')}</p>
               </div>
               <div className="option-arrow">→</div>
             </Link>
             <Link to="/contact" className="cta-option-card">
               <div className="option-icon">💬</div>
               <div className="option-content">
-                <h3>Форма</h3>
-                <p>Заполните форму</p>
+                <h3>{t('services.ctaSection.options.form.title')}</h3>
+                <p>{t('services.ctaSection.options.form.desc')}</p>
               </div>
               <div className="option-arrow">→</div>
             </Link>
@@ -265,12 +287,12 @@ function ServicesPage() {
           <div className="cta-actions">
             <Link to="/contact" className="btn btn-primary cta-main-btn">
               <span className="btn-icon">📞</span>
-              <span>Получить консультацию</span>
+              <span>{t('services.ctaSection.mainBtn')}</span>
               <span className="btn-arrow">→</span>
             </Link>
             <Link to="/about" className="btn btn-secondary cta-secondary-btn">
               <span className="btn-icon">ℹ️</span>
-              <span>Узнать больше о нас</span>
+              <span>{t('services.ctaSection.secondaryBtn')}</span>
               <span className="btn-arrow">→</span>
             </Link>
           </div>

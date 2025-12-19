@@ -7,11 +7,16 @@
    ============================================ */
 
 .footer {
-  background: #2c2c2c;
+  background: #1a1a2e !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   color: #fff;
   margin-top: auto;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .footer::before {
@@ -21,7 +26,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
 }
 
 .footer-container {
@@ -89,20 +94,57 @@
   color: #fff;
   font-size: 1.5rem;
   font-weight: 700;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.02em;
 }
 
 .footer-section h4 {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
   color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.02em;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.footer-section h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #ff6b35, #ff8c5a);
+  border-radius: 2px;
 }
 
 .section-icon {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 140, 90, 0.2));
+  border-radius: 8px;
+  color: #ff6b35;
+  transition: all 0.3s ease;
+}
+
+.section-icon svg {
+  width: 1.1em;
+  height: 1.1em;
+  fill: currentColor;
+}
+
+.footer-section:hover .section-icon {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), rgba(255, 140, 90, 0.3));
+  transform: scale(1.1) rotate(5deg);
 }
 
 /* Stats для мотивации (Motivation) */
@@ -118,9 +160,14 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-left: 3px solid #ff6b35;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   opacity: 0;
   transform: translateX(-10px);
@@ -145,13 +192,25 @@
 }
 
 .footer-stat-item:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transform: translateX(5px);
 }
 
 .stat-icon {
   font-size: 1.5rem;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  color: #ff6b35;
+}
+
+.stat-icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
 }
 
 .stat-content {
@@ -172,22 +231,44 @@
   line-height: 1.3;
 }
 
-/* Trust Badge для мотивации (Motivation) */
+/* Trust Badge для мотивации (Motivation) - Glassmorphism */
 .footer-trust-badge {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem;
-  background: rgba(76, 175, 80, 0.1);
+  background: rgba(76, 175, 80, 0.15);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
   border-radius: 8px;
-  border: 1px solid rgba(76, 175, 80, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
   font-size: 0.85rem;
   color: #4caf50;
+  transition: all 0.3s ease;
+}
+
+.footer-trust-badge:hover {
+  background: rgba(76, 175, 80, 0.2);
+  border-color: rgba(76, 175, 80, 0.4);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 .footer-trust-badge .trust-icon {
   font-size: 1rem;
   font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  color: #4caf50;
+}
+
+.footer-trust-badge .trust-icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
 }
 
 /* Links с улучшенными подсказками (Prompts) */
@@ -223,7 +304,11 @@
 
 .footer-link:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transform: translateX(5px);
   /* Подсказка: интерактивность */
 }
@@ -232,6 +317,15 @@
   font-size: 1.1rem;
   transition: transform 0.3s ease;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  color: #ff6b35;
+}
+
+.link-icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
 }
 
 .footer-link:hover .link-icon {
@@ -245,6 +339,14 @@
   transform: translateX(-5px);
   transition: all 0.3s ease;
   color: #ff6b35;
+  display: inline-flex;
+  align-items: center;
+}
+
+.link-arrow svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
 }
 
 .footer-link:hover .link-arrow {
@@ -255,42 +357,130 @@
 
 /* Contacts Section */
 .footer-contacts {
-  max-width: 250px;
+  max-width: 280px;
 }
 
 .contact-item {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border-radius: 6px;
-  transition: all 0.3s ease;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #ff6b35, #ff8c5a);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+  transform-origin: bottom;
+}
+
+.contact-item:hover::before {
+  transform: scaleY(1);
 }
 
 .contact-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-color: rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
 }
 
 .contact-icon {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 140, 90, 0.2));
+  border-radius: 10px;
+  color: #ff6b35;
+  margin-top: 0;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.contact-icon svg {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+}
+
+.contact-item:hover .contact-icon {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), rgba(255, 140, 90, 0.3));
+  border-color: rgba(255, 107, 53, 0.4);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.contact-phones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
 }
 
 .contact-link {
-  color: #ccc;
+  color: #e0e0e0;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 500;
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.contact-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleX(0);
+  width: 3px;
+  height: 100%;
+  background: #ff6b35;
+  transition: transform 0.3s ease;
+  transform-origin: left;
 }
 
 .contact-link:hover {
-  color: #ff6b35;
+  color: #fff;
+  padding-left: 0.75rem;
+}
+
+.contact-link:hover::before {
+  transform: translateY(-50%) scaleX(1);
+}
+
+.contact-item:first-child .contact-link {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
 }
 
 /* Social Links с улучшенными подсказками (Prompts) */
 .social-links {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-top: 1.5rem;
   flex-wrap: wrap;
 }
@@ -299,42 +489,78 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border-radius: 10px;
   color: #fff;
   text-decoration: none;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
   font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.social-link:hover::before {
+  left: 100%;
 }
 
 .social-link:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 140, 90, 0.15));
+  border-color: rgba(255, 107, 53, 0.4);
+  box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px) scale(1.02);
   /* Подсказка: призыв к действию */
 }
 
 .social-icon {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   transition: transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  color: #ff6b35;
+}
+
+.social-icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
 }
 
 .social-link:hover .social-icon {
-  transform: scale(1.2) rotate(5deg);
+  transform: scale(1.3) rotate(10deg);
+  color: #ff8c5a;
 }
 
-/* Footer Bottom */
+/* Footer Bottom - Glassmorphism */
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   padding: 1.5rem 2rem;
   text-align: center;
   color: #999;
   font-size: 0.9rem;
   position: relative;
   z-index: 1;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 @media (max-width: 1024px) {

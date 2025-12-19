@@ -1,12 +1,14 @@
 import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './AboutPage.css'
+import { useLanguage } from '../contexts/LanguageContext'
 
 interface AboutPageProps {
   section?: string
 }
 
 function AboutPage({ section }: AboutPageProps) {
+  const { t } = useLanguage()
   const params = useParams()
   const currentSection = section || params.section || 'main'
 
@@ -15,14 +17,14 @@ function AboutPage({ section }: AboutPageProps) {
       <div className="about-page">
         <div className="page-header">
           <div className="container">
-            <Link to="/about" className="back-link">← Назад</Link>
-            <h1>Наша история</h1>
+            <Link to="/about" className="back-link">{t('about.back')}</Link>
+            <h1>{t('about.sections.history.title')}</h1>
           </div>
         </div>
         <div className="about-content">
           <div className="container">
-            <p>Fire Proof Company была основана более 20 лет назад с миссией обеспечить безопасность зданий и защиту жизней.</p>
-            <p>За годы работы мы реализовали более 100 проектов и обработали более 230,000 м² площади.</p>
+            <p>{t('about.sections.history.text1')}</p>
+            <p>{t('about.sections.history.text2')}</p>
           </div>
         </div>
       </div>
@@ -34,13 +36,13 @@ function AboutPage({ section }: AboutPageProps) {
       <div className="about-page">
         <div className="page-header">
           <div className="container">
-            <Link to="/about" className="back-link">← Назад</Link>
-            <h1>Наша команда</h1>
+            <Link to="/about" className="back-link">{t('about.back')}</Link>
+            <h1>{t('about.sections.team.title')}</h1>
           </div>
         </div>
         <div className="about-content">
           <div className="container">
-            <p>Наша команда состоит из опытных специалистов с многолетним опытом в области противопожарной защиты.</p>
+            <p>{t('about.sections.team.text')}</p>
           </div>
         </div>
       </div>
@@ -52,13 +54,13 @@ function AboutPage({ section }: AboutPageProps) {
       <div className="about-page">
         <div className="page-header">
           <div className="container">
-            <Link to="/about" className="back-link">← Назад</Link>
-            <h1>Сертификаты и лицензии</h1>
+            <Link to="/about" className="back-link">{t('about.back')}</Link>
+            <h1>{t('about.sections.certificates.title')}</h1>
           </div>
         </div>
         <div className="about-content">
           <div className="container">
-            <p>Мы работаем только с сертифицированными материалами и имеем все необходимые лицензии.</p>
+            <p>{t('about.sections.certificates.text')}</p>
           </div>
         </div>
       </div>
@@ -70,8 +72,8 @@ function AboutPage({ section }: AboutPageProps) {
       <div className="about-page">
         <div className="page-header">
           <div className="container">
-            <Link to="/about" className="back-link">← Назад</Link>
-            <h1>Партнеры</h1>
+            <Link to="/about" className="back-link">{t('about.back')}</Link>
+            <h1>{t('about.sections.partners.title')}</h1>
           </div>
         </div>
         <div className="about-content">
@@ -102,29 +104,29 @@ function AboutPage({ section }: AboutPageProps) {
           {/* Fogg: MOTIVATION - Trust Badge для повышения мотивации */}
           <div className="about-trust-badge">
             <span className="trust-icon">✓</span>
-            <span>Сертифицированные материалы • 20 лет опыта • 100+ проектов</span>
+            <span>{t('about.trustBadge')}</span>
           </div>
 
           {/* Fogg: MOTIVATION - Заголовок с эмоциональной привлекательностью */}
-          <h1 className="about-hero-title">О компании</h1>
-          <p className="about-hero-subtitle">20 лет опыта в противопожарной защите</p>
+          <h1 className="about-hero-title">{t('about.title')}</h1>
+          <p className="about-hero-subtitle">{t('about.subtitle')}</p>
 
           {/* Fogg: MOTIVATION - Социальные доказательства */}
           <div className="about-social-proof">
             <div className="proof-item">
               <span className="proof-icon">🏆</span>
               <span className="proof-number">100+</span>
-              <span className="proof-label">Успешных проектов</span>
+              <span className="proof-label">{t('about.socialProof.projects')}</span>
             </div>
             <div className="proof-item">
               <span className="proof-icon">📐</span>
               <span className="proof-number">230,000</span>
-              <span className="proof-label">м² защищено</span>
+              <span className="proof-label">{t('about.socialProof.area')}</span>
             </div>
             <div className="proof-item">
               <span className="proof-icon">⭐</span>
               <span className="proof-number">20</span>
-              <span className="proof-label">лет опыта</span>
+              <span className="proof-label">{t('about.socialProof.years')}</span>
             </div>
           </div>
 
@@ -132,19 +134,19 @@ function AboutPage({ section }: AboutPageProps) {
           <div className="about-quick-links">
             <Link to="/about/history" className="quick-link">
               <span className="quick-link-icon">📜</span>
-              <span className="quick-link-text">История</span>
+              <span className="quick-link-text">{t('about.quickLinks.history')}</span>
             </Link>
             <Link to="/about/team" className="quick-link">
               <span className="quick-link-icon">👥</span>
-              <span className="quick-link-text">Команда</span>
+              <span className="quick-link-text">{t('about.quickLinks.team')}</span>
             </Link>
             <Link to="/about/certificates" className="quick-link">
               <span className="quick-link-icon">📜</span>
-              <span className="quick-link-text">Сертификаты</span>
+              <span className="quick-link-text">{t('about.quickLinks.certificates')}</span>
             </Link>
             <Link to="/about/partners" className="quick-link">
               <span className="quick-link-icon">🤝</span>
-              <span className="quick-link-text">Партнеры</span>
+              <span className="quick-link-text">{t('about.quickLinks.partners')}</span>
             </Link>
           </div>
 
@@ -152,12 +154,12 @@ function AboutPage({ section }: AboutPageProps) {
           <div className="about-hero-cta">
             <Link to="/contact" className="btn btn-primary about-cta-btn">
               <span className="btn-icon">📞</span>
-              <span>Связаться с нами</span>
+              <span>{t('about.cta.contact')}</span>
               <span className="btn-arrow">→</span>
             </Link>
             <Link to="/services" className="btn btn-secondary about-cta-btn">
               <span className="btn-icon">⚙️</span>
-              <span>Наши услуги</span>
+              <span>{t('about.cta.services')}</span>
               <span className="btn-arrow">→</span>
             </Link>
           </div>
@@ -171,13 +173,13 @@ function AboutPage({ section }: AboutPageProps) {
           <section className="about-section about-mission">
             <div className="section-header">
               <div className="section-icon">🎯</div>
-              <h2>Наша миссия</h2>
+              <h2>{t('about.mission.title')}</h2>
             </div>
-            <p className="mission-text">Защищаем то, что важно: жизни, имущество, бизнес</p>
+            <p className="mission-text">{t('about.mission.text')}</p>
             {/* Fogg: PROMPTS - Визуальная подсказка о важности */}
             <div className="mission-highlight">
               <span className="highlight-icon">🛡️</span>
-              <span className="highlight-text">Безопасность превыше всего</span>
+              <span className="highlight-text">{t('about.mission.highlight')}</span>
             </div>
           </section>
 
@@ -185,43 +187,43 @@ function AboutPage({ section }: AboutPageProps) {
           <section className="about-section about-values">
             <div className="section-header">
               <div className="section-icon">💎</div>
-              <h2>Наши ценности</h2>
+              <h2>{t('about.values.title')}</h2>
             </div>
             {/* Fogg: ABILITY - Упрощенное представление ценностей */}
             <div className="values-grid">
               <div className="value-item">
                 <div className="value-icon">🔒</div>
                 <div className="value-content">
-                  <strong>Безопасность</strong>
-                  <span className="value-desc">превыше всего</span>
+                  <strong>{t('about.values.safety.title')}</strong>
+                  <span className="value-desc">{t('about.values.safety.desc')}</span>
                 </div>
               </div>
               <div className="value-item">
                 <div className="value-icon">⭐</div>
                 <div className="value-content">
-                  <strong>Качество</strong>
-                  <span className="value-desc">европейские стандарты</span>
+                  <strong>{t('about.values.quality.title')}</strong>
+                  <span className="value-desc">{t('about.values.quality.desc')}</span>
                 </div>
               </div>
               <div className="value-item">
                 <div className="value-icon">⏱️</div>
                 <div className="value-content">
-                  <strong>Надежность</strong>
-                  <span className="value-desc">20 лет на рынке</span>
+                  <strong>{t('about.values.reliability.title')}</strong>
+                  <span className="value-desc">{t('about.values.reliability.desc')}</span>
                 </div>
               </div>
               <div className="value-item">
                 <div className="value-icon">🚀</div>
                 <div className="value-content">
-                  <strong>Инновации</strong>
-                  <span className="value-desc">современные технологии</span>
+                  <strong>{t('about.values.innovation.title')}</strong>
+                  <span className="value-desc">{t('about.values.innovation.desc')}</span>
                 </div>
               </div>
               <div className="value-item">
                 <div className="value-icon">✅</div>
                 <div className="value-content">
-                  <strong>Ответственность</strong>
-                  <span className="value-desc">за каждый проект</span>
+                  <strong>{t('about.values.responsibility.title')}</strong>
+                  <span className="value-desc">{t('about.values.responsibility.desc')}</span>
                 </div>
               </div>
             </div>
@@ -231,38 +233,38 @@ function AboutPage({ section }: AboutPageProps) {
           <section className="about-section about-advantages">
             <div className="section-header">
               <div className="section-icon">🏆</div>
-              <h2>Наши преимущества</h2>
+              <h2>{t('about.advantages.title')}</h2>
             </div>
             {/* Fogg: ABILITY - Упрощенное представление преимуществ */}
             <div className="advantages-list">
               <div className="advantage-item">
                 <div className="advantage-check">✓</div>
                 <div className="advantage-text">
-                  <strong>20 лет опыта</strong> в противопожарной защите
+                  <strong>{t('about.advantages.experience')}</strong>
                 </div>
               </div>
               <div className="advantage-item">
                 <div className="advantage-check">✓</div>
                 <div className="advantage-text">
-                  <strong>Комплексные решения</strong> от проектирования до надзора
+                  <strong>{t('about.advantages.complex')}</strong>
                 </div>
               </div>
               <div className="advantage-item">
                 <div className="advantage-check">✓</div>
                 <div className="advantage-text">
-                  <strong>Сертифицированные материалы</strong> премиум-класса
+                  <strong>{t('about.advantages.materials')}</strong>
                 </div>
               </div>
               <div className="advantage-item">
                 <div className="advantage-check">✓</div>
                 <div className="advantage-text">
-                  <strong>Опытные специалисты</strong> в собственной команде
+                  <strong>{t('about.advantages.specialists')}</strong>
                 </div>
               </div>
               <div className="advantage-item">
                 <div className="advantage-check">✓</div>
                 <div className="advantage-text">
-                  <strong>Гарантия качества</strong> и долговечности покрытий
+                  <strong>{t('about.advantages.guarantee')}</strong>
                 </div>
               </div>
             </div>
@@ -273,32 +275,32 @@ function AboutPage({ section }: AboutPageProps) {
             <Link to="/about/history" className="about-link-card">
               <div className="link-card-icon">📜</div>
               <div className="link-card-content">
-                <h3>Наша история</h3>
-                <p>Узнайте больше о нашей компании</p>
+                <h3>{t('about.links.history.title')}</h3>
+                <p>{t('about.links.history.desc')}</p>
               </div>
               <div className="link-card-arrow">→</div>
             </Link>
             <Link to="/about/team" className="about-link-card">
               <div className="link-card-icon">👥</div>
               <div className="link-card-content">
-                <h3>Команда</h3>
-                <p>Наши эксперты</p>
+                <h3>{t('about.links.team.title')}</h3>
+                <p>{t('about.links.team.desc')}</p>
               </div>
               <div className="link-card-arrow">→</div>
             </Link>
             <Link to="/about/certificates" className="about-link-card">
               <div className="link-card-icon">📜</div>
               <div className="link-card-content">
-                <h3>Сертификаты</h3>
-                <p>Лицензии и сертификаты</p>
+                <h3>{t('about.links.certificates.title')}</h3>
+                <p>{t('about.links.certificates.desc')}</p>
               </div>
               <div className="link-card-arrow">→</div>
             </Link>
             <Link to="/about/partners" className="about-link-card">
               <div className="link-card-icon">🤝</div>
               <div className="link-card-content">
-                <h3>Партнеры</h3>
-                <p>Наши партнеры и производители</p>
+                <h3>{t('about.links.partners.title')}</h3>
+                <p>{t('about.links.partners.desc')}</p>
               </div>
               <div className="link-card-arrow">→</div>
             </Link>

@@ -1,24 +1,26 @@
 import { Link } from 'react-router-dom'
 import './ProjectsPage.css'
+import { useLanguage } from '../contexts/LanguageContext'
 
 function ProjectsPage() {
+  const { t } = useLanguage()
   const categories = [
     {
       id: 'commercial',
-      title: 'Коммерческие проекты',
-      description: 'Огнезащита коммерческих зданий и объектов',
+      title: t('home.projectsPage.categories.commercial.title'),
+      description: t('home.projectsPage.categories.commercial.description'),
       count: 45
     },
     {
       id: 'industrial',
-      title: 'Промышленные проекты',
-      description: 'Комплексные решения для промышленных объектов',
+      title: t('home.projectsPage.categories.industrial.title'),
+      description: t('home.projectsPage.categories.industrial.description'),
       count: 35
     },
     {
       id: 'residential',
-      title: 'Жилые проекты',
-      description: 'Защита жилых зданий и комплексов',
+      title: t('home.projectsPage.categories.residential.title'),
+      description: t('home.projectsPage.categories.residential.description'),
       count: 20
     }
   ]
@@ -27,8 +29,8 @@ function ProjectsPage() {
     <div className="projects-page">
       <div className="page-header">
         <div className="container">
-          <h1>Наши проекты</h1>
-          <p>100+ успешно реализованных проектов</p>
+          <h1>{t('home.projectsPage.title')}</h1>
+          <p>{t('home.projectsPage.subtitle')}</p>
         </div>
       </div>
 
@@ -43,7 +45,7 @@ function ProjectsPage() {
               >
                 <h2>{category.title}</h2>
                 <p>{category.description}</p>
-                <div className="project-count">{category.count} проектов</div>
+                <div className="project-count">{category.count} {t('home.projectsPage.categories.commercial.count')}</div>
               </Link>
             ))}
           </div>
@@ -52,19 +54,19 @@ function ProjectsPage() {
 
       <section className="stats-section">
         <div className="container">
-          <h2>Статистика проектов</h2>
+          <h2>{t('home.projectsPage.stats.title')}</h2>
           <div className="stats-grid">
             <div className="stat">
               <div className="stat-number">100+</div>
-              <div className="stat-label">Проектов</div>
+              <div className="stat-label">{t('home.projectsPage.stats.projects')}</div>
             </div>
             <div className="stat">
               <div className="stat-number">230,000</div>
-              <div className="stat-label">м² обработанной площади</div>
+              <div className="stat-label">{t('home.projectsPage.stats.area')}</div>
             </div>
             <div className="stat">
               <div className="stat-number">20+</div>
-              <div className="stat-label">лет опыта</div>
+              <div className="stat-label">{t('home.projectsPage.stats.years')}</div>
             </div>
           </div>
         </div>

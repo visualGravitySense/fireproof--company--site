@@ -13,6 +13,27 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Обработка редиректа от 404.html для GitHub Pages SPA
+      // Если URL содержит query string в формате ?/path, преобразуем его в нормальный путь
+      (function() {
+        var location = window.location;
+        var search = location.search;
+        
+        if (search.length > 0 && search.indexOf('/') !== -1) {
+          // Проверяем, начинается ли query string с ?/
+          if (search.indexOf('?/') === 0) {
+            var path = search.substring(2).split('&')[0].replace(/~and~/g, '&');
+            // Исправляем путь
+            var newPath = path.startsWith('/') ? path : '/' + path;
+            // Сохраняем hash
+            var hash = location.hash;
+            // Заменяем URL
+            window.history.replaceState(null, '', newPath + hash);
+          }
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

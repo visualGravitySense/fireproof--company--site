@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import './Header.css'
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher'
 import { useLanguage } from '../../contexts/LanguageContext'
+import { getStaticPath } from '../../utils/paths'
 // Иконки из централизованного файла
 import {
   HiHome,
@@ -93,7 +94,7 @@ function Header() {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
         <Link to="/" className="logo" aria-label="Fire Proof - Главная страница">
-          <img src="/fp-logo-2.svg" alt="Fire Proof" className="logo-img" />
+          <img src={getStaticPath('/fp-logo-2.svg')} alt="Fire Proof" className="logo-img" />
         </Link>
         
         
@@ -191,6 +192,21 @@ function Header() {
             <span className="nav-text">{t('nav.contact')}</span>
           </Link>
 
+          {/* Переключатель языков в мобильном меню */}
+          <div className="nav-language-switcher">
+            <LanguageSwitcher />
+          </div>
+
+          {/* CTA кнопка в мобильном меню */}
+          <Link 
+            to="/contact" 
+            className="nav-cta-button"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label={t('nav.contactButton')}
+          >
+            {t('nav.contactButton')}
+          </Link>
+
         </nav>
 
           {/* Поиск для улучшения способности (Ability) */}
@@ -221,13 +237,15 @@ function Header() {
           )}
         </div>
 
-        {/* Переключатель языков */}
-        <LanguageSwitcher />
+        {/* Переключатель языков - только для десктопа */}
+        <div className="language-switcher-desktop">
+          <LanguageSwitcher />
+        </div>
 
-        {/* CTA кнопка для повышения мотивации (Motivation) */}
+        {/* CTA кнопка для повышения мотивации (Motivation) - только для десктопа */}
         <Link 
           to="/contact" 
-          className="cta-button"
+          className="cta-button cta-button-desktop"
           onClick={() => setIsMenuOpen(false)}
           aria-label={t('nav.contactButton')}
         >

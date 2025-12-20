@@ -20,7 +20,7 @@
 
 /* Fogg: MOTIVATION & PROMPTS - Hero блок с улучшениями */
 .about-hero {
-  background: url('/fire_protection.jpg');
+  background: var(--url-fire-protection, url('/fire_protection.jpg'));
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

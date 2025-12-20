@@ -407,7 +407,7 @@
 
 /* Fogg: PROMPTS - CTA секция */
 .post-cta-section {
-  background: url('/glass_background.jpg');
+  background: var(--url-glass-background, url('/glass_background.jpg'));
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

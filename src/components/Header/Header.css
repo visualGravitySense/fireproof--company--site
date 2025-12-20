@@ -258,12 +258,19 @@
   display: inline-block;
 }
 
-/* Переключатель языков */
-.header-container .language-switcher {
+/* Переключатель языков - только для десктопа */
+.language-switcher-desktop {
   margin-right: 0.5rem;
 }
 
-/* CTA кнопка для мотивации (Motivation) */
+/* Переключатель языков в мобильном меню - скрыт по умолчанию */
+.nav-language-switcher {
+  display: none;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+/* CTA кнопка для мотивации (Motivation) - только для десктопа */
 .cta-button {
   background: var(--color-cta, #d32f2f);
   color: #fff;
@@ -291,6 +298,11 @@
 .cta-button:focus {
   outline: 2px solid var(--color-cta, #d32f2f);
   outline-offset: 2px;
+}
+
+/* CTA кнопка в мобильном меню - скрыта по умолчанию, показывается только на мобильных */
+.nav-cta-button {
+  display: none;
 }
 
 /* Мобильное меню */
@@ -353,10 +365,62 @@
     order: 2;
   }
 
-  .cta-button {
-    order: 1;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+  /* Скрываем CTA кнопку в header на мобильных */
+  .cta-button-desktop {
+    display: none;
+  }
+
+  /* Скрываем переключатель языков в header на мобильных */
+  .language-switcher-desktop {
+    display: none;
+  }
+
+  /* Показываем переключатель языков в мобильном меню */
+  .nav-language-switcher {
+    display: block;
+  }
+
+  /* Стили для переключателя языков в мобильном меню */
+  .nav-language-switcher .language-switcher {
+    width: 100%;
+  }
+
+  .nav-language-switcher .language-button {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  /* CTA кнопка в мобильном меню */
+  .nav-cta-button {
+    width: 100%;
+    background: var(--color-cta, #d32f2f);
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
+    display: block;
+  }
+
+  .nav-cta-button:hover {
+    background: var(--color-cta-dark, #b71c1c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+  }
+
+  .nav-cta-button:active {
+    transform: translateY(0);
+  }
+
+  .nav-cta-button:focus {
+    outline: 2px solid var(--color-cta, #d32f2f);
+    outline-offset: 2px;
   }
 
   .nav {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './ChristmasCardPage.css'
-import { HiFire, HiPhone, HiEnvelope, HiHome, HiArrowRight } from '../utils/icons'
+import { getStaticPath } from '../utils/paths'
 
 interface Snowflake {
   id: number
@@ -58,23 +58,36 @@ function ChristmasCardPage() {
 
       <div className="card">
         <div className="card-header">
-          <img 
-            src="/fp-logo-wh-1.svg" 
-            alt="FireProof Logo" 
-            className="logo"
-          />
           <h1>🎄 С Рождеством! 🎄</h1>
-          <p>и Наступающим Новым Годом!</p>
+          <p>и наступающим Новым Годом!</p>
+        </div>
+
+        <div className="meme-section">
+          <div className="meme-container">
+            <div className="meme-title">Ваши конструкции в праздники:</div>
+            <div className="meme-labels-row">
+              <div className="meme-label">БЕЗ FireProof<br/>защиты</div>
+              <div className="vs-text">VS</div>
+              <div className="meme-label">С FireProof<br/>защитой</div>
+            </div>
+            <div className="meme-image-wrapper">
+              <img 
+                src={getStaticPath('/this-is-fine-meme.jpg')} 
+                alt="This is Fine meme - сравнение БЕЗ и С FireProof защитой" 
+                className="meme-image-full"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="card-body">
           <div className="message">
             <h2>Уважаемые партнёры!</h2>
-            <p>
-              В преддверии новогодних праздников команда FireProof от всей души поздравляет вас 
-              с Рождеством и наступающим Новым Годом!
+            <p className="greeting-text">
+              В преддверии новогодних праздников команда FireProof от всей души 
+              поздравляет вас с Рождеством и наступающим Новым Годом!
             </p>
-            <p>
+            <p className="greeting-text">
               Благодарим за доверие и плодотворное сотрудничество в уходящем году. 
               Вместе мы обеспечили надёжную защиту множества объектов, создавая 
               безопасное пространство для людей и бизнеса.
@@ -82,55 +95,45 @@ function ChristmasCardPage() {
           </div>
 
           <div className="fire-safety-message">
-            <h3>
-              <span className="icon"><HiFire /></span>
-              Безопасность превыше всего
-            </h3>
-            <p>
-              В праздничные дни не забывайте о мерах пожарной безопасности: 
-              используйте исправные гирлянды, не оставляйте без присмотра зажжённые свечи, 
-              будьте внимательны при использовании фейерверков. Пусть праздники будут тёплыми и безопасными!
+            <div className="safety-title">
+              <span>🔥</span>
+              <span>Безопасность превыше всего</span>
+            </div>
+            <p className="safety-text">
+              В праздничные дни не забывайте о мерах пожарной безопасности: используйте 
+              исправные гирлянды, не оставляйте без присмотра зажжённые свечи, будьте 
+              внимательны при использовании фейерверков. Пусть праздники будут тёплыми и 
+              безопасными!
             </p>
           </div>
 
-          <div className="message">
+          <div className="wishes">
             <p>
-              Желаем вам в новом году крепкого здоровья, благополучия, новых достижений 
-              и успешной реализации всех планов!
+              Желаем вам в новом году крепкого здоровья, благополучия, новых достижений и 
+              успешной реализации всех планов!
             </p>
-            <p>
+            <p className="wishes-bold">
               Пусть 2026 год принесёт радость, процветание и будет полон ярких событий!
             </p>
           </div>
 
           <div className="signature">
-            С наилучшими пожеланиями,
-            <strong>Команда FireProof</strong>
+            <p>С наилучшими пожеланиями,</p>
+            <p className="team-name">Команда FireProof</p>
           </div>
         </div>
 
         <div className="footer">
           <div className="contact-info">
-            <div className="contact-item">
-              <HiPhone /> <a href="tel:+37253442034">+372 5344 2034</a>
-            </div>
-            <div className="contact-item">
-              <HiEnvelope /> <a href="mailto:info@fireproof.ee">info@fireproof.ee</a>
-            </div>
-            <div className="contact-item">
-              <HiHome /> <a href="https://fireproof.ee" target="_blank" rel="noopener noreferrer">fireproof.ee</a>
-            </div>
+            <a href="tel:+37253442034" className="contact-item">📞 +372 5344 2034</a>
+            <a href="mailto:info@fireproof.ee" className="contact-item">✉️ info@fireproof.ee</a>
+            <a href="https://fireproof.ee" className="contact-item">🌐 fireproof.ee</a>
           </div>
           <p className="footer-tagline">
             Профессиональные решения в области противопожарной защиты
           </p>
-        </div>
-        
-        <div className="back-to-home">
-          <Link to="/" className="home-button">
-            <HiHome />
-            <span>На главную страницу</span>
-            <HiArrowRight />
+          <Link to="/" className="cta-button">
+            🏠 На главную страницу →
           </Link>
         </div>
       </div>

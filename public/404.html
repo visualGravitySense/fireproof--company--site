@@ -14,7 +14,8 @@
       // 1 = для username.github.io/repo-name (base path: /repo-name/, URL: username.github.io/repo-name/about)
       // Если ваш сайт доступен по адресу username.github.io/about, установите 0
       // Если ваш сайт доступен по адресу username.github.io/repo-name/about, установите 1
-      var pathSegmentsToKeep = 0;
+      // Для репозитория fireproof--company--site нужно установить 1
+      var pathSegmentsToKeep = 1;
       
       var l = window.location;
       var redirect = l.protocol + "//" + l.hostname + (l.port ? ":" + l.port : "") +

@@ -484,7 +484,7 @@
 
 /* Fogg: PROMPTS - Улучшенная CTA секция */
 .cta-box {
-  background: url('/glass_background.jpg');
+  background: var(--url-glass-background, url('/glass_background.jpg'));
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

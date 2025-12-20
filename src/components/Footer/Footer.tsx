@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import './Footer.css'
 import { useLanguage } from '../../contexts/LanguageContext'
+import { getStaticPath } from '../../utils/paths'
 // Иконки из централизованного файла
 import {
   HiStar,
@@ -85,7 +86,7 @@ function Footer() {
         {/* Company Section с улучшениями по модели Фогга */}
         <div className={`footer-section footer-company ${isVisible ? 'visible' : ''}`}>
           <div className="footer-logo">
-            <img src="/fp-logo-2.svg" alt="Fire Proof" className="footer-logo-img" />
+            <img src={getStaticPath('/fp-logo-2.svg')} alt="Fire Proof" className="footer-logo-img" />
             <h3></h3>
           </div>
           <div className="footer-stats">

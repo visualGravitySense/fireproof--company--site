@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import './ProjectCategoryPage.css'
+import { getStaticPath } from '../utils/paths'
 
 function ProjectCategoryPage() {
   const { category } = useParams<{ category: string }>()
@@ -108,7 +109,7 @@ function ProjectCategoryPage() {
                 <div className="project-image">
                   {project.image ? (
                     <img 
-                      src={project.image} 
+                      src={project.image ? getStaticPath(project.image) : ''} 
                       alt={project.title}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement

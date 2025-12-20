@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './HomePage.css'
 import { useLanguage } from '../contexts/LanguageContext'
 import { sendQuickForm } from '../utils/emailService'
+import { getStaticPath } from '../utils/paths'
 // Иконки из централизованного файла
 import {
   HiCheck,
@@ -435,7 +436,7 @@ function ServicesPreviewSection() {
               style={{ 
                 animationDelay: `${index * 0.15}s`,
                 ...(service.image && {
-                  '--service-image': `url(${service.image})`
+                  '--service-image': `url(${getStaticPath(service.image)})`
                 } as React.CSSProperties)
               }}
             >
@@ -756,7 +757,7 @@ function ProjectsPreviewSection() {
             >
               <div className="project-preview-image">
                 {project.image ? (
-                  <img src={project.image} alt={project.title} onError={(e) => {
+                  <img src={getStaticPath(project.image)} alt={project.title} onError={(e) => {
                     const target = e.target as HTMLImageElement
                     target.style.display = 'none'
                     const placeholder = target.nextElementSibling as HTMLElement

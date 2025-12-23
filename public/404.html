@@ -10,12 +10,11 @@
       // https://github.com/rafgraph/spa-github-pages
       
       // Определяем количество сегментов пути для сохранения
-      // 0 = для username.github.io (base path: /, URL: username.github.io/about)
+      // 0 = для кастомного домена (base path: /, URL: fireproof.ee/about)
       // 1 = для username.github.io/repo-name (base path: /repo-name/, URL: username.github.io/repo-name/about)
-      // Если ваш сайт доступен по адресу username.github.io/about, установите 0
-      // Если ваш сайт доступен по адресу username.github.io/repo-name/about, установите 1
-      // Для репозитория fireproof--company--site нужно установить 1
-      var pathSegmentsToKeep = 1;
+      // Если используется кастомный домен fireproof.ee, установите 0
+      // Если используется стандартный GitHub Pages URL с путем репозитория, установите 1
+      var pathSegmentsToKeep = 0;
       
       var l = window.location;
       var redirect = l.protocol + "//" + l.hostname + (l.port ? ":" + l.port : "") +

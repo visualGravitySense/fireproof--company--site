@@ -9,8 +9,10 @@ Next Task:
 - [x] Christmas Card | Implement to website
 - [x] Lokalisation
 - [x] Email JS form and Test
-- [] GitHub Action | Publish Website
-- [] Contact
+- [x] GitHub Action | Publish Website
+- [] SMM, Add's
+- [] Contact | Redirect domen
+
 
 <!-- - [] 00. Mouse Fire Effect: https://codepen.io/rban/pen/BaNgQqM -->
 <!-- - [] 3. My FIRE BUTTONS ANIMATION | NEW OPN-SRC -->

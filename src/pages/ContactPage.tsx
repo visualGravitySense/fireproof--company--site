@@ -157,7 +157,6 @@ function ContactPage() {
                     <div className="phone-numbers">
                       <a href="tel:+37253442034" className="phone-link">Leonid: +372 5344 2034</a>
                       <a href="tel:+37253442035" className="phone-link">Nikolai: +372 5344 2035</a>
-                      <a href="tel:+37258054255" className="phone-link">Taimo: +372 5805 4255</a>
                     </div>
                   </div>
                 </div>

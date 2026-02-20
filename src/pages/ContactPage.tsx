@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './ContactPage.css'
 import { useLanguage } from '../contexts/LanguageContext'
 import { sendContactForm, type ContactFormData } from '../utils/emailService'
+import { TelegramService } from '../services/telegramService'
 
 function ContactPage() {
   const { t } = useLanguage()
@@ -76,6 +77,13 @@ function ContactPage() {
       const result = await sendContactForm(formData as ContactFormData)
       
       if (result.success) {
+        // Отправка в Telegram
+        await TelegramService.notifyContactForm({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          message: formData.message,
+        })
         // Fogg: EXECUTION - Успешная отправка
         setFormStatus('success')
         setFormData({ name: '', email: '', phone: '', message: '' })

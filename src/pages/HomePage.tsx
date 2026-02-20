@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './HomePage.css'
 import { useLanguage } from '../contexts/LanguageContext'
 import { sendQuickForm } from '../utils/emailService'
+import { TelegramService } from '../services/telegramService'
 import { getStaticPath } from '../utils/paths'
 // Иконки из централизованного файла
 import {
@@ -831,6 +832,12 @@ function CTASection() {
       })
       
       if (result.success) {
+        await TelegramService.notifyQuickForm({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          objectType: formData.objectType,
+        })
         alert(t('contact.form.success'))
         setFormData({ name: '', phone: '', email: '', objectType: '' })
         setShowForm(false)
@@ -1048,6 +1055,13 @@ function HomePage() {
       })
       
       if (result.success) {
+        // Отправка в Telegram
+        await TelegramService.notifyQuickForm({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          objectType: formData.objectType,
+        })
         // Tell User: Показываем успешный статус
         setSystemStatus('success')
         
@@ -1199,7 +1213,10 @@ function HomePage() {
       {/* Clear the Page: Минимизированная кнопка помощи */}
       <button 
         className="help-button minimal"
-        onClick={() => setShowHelp(!showHelp)}
+        onClick={() => {
+          if (!showHelp) TelegramService.notifyHelpClick()
+          setShowHelp(!showHelp)
+        }}
         aria-label="Помощь"
         title="Помощь"
       >

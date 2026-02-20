@@ -2,41 +2,48 @@
 
 Все контактные кнопки и формы на сайте отправляют уведомления в Telegram-бот.
 
-## Настройка
+## Почему бот не работает на GitHub Pages
 
-### 1. Переменные окружения
+GitHub Pages — только статика. API `/api/bot1` там **не работает**. Нужен Vercel для serverless-функций.
 
-Добавьте в `.env` (или в настройки деплоя):
+---
 
+## Настройка бота на Vercel
+
+### Шаг 1. Деплой на Vercel
+
+1. Зайдите на [vercel.com](https://vercel.com) → **Add New** → **Project**
+2. Импортируйте репозиторий `fireproof-site`
+3. **Deploy** (Vercel сам определит Vite + API)
+
+### Шаг 2. Переменные окружения в Vercel
+
+Vercel → ваш проект → **Settings** → **Environment Variables**:
+
+| Переменная | Значение | Где |
+|------------|----------|-----|
+| `TELEGRAM_BOT_TOKEN` | Токен от @BotFather | Production, Preview |
+| `VITE_TELEGRAM_ADMIN_CHAT_ID` | Ваш Chat ID (напр. 5883625804) | Production, Preview |
+
+**Chat ID:** напишите @userinfobot в Telegram — он вернёт ваш Id.
+
+### Шаг 3. Сайт на GitHub Pages — указать URL API
+
+Если сайт на **GitHub Pages**, а API на **Vercel**:
+
+1. GitHub → **Settings** → **Secrets and variables** → **Actions**
+2. Добавьте secret: `VITE_TELEGRAM_API_URL` = `https://ваш-проект.vercel.app/api/bot1`
+3. Раскомментируйте строку в `.github/workflows/deploy.yml` (см. ниже)
+
+### Шаг 4. Проверка API
+
+```bash
+curl -X POST https://ваш-проект.vercel.app/api/bot1 \
+  -H "Content-Type: application/json" \
+  -d '{"type":"help_click","chatId":"ВАШ_CHAT_ID","data":{"source":"test"}}'
 ```
-VITE_TELEGRAM_ADMIN_CHAT_ID=ваш_chat_id
-```
 
-**Как получить Chat ID:**
-1. Напишите боту @userinfobot в Telegram
-2. Он вернёт ваш `Id` — это и есть Chat ID
-
-### 2. API для отправки
-
-Сайт отправляет данные на API `/api/bot1`. Варианты:
-
-**Вариант A: Деплой на Vercel** (рекомендуется)
-- При деплое на Vercel API автоматически доступен
-- Добавьте в Vercel: `TELEGRAM_BOT_TOKEN` (или `BOT1_TOKEN`) и `VITE_TELEGRAM_ADMIN_CHAT_ID`
-
-**Вариант B: GitHub Pages + отдельный Vercel для ботов**
-- Сайт на GitHub Pages, боты — отдельный проект Vercel
-- Укажите: `VITE_TELEGRAM_API_URL=https://ваш-проект.vercel.app/api/bot1`
-
-### 3. Токен бота
-
-В Vercel → Settings → Environment Variables:
-
-```
-TELEGRAM_BOT_TOKEN=ваш_токен_бота
-# или для бота 1:
-BOT1_TOKEN=ваш_токен_бота
-```
+Должно прийти сообщение в Telegram.
 
 ## Что отправляется в Telegram
 

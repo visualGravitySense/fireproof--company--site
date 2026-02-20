@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:bot": "node scripts/test-bot-server.js",
+    "test:bot:send": "node scripts/send-test-message.js"
   },
   "devDependencies": {
     "@vercel/node": "^3.2.0",

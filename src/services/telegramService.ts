@@ -8,7 +8,8 @@ type NotifyType =
   | 'website_registration'
   | 'contact_form'
   | 'feedback'
-  | 'help_click';
+  | 'help_click'
+  | 'button_click';
 
 export class TelegramService {
   private static async send(type: NotifyType, data: Record<string, unknown>): Promise<boolean> {
@@ -70,5 +71,15 @@ export class TelegramService {
       source: 'help_button',
       timestamp: new Date().toISOString(),
     });
+  }
+
+  /** Клик по кнопке/ссылке на сайте */
+  static async notifyButtonClick(data: {
+    id?: string;
+    label: string;
+    page: string;
+    url?: string;
+  }): Promise<boolean> {
+    return this.send('button_click', data);
   }
 }

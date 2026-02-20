@@ -117,9 +117,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ].join('\n');
         break;
 
+      case 'button_click':
+        message = [
+          '🖱️ <b>Клик на сайте</b>',
+          `📍 <b>Страница:</b> ${escapeHtml(String(data?.page ?? '—'))}`,
+          `🔘 <b>Кнопка:</b> ${escapeHtml(String(data?.label ?? data?.id ?? '—'))}`,
+          data?.url ? `🔗 <b>Ссылка:</b> ${escapeHtml(String(data.url))}` : '',
+          `⏰ <b>Время:</b> ${time}`,
+        ]
+          .filter(Boolean)
+          .join('\n');
+        break;
+
       default:
         return res.status(400).json({ error: 'Invalid type' });
     }
+
+    // Вывод в терминал для тестирования (видно при vercel dev)
+    const plainText = message.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+    console.log('\n' + '─'.repeat(50) + '\n📤 BOT1 → Telegram\n' + '─'.repeat(50) + '\n' + plainText + '\n' + '─'.repeat(50) + '\n');
 
     const result = await sendToTelegram(BOT_TOKEN, chatId, message);
 

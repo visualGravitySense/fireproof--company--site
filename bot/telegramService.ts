@@ -22,9 +22,7 @@ export class TelegramService {
 
     try {
       // Try Vercel API route first (works in production)
-      const apiUrl = USE_VERCEL_API
-        ? '/api/telegram-notify'
-        : 'https://api.telegram.org/bot8098211455:AAHgn_Tnl23c5Vr2AE2c1GuhuyUXKgj27N4/sendMessage';
+      const apiUrl = '/api/bot1';
 
       if (USE_VERCEL_API) {
         // Use Vercel Serverless Function

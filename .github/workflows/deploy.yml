@@ -36,14 +36,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate Telegram secrets
+      - name: Validate Telegram config
         run: |
-          if [ -z "${{ secrets.VITE_TELEGRAM_ADMIN_CHAT_ID }}" ]; then
-            echo "::error::VITE_TELEGRAM_ADMIN_CHAT_ID не задан! Добавьте в Settings → Secrets and variables → Actions"
+          if [ -z "${{ vars.VITE_TELEGRAM_ADMIN_CHAT_ID || secrets.VITE_TELEGRAM_ADMIN_CHAT_ID }}" ]; then
+            echo "::error::VITE_TELEGRAM_ADMIN_CHAT_ID не задан! Добавьте в Settings → Secrets and variables → Actions (Variables или Secrets)"
             exit 1
           fi
           echo "VITE_TELEGRAM_ADMIN_CHAT_ID: OK"
-          API_URL="${{ secrets.VITE_TELEGRAM_API_URL }}"
+          API_URL="${{ vars.VITE_TELEGRAM_API_URL || secrets.VITE_TELEGRAM_API_URL }}"
           if [ -z "$API_URL" ]; then
             echo "VITE_TELEGRAM_API_URL: используется fallback (fireproof-site.vercel.app)"
           else
@@ -59,9 +59,9 @@ jobs:
           # Если используется кастомный домен (fireproof.ee), установите USE_CUSTOM_DOMAIN=true
           USE_CUSTOM_DOMAIN: true
           # Telegram бот: API на Vercel (обязательно для GitHub Pages)
-          VITE_TELEGRAM_API_URL: ${{ secrets.VITE_TELEGRAM_API_URL || 'https://fireproof-company-site.vercel.app/api/bot1' }}
-          # Chat ID — ОБЯЗАТЕЛЬНО добавить в Settings → Secrets: VITE_TELEGRAM_ADMIN_CHAT_ID
-          VITE_TELEGRAM_ADMIN_CHAT_ID: ${{ secrets.VITE_TELEGRAM_ADMIN_CHAT_ID }}
+          # Variables или Secrets — оба варианта поддерживаются
+          VITE_TELEGRAM_API_URL: ${{ vars.VITE_TELEGRAM_API_URL || secrets.VITE_TELEGRAM_API_URL || 'https://fireproof-site.vercel.app/api/bot1' }}
+          VITE_TELEGRAM_ADMIN_CHAT_ID: ${{ vars.VITE_TELEGRAM_ADMIN_CHAT_ID || secrets.VITE_TELEGRAM_ADMIN_CHAT_ID }}
           # EmailJS (опционально)
           # VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
           # VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}

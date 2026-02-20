@@ -43,10 +43,11 @@ jobs:
           # Автоматически определяем название репозитория для base path
           REPO_NAME: ${{ github.event.repository.name }}
           # Если используется кастомный домен (fireproof.ee), установите USE_CUSTOM_DOMAIN=true
-          # В этом случае base path будет '/' вместо '/fireproof--company--site/'
           USE_CUSTOM_DOMAIN: true
-          # Переменные окружения для EmailJS (опционально, если нужны)
-          # Раскомментируйте следующие строки и добавьте secrets в Settings → Secrets and variables → Actions
+          # Telegram бот (API на Vercel) — добавьте secret VITE_TELEGRAM_API_URL
+          VITE_TELEGRAM_API_URL: ${{ secrets.VITE_TELEGRAM_API_URL }}
+          VITE_TELEGRAM_ADMIN_CHAT_ID: ${{ secrets.VITE_TELEGRAM_ADMIN_CHAT_ID }}
+          # EmailJS (опционально)
           # VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
           # VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
           # VITE_EMAILJS_TEMPLATE_CONTACT: ${{ secrets.VITE_EMAILJS_TEMPLATE_CONTACT }}

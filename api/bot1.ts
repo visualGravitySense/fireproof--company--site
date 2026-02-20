@@ -1,23 +1,44 @@
 /**
  * Bot 1 — Fireproof: приём форм с сайта и отправка в Telegram
- * Деплой: Vercel (отдельно или вместе с другими ботами)
- *
- * Сайт (GitHub Pages) → fetch() → /api/bot1 → Telegram
+ * Сайт → fetch() → /api/bot1 → Telegram
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { sendTelegramMessage, escapeHtml } from '../lib/telegram';
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || process.env.BOT1_TOKEN || '';
 
-function setCors(res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+function escapeHtml(s: string): string {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+async function sendToTelegram(
+  botToken: string,
+  chatId: string | number,
+  text: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) {
+      return { success: false, error: data.description || 'Failed to send' };
+    }
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: err instanceof Error ? err.message : 'Unknown error' };
+  }
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  setCors(res);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     return res.status(204).end();
@@ -28,19 +49,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   if (!BOT_TOKEN) {
-    console.error('TELEGRAM_BOT_TOKEN or BOT1_TOKEN not set');
-    return res.status(500).json({ error: 'Bot token not configured' });
+    return res.status(500).json({ error: 'Bot token not configured. Set TELEGRAM_BOT_TOKEN in Vercel.' });
   }
 
   try {
-    const { type, chatId, data } = (req.body || {}) as {
-      type: string;
-      chatId: string;
-      data: Record<string, unknown>;
-    };
+    const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+    const { type, chatId, data } = body;
 
     if (!chatId) {
-      return res.status(400).json({ error: 'Chat ID is required' });
+      return res.status(400).json({ error: 'chatId is required' });
     }
 
     const time = new Date().toLocaleString('et-EE', { timeZone: 'Europe/Tallinn' });
@@ -93,15 +110,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         break;
 
       default:
-        return res.status(400).json({ error: 'Invalid notification type' });
+        return res.status(400).json({ error: 'Invalid type' });
     }
 
-    const result = await sendTelegramMessage(BOT_TOKEN, chatId, message);
+    const result = await sendToTelegram(BOT_TOKEN, chatId, message);
 
     if (result.success) {
       return res.status(200).json({ success: true });
     }
-    return res.status(500).json({ error: result.error || 'Failed to send notification' });
+    return res.status(500).json({ error: result.error || 'Failed to send' });
   } catch (err) {
     console.error('bot1 error:', err);
     return res.status(500).json({ error: 'Internal server error' });

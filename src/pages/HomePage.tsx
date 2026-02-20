@@ -825,24 +825,29 @@ function CTASection() {
     e.preventDefault()
     
     try {
-      const result = await sendQuickForm({
+      const telegramOk = await TelegramService.notifyQuickForm({
         name: formData.name,
         email: formData.email,
-        phone: formData.phone || ''
+        phone: formData.phone || undefined,
+        objectType: formData.objectType,
       })
       
-      if (result.success) {
-        await TelegramService.notifyQuickForm({
+      let emailOk = false
+      try {
+        const result = await sendQuickForm({
           name: formData.name,
           email: formData.email,
-          phone: formData.phone || undefined,
-          objectType: formData.objectType,
+          phone: formData.phone || ''
         })
+        emailOk = result.success
+      } catch (_) {}
+      
+      if (telegramOk || emailOk) {
         alert(t('contact.form.success'))
         setFormData({ name: '', phone: '', email: '', objectType: '' })
         setShowForm(false)
       } else {
-        alert(result.message || t('contact.form.error'))
+        alert(t('contact.form.error'))
       }
     } catch (error) {
       console.error('Form submission error:', error)
@@ -991,6 +996,8 @@ function HomePage() {
   const [systemStatus, setSystemStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [showHelp, setShowHelp] = useState(false)
   const [showMinimizedFeedback, setShowMinimizedFeedback] = useState(false)
+  const [quickContact, setQuickContact] = useState('')
+  const [quickContactStatus, setQuickContactStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   
   const pageRef = useRef<HTMLDivElement>(null)
 
@@ -1025,10 +1032,38 @@ function HomePage() {
     }
   }, [exitIntentDetected])
 
-  // Tell User & Ask User: Обработка обратной связи
-  const handleFeedbackSubmit = (e: React.FormEvent) => {
+  const handleQuickContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Feedback submitted:', { rating: feedbackRating, comment: feedbackComment })
+    const value = quickContact.trim()
+    if (!value || value.length < 3) return
+    setQuickContactStatus('sending')
+    try {
+      const ok = await TelegramService.notifyQuickContact(value)
+      if (ok) {
+        setQuickContactStatus('success')
+        setQuickContact('')
+        setShowNotification(true)
+        setTimeout(() => {
+          setQuickContactStatus('idle')
+          setShowNotification(false)
+        }, 4000)
+      } else {
+        setQuickContactStatus('error')
+        setTimeout(() => setQuickContactStatus('idle'), 3000)
+      }
+    } catch {
+      setQuickContactStatus('error')
+      setTimeout(() => setQuickContactStatus('idle'), 3000)
+    }
+  }
+
+  // Tell User & Ask User: Обработка обратной связи
+  const handleFeedbackSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    await TelegramService.notifyFeedback({
+      rating: feedbackRating,
+      comment: feedbackComment || undefined,
+    })
     setShowNotification(true)
     setShowFeedback(false)
     setFeedbackRating(0)
@@ -1042,41 +1077,43 @@ function HomePage() {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    // Tell User: Показываем статус загрузки
     setSystemStatus('loading')
     
     try {
-      // Отправка формы через EmailJS
-      const result = await sendQuickForm({
+      // Отправка в Telegram (основной канал — всегда работает)
+      const telegramOk = await TelegramService.notifyQuickForm({
         name: formData.name,
         email: formData.email,
-        phone: formData.phone || '',
-        objectType: formData.objectType || ''
+        phone: formData.phone || undefined,
+        objectType: formData.objectType,
       })
       
-      if (result.success) {
-        // Отправка в Telegram
-        await TelegramService.notifyQuickForm({
+      // EmailJS — дополнительно (если настроен)
+      let emailOk = false
+      try {
+        const result = await sendQuickForm({
           name: formData.name,
           email: formData.email,
-          phone: formData.phone || undefined,
-          objectType: formData.objectType,
+          phone: formData.phone || '',
+          objectType: formData.objectType || ''
         })
-        // Tell User: Показываем успешный статус
+        emailOk = result.success
+      } catch (_) {
+        // EmailJS не настроен или ошибка — не блокируем успех
+      }
+      
+      // Успех, если хотя бы Telegram сработал
+      if (telegramOk || emailOk) {
         setSystemStatus('success')
-        
-        // Показываем уведомление об успехе (EXECUTION)
         setShowNotification(true)
         setFormData({ name: '', phone: '', email: '', objectType: '' })
         setShowForm(false)
-        
-        // Скрываем уведомление через 5 секунд
         setTimeout(() => {
           setShowNotification(false)
           setSystemStatus('idle')
         }, 5000)
       } else {
-        throw new Error(result.message)
+        throw new Error('Не удалось отправить')
       }
     } catch (error) {
       console.error('Form submission error:', error)
@@ -1382,28 +1419,56 @@ function HomePage() {
 
           {/* Spectrum of Thinking: HABITS & INTUITIVE - Знакомые CTA паттерны */}
           <div className="hero-cta">
-            <Link 
-              to="/contact" 
-              className="btn btn-primary"
-              onClick={(e) => {
-                e.preventDefault()
-                setShowForm(!showForm)
-                setUserIntent('deciding')
-              }}
-            >
-              <span className="btn-icon">📞</span>
-              <span>{t('home.hero.freeConsultation')}</span>
-              <span className="btn-arrow">→</span>
-            </Link>
-            <Link 
-              to="/services" 
-              className="btn btn-secondary"
-              onClick={() => setUserIntent('evaluating')}
-            >
-              <span className="btn-icon"><HiCog6Tooth /></span>
-              <span>{t('home.hero.ourServices')}</span>
-              <span className="btn-arrow">→</span>
-            </Link>
+            <div className="hero-cta-buttons">
+              <Link 
+                to="/contact" 
+                className="btn btn-primary"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setShowForm(!showForm)
+                  setUserIntent('deciding')
+                }}
+              >
+                <span className="btn-icon">📞</span>
+                <span>{t('home.hero.freeConsultation')}</span>
+                <span className="btn-arrow">→</span>
+              </Link>
+              <Link 
+                to="/services" 
+                className="btn btn-secondary"
+                onClick={() => setUserIntent('evaluating')}
+              >
+                <span className="btn-icon"><HiCog6Tooth /></span>
+                <span>{t('home.hero.ourServices')}</span>
+                <span className="btn-arrow">→</span>
+              </Link>
+            </div>
+            <form className="hero-quick-input-bar" onSubmit={handleQuickContactSubmit}>
+              <input
+                type="text"
+                value={quickContact}
+                onChange={(e) => setQuickContact(e.target.value)}
+                placeholder={t('home.hero.form.quickInputPlaceholder')}
+                className="hero-quick-input"
+                disabled={quickContactStatus === 'sending'}
+                minLength={3}
+                aria-label={t('home.hero.form.quickInputPlaceholder')}
+              />
+              <button
+                type="submit"
+                className="btn btn-primary hero-quick-submit"
+                disabled={quickContactStatus === 'sending' || quickContact.trim().length < 3}
+              >
+                {quickContactStatus === 'sending' ? (
+                  <span>...</span>
+                ) : (
+                  <>
+                    <span>{t('home.hero.form.quickInputSubmit')}</span>
+                    <span className="btn-arrow">→</span>
+                  </>
+                )}
+              </button>
+            </form>
           </div>
 
           {/* Spectrum of Thinking: HEURISTICS - Упрощенные правила принятия решений */}

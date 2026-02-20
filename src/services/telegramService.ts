@@ -9,7 +9,8 @@ type NotifyType =
   | 'contact_form'
   | 'feedback'
   | 'help_click'
-  | 'button_click';
+  | 'button_click'
+  | 'quick_contact';
 
 export class TelegramService {
   private static async send(type: NotifyType, data: Record<string, unknown>): Promise<boolean> {
@@ -81,5 +82,10 @@ export class TelegramService {
     url?: string;
   }): Promise<boolean> {
     return this.send('button_click', data);
+  }
+
+  /** Быстрый контакт: email, телефон или вопрос (одно поле) */
+  static async notifyQuickContact(contact: string): Promise<boolean> {
+    return this.send('quick_contact', { contact });
   }
 }

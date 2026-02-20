@@ -66,6 +66,8 @@ export const et = {
         objectTypeCommercial: 'Äri-',
         objectTypeIndustrial: 'Tööstuslik',
         valueReminder: 'Tasuta konsultatsioon • Vastus 24 tunni jooksul',
+        quickInputPlaceholder: 'E-post, telefon või teie küsimus',
+        quickInputSubmit: 'Saada',
         submit: 'Saada taotlus',
         close: 'Sulge vorm'
       }

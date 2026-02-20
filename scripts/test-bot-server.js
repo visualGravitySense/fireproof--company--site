@@ -50,6 +50,13 @@ function formatMessage(type, data) {
         data?.url ? `🔗 Ссылка: ${data.url}` : '',
         `⏰ Время: ${time}`,
       ].filter(Boolean).join('\n');
+    case 'quick_contact':
+      const contact = String(data?.contact ?? data?.message ?? '—').trim();
+      return [
+        '📩 Быстрый контакт',
+        `💬 Email / Телефон / Вопрос:\n${contact.slice(0, 500)}`,
+        `⏰ Время: ${time}`,
+      ].join('\n');
     default:
       return `[${type}] ${JSON.stringify(data)}`;
   }

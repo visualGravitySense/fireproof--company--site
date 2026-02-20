@@ -129,13 +129,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           .join('\n');
         break;
 
+      case 'quick_contact':
+        const contact = String(data?.contact ?? data?.message ?? '—').trim();
+        const contactSafe = contact.length > 500 ? contact.slice(0, 500) + '...' : contact;
+        message = [
+          '📩 <b>Быстрый контакт (Free consultation)</b>',
+          `💬 <b>Email / Телефон / Вопрос:</b>\n${escapeHtml(contactSafe)}`,
+          `⏰ <b>Время:</b> ${time}`,
+        ].join('\n');
+        break;
+
       default:
         return res.status(400).json({ error: 'Invalid type' });
     }
-
-    // Вывод в терминал для тестирования (видно при vercel dev)
-    const plainText = message.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-    console.log('\n' + '─'.repeat(50) + '\n📤 BOT1 → Telegram\n' + '─'.repeat(50) + '\n' + plainText + '\n' + '─'.repeat(50) + '\n');
 
     const result = await sendToTelegram(BOT_TOKEN, chatId, message);
 

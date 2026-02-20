@@ -66,6 +66,8 @@ export const en = {
         objectTypeCommercial: 'Commercial',
         objectTypeIndustrial: 'Industrial',
         valueReminder: 'Free consultation • Response within 24 hours',
+        quickInputPlaceholder: 'Email, phone or your question',
+        quickInputSubmit: 'Send',
         submit: 'Submit request',
         close: 'Close form'
       }

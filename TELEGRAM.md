@@ -27,13 +27,16 @@ Vercel → ваш проект → **Settings** → **Environment Variables**:
 
 **Chat ID:** напишите @userinfobot в Telegram — он вернёт ваш Id.
 
-### Шаг 3. Сайт на GitHub Pages — указать URL API
+### Шаг 3. Сайт на GitHub Pages — обязательно
 
-Если сайт на **GitHub Pages**, а API на **Vercel**:
+Если сайт на **GitHub Pages**, добавьте в **Settings** → **Secrets and variables** → **Actions**:
 
-1. GitHub → **Settings** → **Secrets and variables** → **Actions**
-2. Добавьте secret: `VITE_TELEGRAM_API_URL` = `https://ваш-проект.vercel.app/api/bot1`
-3. Раскомментируйте строку в `.github/workflows/deploy.yml` (см. ниже)
+| Secret | Значение |
+|--------|----------|
+| `VITE_TELEGRAM_ADMIN_CHAT_ID` | Ваш Chat ID (напр. 5883625804) | 
+| `VITE_TELEGRAM_API_URL` | `https://fireproof-company-site.vercel.app/api/bot1` (опционально)
+
+**Без `VITE_TELEGRAM_ADMIN_CHAT_ID` бот не работает на GitHub Pages.** После добавления — запустите workflow заново (Deploy).
 
 ### Шаг 4. Проверка API
 

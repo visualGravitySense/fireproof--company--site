@@ -36,6 +36,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate Telegram secrets
+        run: |
+          if [ -z "${{ secrets.VITE_TELEGRAM_ADMIN_CHAT_ID }}" ]; then
+            echo "::error::VITE_TELEGRAM_ADMIN_CHAT_ID не задан! Добавьте в Settings → Secrets and variables → Actions"
+            exit 1
+          fi
+          echo "VITE_TELEGRAM_ADMIN_CHAT_ID: OK"
+          API_URL="${{ secrets.VITE_TELEGRAM_API_URL }}"
+          if [ -z "$API_URL" ]; then
+            echo "VITE_TELEGRAM_API_URL: используется fallback (fireproof-site.vercel.app)"
+          else
+            echo "VITE_TELEGRAM_API_URL: задан"
+          fi
+
       - name: Build
         run: npm run build
         env:

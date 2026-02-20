@@ -4,8 +4,9 @@
 const ADMIN_CHAT_ID = import.meta.env.VITE_TELEGRAM_ADMIN_CHAT_ID || '';
 
 // На Vercel: /api/bot1 (тот же домен). На GitHub Pages: полный URL Vercel API
+// Fallback: fireproof-site.vercel.app (имя репо). Иначе задайте VITE_TELEGRAM_API_URL в GitHub Secrets
 const API_URL = import.meta.env.VITE_TELEGRAM_API_URL
-  || (import.meta.env.PROD ? 'https://fireproof-company-site.vercel.app/api/bot1' : '/api/bot1');
+  || (import.meta.env.PROD ? 'https://fireproof-site.vercel.app/api/bot1' : '/api/bot1');
 
 type NotifyType =
   | 'website_registration'
@@ -31,12 +32,13 @@ export class TelegramService {
 
       const result = await response.json();
       if (!response.ok) {
-        console.error('Telegram API error:', result);
+        console.error('Telegram API error:', result, '| URL:', API_URL);
         return false;
       }
       return true;
     } catch (error) {
       console.error('Ошибка отправки в Telegram:', error);
+      console.error('API URL:', API_URL, '(проверьте VITE_TELEGRAM_API_URL и CORS на Vercel)');
       return false;
     }
   }

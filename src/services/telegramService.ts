@@ -8,7 +8,9 @@ type NotifyType =
   | 'website_registration'
   | 'contact_form'
   | 'feedback'
-  | 'help_click';
+  | 'help_click'
+  | 'button_click'
+  | 'quick_contact';
 
 export class TelegramService {
   private static async send(type: NotifyType, data: Record<string, unknown>): Promise<boolean> {
@@ -70,5 +72,20 @@ export class TelegramService {
       source: 'help_button',
       timestamp: new Date().toISOString(),
     });
+  }
+
+  /** Клик по кнопке/ссылке на сайте */
+  static async notifyButtonClick(data: {
+    id?: string;
+    label: string;
+    page: string;
+    url?: string;
+  }): Promise<boolean> {
+    return this.send('button_click', data);
+  }
+
+  /** Быстрый контакт: email, телефон или вопрос (одно поле) */
+  static async notifyQuickContact(contact: string): Promise<boolean> {
+    return this.send('quick_contact', { contact });
   }
 }

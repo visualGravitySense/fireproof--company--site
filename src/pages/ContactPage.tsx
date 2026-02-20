@@ -73,35 +73,37 @@ function ContactPage() {
     setFormStatus('submitting')
     
     try {
-      // Отправка формы через EmailJS
-      const result = await sendContactForm(formData as ContactFormData)
+      // Отправка в Telegram (основной канал — всегда работает)
+      const telegramOk = await TelegramService.notifyContactForm({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        message: formData.message,
+      })
       
-      if (result.success) {
-        // Отправка в Telegram
-        await TelegramService.notifyContactForm({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone || undefined,
-          message: formData.message,
-        })
-        // Fogg: EXECUTION - Успешная отправка
+      // EmailJS — дополнительно (если настроен)
+      let emailOk = false
+      try {
+        const result = await sendContactForm(formData as ContactFormData)
+        emailOk = result.success
+      } catch (_) {
+        // EmailJS не настроен — не блокируем успех
+      }
+      
+      // Успех, если хотя бы Telegram сработал
+      if (telegramOk || emailOk) {
         setFormStatus('success')
         setFormData({ name: '', email: '', phone: '', message: '' })
         setFieldTouched({})
         setFieldErrors({})
-        
-        setTimeout(() => {
-          setFormStatus('idle')
-        }, 5000)
+        setTimeout(() => setFormStatus('idle'), 5000)
       } else {
-        throw new Error(result.message)
+        throw new Error('Не удалось отправить')
       }
     } catch (error) {
       console.error('Form submission error:', error)
       setFormStatus('error')
-      setTimeout(() => {
-        setFormStatus('idle')
-      }, 3000)
+      setTimeout(() => setFormStatus('idle'), 3000)
     }
   }
 

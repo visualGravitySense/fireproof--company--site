@@ -45,11 +45,19 @@ curl -X POST https://ваш-проект.vercel.app/api/bot1 \
 
 Должно прийти сообщение в Telegram.
 
+## Production (Vercel)
+
+При деплое на Vercel:
+- Сайт и API на одном домене → `VITE_TELEGRAM_API_URL` не задавать (по умолчанию `/api/bot1`)
+- Все сообщения уходят в Telegram
+
 ## Что отправляется в Telegram
 
 | Действие | Тип | Данные |
 |----------|-----|--------|
 | Форма контактов (/contact) | contact_form | имя, email, телефон, сообщение |
 | Быстрая форма (Hero, CTA) | website_registration | имя, email, телефон |
+| Поле «Email, телефон или вопрос» | quick_contact | контакт/вопрос |
 | Форма отзыва (💬) | feedback | оценка, комментарий |
 | Кнопка помощи (❓) | help_click | источник, время |
+| Клики по кнопкам/ссылкам | button_click | страница, кнопка, ссылка |

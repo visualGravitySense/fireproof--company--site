@@ -66,6 +66,8 @@ export const ru = {
         objectTypeCommercial: 'Коммерческий',
         objectTypeIndustrial: 'Промышленный',
         valueReminder: 'Бесплатная консультация • Ответ в течение 24 часов',
+        quickInputPlaceholder: 'Email, телефон или ваш вопрос',
+        quickInputSubmit: 'Отправить',
         submit: 'Отправить заявку',
         close: 'Закрыть форму'
       }

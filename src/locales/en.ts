@@ -1,10 +1,5 @@
 // English
 export const en = {
-  // Common elements
-  common: {
-    more: 'Learn more'
-  },
-  
   // Navigation
   nav: {
     home: 'Home',
@@ -465,7 +460,7 @@ export const en = {
 
   // Common
   common: {
-    more: 'More',
+    more: 'Learn more',
     back: 'Back',
     next: 'Next',
     close: 'Close',

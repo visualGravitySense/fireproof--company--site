@@ -1,10 +1,5 @@
 // Eesti keel
 export const et = {
-  // Üldised elemendid
-  common: {
-    more: 'Lisateave'
-  },
-  
   // Navigatsioon
   nav: {
     home: 'Avaleht',
@@ -465,7 +460,7 @@ export const et = {
 
   // Üldine
   common: {
-    more: 'Rohkem',
+    more: 'Lisateave',
     back: 'Tagasi',
     next: 'Edasi',
     close: 'Sulge',

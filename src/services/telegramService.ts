@@ -2,7 +2,10 @@
 // Использует API route для безопасности токена бота
 
 const ADMIN_CHAT_ID = import.meta.env.VITE_TELEGRAM_ADMIN_CHAT_ID || '';
-const API_URL = import.meta.env.VITE_TELEGRAM_API_URL || '/api/bot1';
+
+// На Vercel: /api/bot1 (тот же домен). На GitHub Pages: полный URL Vercel API
+const API_URL = import.meta.env.VITE_TELEGRAM_API_URL
+  || (import.meta.env.PROD ? 'https://fireproof-company-site.vercel.app/api/bot1' : '/api/bot1');
 
 type NotifyType =
   | 'website_registration'

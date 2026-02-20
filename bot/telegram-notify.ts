@@ -3,7 +3,7 @@
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const TELEGRAM_BOT_TOKEN = '6843595262:AAEDs1TYnP9TuQYsv5SUiEEyduOXTtw-Txc';
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '';
 const TELEGRAM_API_URL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}`;
 
 interface TelegramMessage {

@@ -1392,7 +1392,7 @@ function HomePage() {
               }}
             >
               <span className="btn-icon">📞</span>
-              <span>Бесплатная консультация</span>
+              <span>{t('home.hero.freeConsultation')}</span>
               <span className="btn-arrow">→</span>
             </Link>
             <Link 
@@ -1401,7 +1401,7 @@ function HomePage() {
               onClick={() => setUserIntent('evaluating')}
             >
               <span className="btn-icon"><HiCog6Tooth /></span>
-              <span>Наши услуги</span>
+              <span>{t('home.hero.ourServices')}</span>
               <span className="btn-arrow">→</span>
             </Link>
           </div>

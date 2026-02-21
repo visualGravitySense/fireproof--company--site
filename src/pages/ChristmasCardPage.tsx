@@ -75,6 +75,9 @@ function ChristmasCardPage() {
                 src={getStaticPath('/this-is-fine-meme.jpg')} 
                 alt="This is Fine meme - сравнение БЕЗ и С FireProof защитой" 
                 className="meme-image-full"
+                width={600}
+                height={400}
+                loading="lazy"
               />
             </div>
           </div>

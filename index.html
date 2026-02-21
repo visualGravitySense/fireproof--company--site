@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Fire Proof Company - противопожарные услуги для строительства и промышленности в Эстонии" />
     <title>Fire Proof Company - Противопожарная защита</title>
-    <!-- Google Fonts -->
+    <!-- LCP: Preload hero image - largest above-the-fold content -->
+    <link rel="preload" as="image" href="/fp-hero-1.jpg" />
+    <!-- Google Fonts: preconnect + async load (display=swap reduces CLS) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" /></noscript>
     <script>
       // Обработка редиректа от 404.html для GitHub Pages SPA
       // Этот скрипт должен выполняться ДО загрузки React

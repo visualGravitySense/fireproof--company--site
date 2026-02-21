@@ -29,8 +29,19 @@ export default defineConfig({
   // Убеждаемся, что все пути обрабатываются правильно
   build: {
     assetsDir: 'assets',
-    // Копируем файлы из public в корень dist
     copyPublicDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'react-icons': ['react-icons/hi2'],
+        },
+        compact: true,
+      },
+    },
+    minify: 'esbuild',
+    cssMinify: true,
+    chunkSizeWarningLimit: 600,
   },
 })
 

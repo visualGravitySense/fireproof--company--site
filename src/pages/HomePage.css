@@ -1006,11 +1006,11 @@ p, span, div, a, li, button, input, textarea, select {
     var(--url-fp-hero-1, url('/fp-hero-1.jpg'));
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  /* background-attachment: fixed убран — вызывает repaint на мобильных и ухудшает LCP */
   color: #fff;
-  /* Professional UI: Компактные отступы */
+  /* Professional UI: min-height резервирует место, снижает CLS */
   padding: 6rem 2rem 4rem;
-  min-height: auto;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

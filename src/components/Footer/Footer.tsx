@@ -86,7 +86,7 @@ function Footer() {
         {/* Company Section с улучшениями по модели Фогга */}
         <div className={`footer-section footer-company ${isVisible ? 'visible' : ''}`}>
           <div className="footer-logo">
-            <img src={getStaticPath('/fp-logo-2.svg')} alt="Fire Proof" className="footer-logo-img" />
+            <img src={getStaticPath('/fp-logo-2.svg')} alt="Fire Proof" className="footer-logo-img" width={120} height={70} />
             <h3></h3>
           </div>
           <div className="footer-stats">

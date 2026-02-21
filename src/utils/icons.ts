@@ -30,12 +30,10 @@ import {
   HiBookOpen,
   HiDocument,
   HiUserGroup,
-  HiBriefcase,
-  HiAcademicCap,
-  HiRocketLaunch
+  HiBriefcase
 } from 'react-icons/hi2'
 
-// Экспортируем все иконки для использования в компонентах
+// Экспортируем только используемые иконки (уменьшает bundle)
 export {
   HiCheck,
   HiStar,
@@ -66,8 +64,6 @@ export {
   HiBookOpen,
   HiDocument,
   HiUserGroup,
-  HiBriefcase,
-  HiAcademicCap,
-  HiRocketLaunch
+  HiBriefcase
 }
 

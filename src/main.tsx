@@ -4,10 +4,6 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import { LanguageProvider } from './contexts/LanguageContext'
-import { initEmailJS } from './utils/emailService'
-
-// Инициализация EmailJS при загрузке приложения
-initEmailJS()
 
 // Определяем base path для роутера
 // import.meta.env.BASE_URL содержит base path из vite.config.ts (например '/' или '/repo-name/')

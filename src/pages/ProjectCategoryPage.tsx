@@ -111,6 +111,9 @@ function ProjectCategoryPage() {
                     <img 
                       src={project.image ? getStaticPath(project.image) : ''} 
                       alt={project.title}
+                      width={400}
+                      height={250}
+                      loading="lazy"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement
                         target.style.display = 'none'

@@ -291,6 +291,9 @@ function SocialProofSection() {
                     src={partner.logo} 
                     alt={partner.name}
                     className="partner-logo"
+                    width={80}
+                    height={80}
+                    loading="lazy"
                   />
                 ) : (
                   <span 
@@ -758,7 +761,13 @@ function ProjectsPreviewSection() {
             >
               <div className="project-preview-image">
                 {project.image ? (
-                  <img src={getStaticPath(project.image)} alt={project.title} onError={(e) => {
+                  <img 
+                    src={getStaticPath(project.image)} 
+                    alt={project.title} 
+                    width={400}
+                    height={250}
+                    loading="lazy"
+                    onError={(e) => {
                     const target = e.target as HTMLImageElement
                     target.style.display = 'none'
                     const placeholder = target.nextElementSibling as HTMLElement

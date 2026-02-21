@@ -94,7 +94,7 @@ function Header() {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
         <Link to="/" className="logo" aria-label="Fire Proof - Главная страница">
-          <img src={getStaticPath('/fp-logo-2.svg')} alt="Fire Proof" className="logo-img" />
+          <img src={getStaticPath('/fp-logo-2.svg')} alt="Fire Proof" className="logo-img" width={120} height={40} />
         </Link>
         
         

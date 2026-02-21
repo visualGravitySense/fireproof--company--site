@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout/Layout'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
+import { PageVisitNotifier } from './components/PageVisitNotifier/PageVisitNotifier'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import ServicesPage from './pages/ServicesPage'
@@ -16,9 +17,11 @@ import ChristmasCardPage from './pages/ChristmasCardPage'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/christmas" element={<ChristmasCardPage />} />
-      <Route path="*" element={
+    <>
+      <PageVisitNotifier />
+      <Routes>
+        <Route path="/christmas" element={<ChristmasCardPage />} />
+        <Route path="*" element={
         <Layout>
           <ScrollToTop />
           <Routes>
@@ -37,8 +40,9 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </Layout>
-      } />
-    </Routes>
+        } />
+      </Routes>
+    </>
   )
 }
 

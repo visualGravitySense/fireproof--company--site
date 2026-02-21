@@ -139,6 +139,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ].join('\n');
         break;
 
+      case 'page_visit':
+        const path = escapeHtml(String(data?.path ?? '—'));
+        const referrer = data?.referrer ? escapeHtml(String(data.referrer).slice(0, 100)) : '—';
+        message = [
+          '👁️ <b>Посещение сайта</b>',
+          `📍 <b>Страница:</b> ${path}`,
+          referrer !== '—' ? `🔗 <b>Откуда:</b> ${referrer}` : '',
+          `⏰ <b>Время:</b> ${time}`,
+        ]
+          .filter(Boolean)
+          .join('\n');
+        break;
+
       default:
         return res.status(400).json({ error: 'Invalid type' });
     }

@@ -57,6 +57,13 @@ function formatMessage(type, data) {
         `💬 Email / Телефон / Вопрос:\n${contact.slice(0, 500)}`,
         `⏰ Время: ${time}`,
       ].join('\n');
+    case 'page_visit':
+      return [
+        '👁️ Посещение сайта',
+        `📍 Страница: ${data?.path ?? '—'}`,
+        data?.referrer ? `🔗 Откуда: ${data.referrer}` : '',
+        `⏰ Время: ${time}`,
+      ].filter(Boolean).join('\n');
     default:
       return `[${type}] ${JSON.stringify(data)}`;
   }

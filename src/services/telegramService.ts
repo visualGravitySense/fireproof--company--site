@@ -14,7 +14,8 @@ type NotifyType =
   | 'feedback'
   | 'help_click'
   | 'button_click'
-  | 'quick_contact';
+  | 'quick_contact'
+  | 'page_visit';
 
 export class TelegramService {
   private static async send(type: NotifyType, data: Record<string, unknown>): Promise<boolean> {
@@ -92,5 +93,15 @@ export class TelegramService {
   /** Быстрый контакт: email, телефон или вопрос (одно поле) */
   static async notifyQuickContact(contact: string): Promise<boolean> {
     return this.send('quick_contact', { contact });
+  }
+
+  /** Посещение сайта (при загрузке страницы) */
+  static async notifyPageVisit(data?: { path?: string; referrer?: string }): Promise<boolean> {
+    const path = typeof window !== 'undefined' ? window.location.pathname || '/' : '/';
+    const referrer = typeof document !== 'undefined' ? document.referrer || undefined : undefined;
+    return this.send('page_visit', {
+      path: data?.path ?? path,
+      referrer: data?.referrer ?? referrer,
+    });
   }
 }

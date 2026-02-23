@@ -15,7 +15,9 @@ type NotifyType =
   | 'help_click'
   | 'button_click'
   | 'quick_contact'
-  | 'page_visit';
+  | 'page_visit'
+  | 'form_abandoned'
+  | 'cta_reached';
 
 export class TelegramService {
   private static async send(type: NotifyType, data: Record<string, unknown>): Promise<boolean> {
@@ -103,5 +105,48 @@ export class TelegramService {
       path: data?.path ?? path,
       referrer: data?.referrer ?? referrer,
     });
+  }
+
+  /** Пользователь доскроллил до CTA — считаем охват */
+  static async notifyCtaReached(data?: { path?: string; scrollProgress?: number }): Promise<boolean> {
+    const path = typeof window !== 'undefined' ? window.location.pathname || '/' : '/';
+    return this.send('cta_reached', {
+      path: data?.path ?? path,
+      scrollProgress: data?.scrollProgress,
+    });
+  }
+
+  /** Время на странице — при уходе или смене вкладки */
+  static async notifyTimeOnPage(data: { path: string; timeSec: number }): Promise<boolean> {
+    return this.send('time_on_page', data);
+  }
+
+  /** sendBeacon для надёжной отправки при закрытии вкладки */
+  static sendBeaconTimeOnPage(data: { path: string; timeSec: number }): boolean {
+    if (!ADMIN_CHAT_ID) return false;
+    try {
+      const body = JSON.stringify({
+        type: 'time_on_page',
+        chatId: ADMIN_CHAT_ID,
+        data,
+      });
+      return navigator.sendBeacon(API_URL, new Blob([body], { type: 'application/json' }));
+    } catch {
+      return false;
+    }
+  }
+
+  /** Форма открыта, но не отправлена — для follow-up */
+  static async notifyFormAbandoned(data: {
+    source: 'hero' | 'cta';
+    name?: string;
+    email?: string;
+    phone?: string;
+    objectType?: string;
+    fieldsFilled?: number;
+    scrollProgress?: number;
+    timeOpenSec?: number;
+  }): Promise<boolean> {
+    return this.send('form_abandoned', data);
   }
 }

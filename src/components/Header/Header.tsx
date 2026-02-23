@@ -84,9 +84,11 @@ function Header() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    if (searchQuery.trim()) {
-      // Здесь можно добавить логику поиска
-      console.log('Search:', searchQuery)
+    const q = searchQuery.trim()
+    if (q) {
+      navigate(`/search?q=${encodeURIComponent(q)}`)
+      setShowSearch(false)
+      setIsMenuOpen(false)
     }
   }
 

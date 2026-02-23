@@ -152,6 +152,56 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           .join('\n');
         break;
 
+      case 'form_abandoned':
+        const source = escapeHtml(String(data?.source ?? '—'));
+        const abName = data?.name ? escapeHtml(String(data.name).slice(0, 100)) : null;
+        const abEmail = data?.email ? escapeHtml(String(data.email).slice(0, 100)) : null;
+        const abPhone = data?.phone ? escapeHtml(String(data.phone).slice(0, 50)) : null;
+        const fieldsFilled = data?.fieldsFilled != null ? String(data.fieldsFilled) : null;
+        const scrollProgress = data?.scrollProgress != null ? `${Math.round(Number(data.scrollProgress))}%` : null;
+        const timeOpenSec = data?.timeOpenSec != null ? `${Math.round(Number(data.timeOpenSec))} сек` : null;
+        message = [
+          '⚠️ <b>Форма открыта, но не отправлена</b>',
+          `📍 <b>Источник:</b> ${source}`,
+          abName ? `👤 <b>Имя:</b> ${abName}` : '',
+          abEmail ? `📧 <b>Email:</b> ${abEmail}` : '',
+          abPhone ? `📱 <b>Телефон:</b> ${abPhone}` : '',
+          fieldsFilled ? `📝 <b>Заполнено полей:</b> ${fieldsFilled}` : '',
+          scrollProgress ? `📊 <b>Скролл:</b> ${scrollProgress}` : '',
+          timeOpenSec ? `⏱️ <b>Время:</b> ${timeOpenSec}` : '',
+          `⏰ <b>Время:</b> ${time}`,
+        ]
+          .filter(Boolean)
+          .join('\n');
+        break;
+
+      case 'cta_reached':
+        const ctaPath = escapeHtml(String(data?.path ?? '—'));
+        const ctaScroll = data?.scrollProgress != null ? `${Math.round(Number(data.scrollProgress))}%` : null;
+        message = [
+          '📊 <b>Скролл до CTA</b>',
+          `📍 <b>Страница:</b> ${ctaPath}`,
+          ctaScroll ? `📈 <b>Прогресс:</b> ${ctaScroll}` : '',
+          `⏰ <b>Время:</b> ${time}`,
+        ]
+          .filter(Boolean)
+          .join('\n');
+        break;
+
+      case 'time_on_page':
+        const topPath = escapeHtml(String(data?.path ?? '—'));
+        const timeSec = Number(data?.timeSec) || 0;
+        const timeFormatted = timeSec >= 60
+          ? `${Math.floor(timeSec / 60)} мин ${Math.round(timeSec % 60)} сек`
+          : `${Math.round(timeSec)} сек`;
+        message = [
+          '⏱️ <b>Время на странице</b>',
+          `📍 <b>Страница:</b> ${topPath}`,
+          `⏳ <b>Провёл:</b> ${timeFormatted}`,
+          `⏰ <b>Уход:</b> ${time}`,
+        ].join('\n');
+        break;
+
       default:
         return res.status(400).json({ error: 'Invalid type' });
     }

@@ -806,6 +806,29 @@ function CTASection() {
   const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', objectType: '' })
   const sectionRef = useRef<HTMLElement>(null)
+  const formOpenedAtRef = useRef<number>(0)
+
+  useEffect(() => {
+    if (showForm) formOpenedAtRef.current = Date.now()
+  }, [showForm])
+
+  const handleFormClose = () => {
+    const fieldsFilled = [formData.name, formData.email, formData.phone, formData.objectType].filter(Boolean).length
+    const docH = document.documentElement.scrollHeight - window.innerHeight
+    const scrollProgress = docH > 0 ? Math.round((window.pageYOffset / docH) * 100) : 0
+    const timeOpenSec = (Date.now() - formOpenedAtRef.current) / 1000
+    TelegramService.notifyFormAbandoned({
+      source: 'cta',
+      name: formData.name || undefined,
+      email: formData.email || undefined,
+      phone: formData.phone || undefined,
+      objectType: formData.objectType || undefined,
+      fieldsFilled: fieldsFilled || undefined,
+      scrollProgress: scrollProgress || undefined,
+      timeOpenSec: timeOpenSec || undefined,
+    })
+    setShowForm(false)
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -813,6 +836,14 @@ function CTASection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !isVisible) {
             setIsVisible(true)
+            // Событие «скролл до CTA» — раз за сессию
+            const key = 'ctaReachedSent'
+            if (!sessionStorage.getItem(key)) {
+              sessionStorage.setItem(key, '1')
+              const docH = document.documentElement.scrollHeight - window.innerHeight
+              const scrollProgress = docH > 0 ? Math.round((window.pageYOffset / docH) * 100) : undefined
+              TelegramService.notifyCtaReached({ scrollProgress })
+            }
           }
         })
       },
@@ -944,7 +975,7 @@ function CTASection() {
               <button 
                 type="button" 
                 className="form-close"
-                onClick={() => setShowForm(false)}
+                onClick={handleFormClose}
                 aria-label={t('home.hero.form.close')}
               >
                 ×
@@ -1009,6 +1040,28 @@ function HomePage() {
   const [quickContactStatus, setQuickContactStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   
   const pageRef = useRef<HTMLDivElement>(null)
+  const formOpenedAtRef = useRef<number>(0)
+
+  useEffect(() => {
+    if (showForm) formOpenedAtRef.current = Date.now()
+  }, [showForm])
+
+  const handleHeroFormClose = () => {
+    const fieldsFilled = [formData.name, formData.email, formData.phone, formData.objectType].filter(Boolean).length
+    const timeOpenSec = (Date.now() - formOpenedAtRef.current) / 1000
+    TelegramService.notifyFormAbandoned({
+      source: 'hero',
+      name: formData.name || undefined,
+      email: formData.email || undefined,
+      phone: formData.phone || undefined,
+      objectType: formData.objectType || undefined,
+      fieldsFilled: fieldsFilled || undefined,
+      scrollProgress: scrollProgress || undefined,
+      timeOpenSec: timeOpenSec || undefined,
+    })
+    setShowForm(false)
+    setUserIntent('browsing')
+  }
 
   // CREATE Action Funnel: CUE - Визуальные подсказки и триггеры
   useEffect(() => {
@@ -1513,10 +1566,7 @@ function HomePage() {
                 <button 
                   type="button" 
                   className="form-close"
-                  onClick={() => {
-                    setShowForm(false)
-                    setUserIntent('browsing')
-                  }}
+                  onClick={handleHeroFormClose}
                   aria-label={t('home.hero.form.close')}
                 >
                   ×

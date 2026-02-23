@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout/Layout'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import { PageVisitNotifier } from './components/PageVisitNotifier/PageVisitNotifier'
+import { PageTimeTracker } from './components/PageTimeTracker/PageTimeTracker'
 import HomePage from './pages/HomePage'
 
 // Lazy load non-critical pages to reduce TBT and initial bundle size
@@ -26,6 +27,7 @@ function App() {
   return (
     <>
       <PageVisitNotifier />
+      <PageTimeTracker />
       <Routes>
         <Route path="/christmas" element={
           <Suspense fallback={<PageFallback />}>

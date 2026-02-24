@@ -460,6 +460,23 @@ export const et = {
     }
   },
 
+  // Lead Gen — Tasuta ekspressaudiit
+  leadGen: {
+    title: 'Valmistuge Päästeameti kontrolliks: Tasuta ekspressaudiit objektile',
+    badge: 'Audit Report Included',
+    benefits: {
+      visit: 'Inseneri sõit objekti juurde (Tallinn & Harjumaa)',
+      inspection: 'Tuleohutusaluste läbipääsude ja konstruktsioonide visuaalne ülevaatus',
+      issues: 'Kitsaskohade ja normide vastavuse probleemide tuvastamine',
+      plan: 'Eelneva tähelepanekute kõrvaldamise plaan',
+    },
+    location: 'Tallinn & Harjumaa',
+    cta: 'Registreeri audiidile (0€)',
+    note: 'Pakkumine kehtib uute objektide puhul.',
+    close: 'Sulge',
+    sending: 'Saadetakse...',
+  },
+
   // Üldine
   common: {
     more: 'Lisateave',

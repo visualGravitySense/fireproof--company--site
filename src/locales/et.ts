@@ -19,9 +19,9 @@ export const et = {
     hero: {
       title: 'Kaitstame seda, mis on oluline: elud, vara, äri',
       subtitle: '20 aastat kogemust tulekaitse alal. Terviklahendused projekteerimisest järelevalveni',
-      cta: 'Hangi konsultatsioon',
+      cta: 'Taotle tasuta audiiti',
       trustBadge: 'Sertifitseeritud materjalid • 20 aastat kogemust',
-      freeConsultation: 'Tasuta konsultatsioon',
+      freeConsultation: 'Tasuta audiit',
       ourServices: 'Meie teenused',
       scrollHint: 'Lisateave',
       socialProof: {
@@ -65,10 +65,10 @@ export const et = {
         objectTypeResidential: 'Elamu',
         objectTypeCommercial: 'Äri-',
         objectTypeIndustrial: 'Tööstuslik',
-        valueReminder: 'Tasuta konsultatsioon • Vastus 24 tunni jooksul',
+        valueReminder: 'Vastus 48 tunni jooksul • Kehtib esimese 10 taotluse kohta',
         quickInputPlaceholder: 'E-post, telefon või teie küsimus',
         quickInputSubmit: 'Saada',
-        submit: 'Saada taotlus',
+        submit: 'Taotle tasuta audiiti',
         close: 'Sulge vorm'
       }
     },
@@ -165,7 +165,7 @@ export const et = {
       subtitle: 'Võtke meiega ühendust konsultatsiooniks',
       button: 'Võta ühendust',
       benefits: {
-        freeConsultation: 'Tasuta konsultatsioon',
+        freeConsultation: 'Tasuta audiit 48 tunni jooksul',
         fastResponse: 'Kiire vastus',
         expertAdvice: 'Eksperdinõuanne'
       }
@@ -193,7 +193,7 @@ export const et = {
     quickActions: {
       compare: 'Võrdle',
       toTop: 'Üles',
-      freeConsultationTooltip: 'Tasuta konsultatsioon'
+      freeConsultationTooltip: 'Tasuta audiit'
     }
   },
 

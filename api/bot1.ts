@@ -74,7 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     switch (type) {
       case 'website_registration':
         message = [
-          '📝 <b>Запрос на консультацию</b>',
+          '🔥 <b>Запрос на бесплатный аудит</b>',
           `👤 <b>Имя:</b> ${escapeHtml(String(data?.name ?? '—'))}`,
           `📧 <b>Email:</b> ${escapeHtml(String(data?.email ?? '—'))}`,
           `📱 <b>Телефон:</b> ${escapeHtml(String(data?.phone ?? '—'))}`,

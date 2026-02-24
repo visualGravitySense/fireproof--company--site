@@ -18,6 +18,7 @@ const ResourcesPage = lazy(() => import('./pages/ResourcesPage'))
 const MaterialsPage = lazy(() => import('./pages/MaterialsPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 const ChristmasCardPage = lazy(() => import('./pages/ChristmasCardPage'))
+const SeoLandingPage = lazy(() => import('./pages/SeoLandingPage'))
 
 function PageFallback() {
   return <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }} aria-hidden="true" />
@@ -52,6 +53,11 @@ function App() {
               <Route path="/materials" element={<MaterialsPage />} />
               <Route path="/materials/:material" element={<MaterialsPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/tulekaitse-kontoritele" element={<SeoLandingPage />} />
+              <Route path="/tulekaitse-restoranidele" element={<SeoLandingPage />} />
+              <Route path="/tulekaitse-laotele" element={<SeoLandingPage />} />
+              <Route path="/tulekaitse-kaubanduskeskustele" element={<SeoLandingPage />} />
+              <Route path="/hinnakiri" element={<SeoLandingPage />} />
             </Routes>
           </Suspense>
           </Layout>

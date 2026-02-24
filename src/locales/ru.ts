@@ -19,9 +19,9 @@ export const ru = {
     hero: {
       title: 'Защищаем то, что важно: жизни, имущество, бизнес',
       subtitle: '20 лет опыта в противопожарной защите. Комплексные решения от проектирования до надзора',
-      cta: 'Получить консультацию',
+      cta: 'Получить аудит бесплатно',
       trustBadge: 'Сертифицированные материалы • 20 лет опыта',
-      freeConsultation: 'Бесплатная консультация',
+      freeConsultation: 'Бесплатный аудит',
       ourServices: 'Наши услуги',
       scrollHint: 'Узнайте больше',
       socialProof: {
@@ -49,8 +49,8 @@ export const ru = {
         }
       },
       form: {
-        title: 'Получите консультацию прямо сейчас',
-        description: 'Заполните форму ниже, и наш специалист свяжется с вами в течение 24 часов',
+        title: 'Бесплатный аудит пожарной безопасности',
+        description: 'Проверим ваш объект за 48 часов: соответствие требованиям, риски и штрафы, план устранения, смета работ',
         hint: 'Совет: Укажите тип объекта, и мы подберем оптимальное решение',
         name: 'Ваше имя',
         namePlaceholder: 'Например: Иван Иванов',
@@ -65,10 +65,10 @@ export const ru = {
         objectTypeResidential: 'Жилой',
         objectTypeCommercial: 'Коммерческий',
         objectTypeIndustrial: 'Промышленный',
-        valueReminder: 'Бесплатная консультация • Ответ в течение 24 часов',
+        valueReminder: 'Ответ за 48 часов • Действует для первых 10 заявок',
         quickInputPlaceholder: 'Email, телефон или ваш вопрос',
         quickInputSubmit: 'Отправить',
-        submit: 'Отправить заявку',
+        submit: 'Получить аудит бесплатно',
         close: 'Закрыть форму'
       }
     },
@@ -165,7 +165,7 @@ export const ru = {
       subtitle: 'Свяжитесь с нами для консультации',
       button: 'Связаться с нами',
       benefits: {
-        freeConsultation: 'Бесплатная консультация',
+        freeConsultation: 'Бесплатный аудит за 48 часов',
         fastResponse: 'Быстрый ответ',
         expertAdvice: 'Экспертный совет'
       }
@@ -193,7 +193,7 @@ export const ru = {
     quickActions: {
       compare: 'Сравнить',
       toTop: 'Наверх',
-      freeConsultationTooltip: 'Бесплатная консультация'
+      freeConsultationTooltip: 'Бесплатный аудит'
     },
     projectsPage: {
       title: 'Наши проекты',

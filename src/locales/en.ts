@@ -19,9 +19,9 @@ export const en = {
     hero: {
       title: 'Protecting what matters: lives, property, business',
       subtitle: '20 years of experience in fire protection. Comprehensive solutions from design to supervision',
-      cta: 'Get consultation',
+      cta: 'Get free audit',
       trustBadge: 'Certified materials • 20 years of experience',
-      freeConsultation: 'Free consultation',
+      freeConsultation: 'Free audit',
       ourServices: 'Our services',
       scrollHint: 'Learn more',
       socialProof: {
@@ -49,8 +49,8 @@ export const en = {
         }
       },
       form: {
-        title: 'Get consultation right now',
-        description: 'Fill out the form below and our specialist will contact you within 24 hours',
+        title: 'Free fire safety audit',
+        description: 'We check your object within 48 hours: compliance, risks, remediation plan, cost estimate',
         hint: 'Tip: Specify the type of object and we will select the optimal solution',
         name: 'Your name',
         namePlaceholder: 'For example: John Smith',
@@ -68,7 +68,7 @@ export const en = {
         valueReminder: 'Free consultation • Response within 24 hours',
         quickInputPlaceholder: 'Email, phone or your question',
         quickInputSubmit: 'Send',
-        submit: 'Submit request',
+        submit: 'Get free audit',
         close: 'Close form'
       }
     },
@@ -165,7 +165,7 @@ export const en = {
       subtitle: 'Contact us for consultation',
       button: 'Contact Us',
       benefits: {
-        freeConsultation: 'Free consultation',
+        freeConsultation: 'Free audit within 48 hours',
         fastResponse: 'Quick response',
         expertAdvice: 'Expert advice'
       }
@@ -193,7 +193,7 @@ export const en = {
     quickActions: {
       compare: 'Compare',
       toTop: 'To top',
-      freeConsultationTooltip: 'Free consultation'
+      freeConsultationTooltip: 'Free audit'
     }
   },
 

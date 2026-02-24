@@ -460,6 +460,23 @@ export const en = {
     }
   },
 
+  // Lead Gen — Free express audit
+  leadGen: {
+    title: 'Prepare for Päästeamet inspection: Free express audit of your object',
+    badge: 'Audit Report Included',
+    benefits: {
+      visit: 'Engineer visit to site (Tallinn & Harjumaa)',
+      inspection: 'Visual inspection of fire-rated penetrations and structures',
+      issues: 'Identification of bottlenecks and non-compliance issues',
+      plan: 'Preliminary remediation plan',
+    },
+    location: 'Tallinn & Harjumaa',
+    cta: 'Book audit (0€)',
+    note: 'Offer limited to new objects.',
+    close: 'Close',
+    sending: 'Sending...',
+  },
+
   // Common
   common: {
     more: 'Learn more',
